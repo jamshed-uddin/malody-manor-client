@@ -16,8 +16,8 @@ const Instructors = () => {
       });
   }, []);
   return (
-    <div className=" py-8 w-3/4  mx-auto">
-      <h1 className="text-3xl py-16">all instructors here</h1>
+    <div className=" py-20 w-3/4  mx-auto">
+      <h1 className="text-3xl text-center font-semibold ">Instructors</h1>
       <div className="grid lg:grid-cols-3 gap-6">
         {instructors.map((instructor, index) => (
           <InstructorsCard

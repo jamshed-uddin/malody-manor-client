@@ -46,7 +46,7 @@
     "instructor_email": "michael@example.com",
     "price": 60,
     "available_seat": 6,
-    "status": "denied",
+    "status": "approved",
     "enrolled": 0
   },
   {

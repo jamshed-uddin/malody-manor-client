@@ -9,7 +9,7 @@ const PopularClasses = () => {
   const [classes, setClasses] = useState([]);
 
   useEffect(() => {
-    fetch("classes.json")
+    fetch("http://localhost:3000/classes")
       .then((res) => res.json())
       .then((data) => setClasses(data));
   }, []);
@@ -21,7 +21,7 @@ const PopularClasses = () => {
         Popular Classes
       </h1>
 
-      <div className="grid lg:grid-cols-3 my-8">
+      <div className="grid lg:grid-cols-3 my-8 gap-4">
         {classes.map((singleClass, index) => (
           <ClassCard key={index} singleClass={singleClass} />
         ))}

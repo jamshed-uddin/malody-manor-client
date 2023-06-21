@@ -7,7 +7,7 @@ const InstructorsCard = ({ instructor }) => {
       <div>
         <img
           src={instructor?.photo_url}
-          className="w-40 h-40 rounded-full mx-auto hover:scale-105 transition-all duration-500"
+          className="w-48 h-48 rounded-full mx-auto hover:scale-105 transition-all duration-500"
           alt=""
         />
       </div>
