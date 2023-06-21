@@ -17,9 +17,11 @@ const PopularClasses = () => {
 
   return (
     <div className="py-8 w-3/4 mx-auto">
-      <h1 className="text-4xl font-bold text-center">Popular Classes</h1>
+      <h1 className="text-3xl lg:text-4xl font-bold text-center">
+        Popular Classes
+      </h1>
 
-      <div className="grid lg:grid-cols-3">
+      <div className="grid lg:grid-cols-3 my-8">
         {classes.map((singleClass, index) => (
           <ClassCard key={index} singleClass={singleClass} />
         ))}

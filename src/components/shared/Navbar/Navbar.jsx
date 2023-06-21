@@ -13,7 +13,7 @@ const Navbar = () => {
   //   const { user, userLogOut } = useContext(AuthContext);
 
   return (
-    <div className="flex justify-between h-16  items-center px-6 lg:px-16 py-3 lg:py-0 shadow-lg fixed top-0 right-0 left-0 bg-white  z-40">
+    <div className="flex justify-between h-16  items-center px-6 lg:px-16 py-3 lg:py-0  fixed top-0 right-0 left-0 bg-white  z-40">
       <div>
         <Link to={"/"}>
           {" "}

@@ -8,7 +8,7 @@
   {
     "name": "Jane Smith",
     "email": "jane.smith@example.com",
-    "photo_url": "https://example.com/jane_smith.jpg",
+    "photo_url": "https://i.ibb.co/f90MptV/ins5.jpg",
     "role": "instructor"
   },
   {
@@ -31,9 +31,9 @@
   },
 
   {
-    "name": "John Doe",
+    "name": "Adriano Tecson",
     "email": "john.doe@example.com",
-    "photo_url": "https://example.com/john_doe.jpg",
+    "photo_url": "https://i.ibb.co/7j2F86r/ins1.jpg",
     "role": "instructor"
   },
   {
@@ -61,9 +61,9 @@
     "role": "student"
   },
   {
-    "name": "Alice Thompson",
+    "name": "Andy heraldson",
     "email": "alice.thompson@example.com",
-    "photo_url": "https://example.com/alice_thompson.jpg",
+    "photo_url": "https://i.ibb.co/hVjpcqv/ins4.jpg",
     "role": "instructor"
   },
   {
@@ -81,7 +81,7 @@
   {
     "name": "Alex Turner",
     "email": "alex.turner@example.com",
-    "photo_url": "https://example.com/alex_turner.jpg",
+    "photo_url": "https://i.ibb.co/jMHxFgn/ins3.jpg",
     "role": "instructor"
   },
   {
@@ -124,31 +124,31 @@
   {
     "name": "Alice Thompson",
     "email": "alice.thompson@example.com",
-    "photo_url": "https://example.com/alice_thompson.jpg",
+    "photo_url": "https://i.ibb.co/JsF8fSQ/ins2.png",
     "role": "instructor"
   },
   {
-    "name": "Mark Anderson",
+    "name": "Bella Colson",
     "email": "mark.anderson@example.com",
-    "photo_url": "https://example.com/mark_anderson.jpg",
+    "photo_url": "https://i.ibb.co/tmGpH2f/ins9.jpg",
     "role": "instructor"
   },
   {
     "name": "Sarah Roberts",
     "email": "sarah.roberts@example.com",
-    "photo_url": "https://example.com/sarah_roberts.jpg",
+    "photo_url": "https://i.ibb.co/Gp94j6t/ins6.jpg",
     "role": "instructor"
   },
   {
     "name": "Alex Turner",
     "email": "alex.turner@example.com",
-    "photo_url": "https://example.com/alex_turner.jpg",
+    "photo_url": "https://i.ibb.co/QQy1Yd7/ins8.jpg",
     "role": "instructor"
   },
   {
-    "name": "Laura Williams",
+    "name": "Craig Mazin",
     "email": "laura.williams@example.com",
-    "photo_url": "https://example.com/laura_williams.jpg",
+    "photo_url": "https://i.ibb.co/dDnpYG5/ins7.jpg",
     "role": "instructor"
   },
   {
