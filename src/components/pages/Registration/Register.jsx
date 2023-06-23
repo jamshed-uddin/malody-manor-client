@@ -18,7 +18,7 @@ const Register = () => {
 
   return (
     <div className="h-screen flex justify-center items-center">
-      <div className="w-1/4 mx-auto">
+      <div className="w-1/4 mx-auto p-4 shadow">
         <h1 className="text-center text-2xl font-semibold my-3">Sign up</h1>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
           <input
@@ -38,7 +38,7 @@ const Register = () => {
           <input
             {...register("email", { required: true })}
             type="email"
-            placeholder="Email"
+            placeholder="Email*"
             className="border-b border-black block outline-none w-full px-2 py-1"
           />
           {errors.email && <p className="text-red-500">Email is required</p>}
@@ -75,7 +75,7 @@ const Register = () => {
                 /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d!@#$%^&*()]{6,}$/i,
             })}
             type="password"
-            placeholder="Password"
+            placeholder="Password*"
             className="border-b border-black block outline-none w-full px-2 py-1"
           />
           {errors.password?.type === "required" && (
@@ -98,7 +98,7 @@ const Register = () => {
               validate: (value) => value === password,
             })}
             type="password"
-            placeholder="Confirm Password"
+            placeholder="Confirm Password*"
             className="border-b border-black block outline-none w-full px-2 py-1"
           />
           {errors.confirmPassword && (
@@ -109,9 +109,9 @@ const Register = () => {
             {" "}
             <button
               type="submit"
-              className="text-xl font-semibold  py-2 px-4 rounded "
+              className="text-xl font-semibold  py-2 px-4  "
             >
-              Submit
+              Sign up
             </button>
           </p>
         </form>
