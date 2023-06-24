@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const Login = () => {
+  const { userLogin } = useContext(AuthContext);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -11,6 +14,14 @@ const Login = () => {
 
   const onSubmit = (data) => {
     console.log(data);
+    userLogin(data.email, data.password)
+      .then((result) => {
+        console.log(result);
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -38,12 +49,15 @@ const Login = () => {
 
           <p className="text-center">
             {" "}
-            <button type="submit" className=" py-2 px-4 text-xl font-semibold">
+            <button
+              type="submit"
+              className=" py-1 px-4 text-xl font-semibold rounded-lg shadow "
+            >
               Login
             </button>
           </p>
         </form>
-        <h1>
+        <h1 className="mt-3">
           New to Melody Manor?
           <Link className="underline" to={"/register"}>
             Create an account.

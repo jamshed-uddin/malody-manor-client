@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const Register = () => {
+  const [error, setError] = useState("");
+  const { registerUser, updateUserNamePhoto } = useContext(AuthContext);
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -11,7 +16,35 @@ const Register = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
+    setError("");
+
+    registerUser(data.email, data.password)
+      .then((result) => {
+        const registeredUser = result.user;
+
+        updateUserNamePhoto(data.name, data.photo).then(() => {
+          fetch("http://localhost:3000/users", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(data),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.insertedId) {
+                navigate("/");
+              }
+            });
+        });
+      })
+      .catch((error) => {
+        console.log(error.message);
+
+        if (error.message === "Firebase: Error (auth/email-already-in-use).") {
+          setError("An account already exists with this email");
+        }
+      });
   };
 
   const password = watch("password");
@@ -41,7 +74,9 @@ const Register = () => {
             placeholder="Email*"
             className="border-b border-black block outline-none w-full px-2 py-1"
           />
-          {errors.email && <p className="text-red-500">Email is required</p>}
+          {errors.email && (
+            <p className="text-red-500 text-sm">Email is required</p>
+          )}
 
           <select
             className="border-b border-black block outline-none w-full px-2 py-1"
@@ -79,15 +114,15 @@ const Register = () => {
             className="border-b border-black block outline-none w-full px-2 py-1"
           />
           {errors.password?.type === "required" && (
-            <p className="text-red-500">Password is required</p>
+            <p className="text-red-500 text-sm">Password is required</p>
           )}
           {errors.password?.type === "minLength" && (
-            <p className="text-red-500">
+            <p className="text-red-500 text-sm">
               Password should be at least 6 characters long
             </p>
           )}
           {errors.password?.type === "pattern" && (
-            <p className="text-red-500">
+            <p className="text-red-500 text-sm">
               Password should contain at least one uppercase letter, one special
               character, and one digit
             </p>
@@ -102,20 +137,20 @@ const Register = () => {
             className="border-b border-black block outline-none w-full px-2 py-1"
           />
           {errors.confirmPassword && (
-            <p className="text-red-500">Passwords do not match</p>
+            <p className="text-red-500 text-sm">Passwords do not match</p>
           )}
-
+          <p className="text-red-500 text-sm">{error}</p>
           <p className="text-center">
             {" "}
             <button
               type="submit"
-              className="text-xl font-semibold  py-2 px-4  "
+              className="text-xl font-semibold  py-1 px-4 rounded-lg shadow  "
             >
               Sign up
             </button>
           </p>
         </form>
-        <h1>
+        <h1 className="mt-3">
           Already have an account?
           <Link className="underline" to={"/login"}>
             Login

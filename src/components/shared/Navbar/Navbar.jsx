@@ -5,11 +5,12 @@ import { Link, NavLink } from "react-router-dom";
 import Button from "../Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { AuthContext } from "../../Provider/AuthProvider";
 // import { AuthContext } from "../../pages/userManagement/AuthProvider";
 
 const Navbar = () => {
-  const [user, setUser] = useState(true);
   const [isOpen, setOpen] = useState(false);
+  const { user, userLogout } = useContext(AuthContext);
   //   const { user, userLogOut } = useContext(AuthContext);
 
   return (
@@ -71,7 +72,7 @@ const Navbar = () => {
         >
           <Link onClick={() => setOpen(false)} className="cursor-pointer">
             <img
-              className="w-10 bg-black p-1 mb-4 border border-black lg:mb-0 mx-auto rounded-full"
+              className="w-10 bg-black p-1 mb-4 border  lg:mb-0 mx-auto rounded-full"
               src={`${
                 user
                   ? "https://i.ibb.co/Lg08qpN/clone-Head.png"
@@ -82,14 +83,12 @@ const Navbar = () => {
           </Link>
 
           {user ? (
-            <Link
-            //   onClick={userLogOut}
-            >
+            <Link onClick={userLogout}>
               <Button>Logout</Button>
             </Link>
           ) : (
             <Link onClick={() => setOpen(false)} to={"/login"}>
-              Login
+              <Button>Login</Button>
             </Link>
           )}
         </div>
