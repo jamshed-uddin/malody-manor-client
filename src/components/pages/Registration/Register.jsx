@@ -18,6 +18,18 @@ const Register = () => {
   const onSubmit = (data) => {
     setError("");
 
+    const newUser = {
+      name: data.name,
+      photo: data.photo,
+      email: data.email,
+      gender: data.gender,
+      phone: data.phone,
+      address: data.address,
+      role: "student",
+    };
+
+    console.log(newUser);
+
     registerUser(data.email, data.password)
       .then((result) => {
         const registeredUser = result.user;
@@ -28,7 +40,7 @@ const Register = () => {
             headers: {
               "content-type": "application/json",
             },
-            body: JSON.stringify(data),
+            body: JSON.stringify(newUser),
           })
             .then((res) => res.json())
             .then((data) => {
