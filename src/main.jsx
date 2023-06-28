@@ -9,6 +9,16 @@ import Classes from "./components/pages/Classes/Classes.jsx";
 import Login from "./components/pages/Login/Login.jsx";
 import Register from "./components/pages/Registration/Register.jsx";
 import AuthProvider from "./components/Provider/AuthProvider.jsx";
+import Dashboard from "./components/pages/Dashboard/Dashboard.jsx";
+import Profile from "./components/pages/Dashboard/UserHome.jsx";
+import ManageUsers from "./components/pages/Dashboard/Admin/ManageUsers.jsx";
+import ManageClasses from "./components/pages/Dashboard/Admin/ManageClasses.jsx";
+import UserHome from "./components/pages/Dashboard/UserHome.jsx";
+import SelectedClasses from "./components/pages/Dashboard/Student/SelectedClasses.jsx";
+import EnrolledClasses from "./components/pages/Dashboard/Student/EnrolledClasses.jsx";
+import PaymentHistory from "./components/pages/Dashboard/Student/PaymentHistory.jsx";
+import AddClass from "./components/pages/Dashboard/Instructor/AddClass.jsx";
+import MyClasses from "./components/pages/Dashboard/Instructor/MyClasses.jsx";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +46,47 @@ const router = createBrowserRouter([
   {
     path: "register",
     element: <Register></Register>,
+  },
+  {
+    path: "dashboard",
+    element: <Dashboard></Dashboard>,
+    children: [
+      {
+        path: "user-home",
+        element: <UserHome></UserHome>,
+      },
+      //admin routes
+      {
+        path: "manage-user",
+        element: <ManageUsers></ManageUsers>,
+      },
+      {
+        path: "manage-classes",
+        element: <ManageClasses></ManageClasses>,
+      },
+      //student routes
+      {
+        path: "selected-classes",
+        element: <SelectedClasses></SelectedClasses>,
+      },
+      {
+        path: "enrolled-classes",
+        element: <EnrolledClasses></EnrolledClasses>,
+      },
+      {
+        path: "payment-history",
+        element: <PaymentHistory></PaymentHistory>,
+      },
+      //instructor routes
+      {
+        path: "add-class",
+        element: <AddClass></AddClass>,
+      },
+      {
+        path: "my-classes",
+        element: <MyClasses></MyClasses>,
+      },
+    ],
   },
 ]);
 
