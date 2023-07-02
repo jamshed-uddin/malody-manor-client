@@ -74,9 +74,7 @@ const Navbar = () => {
             <img
               className="w-10 bg-black p-1 mb-4 border  lg:mb-0 mx-auto rounded-full"
               src={`${
-                user
-                  ? "https://i.ibb.co/Lg08qpN/clone-Head.png"
-                  : "https://i.ibb.co/PCJCS96/blank.jpg"
+                user ? user?.photoURL : "https://i.ibb.co/PCJCS96/blank.jpg"
               }`}
               alt=""
             />
