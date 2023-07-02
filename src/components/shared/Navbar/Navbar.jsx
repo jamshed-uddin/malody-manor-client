@@ -60,7 +60,7 @@ const Navbar = () => {
             onClick={() => setOpen(false)}
             className={`link px-2 py-1 lg:py-0 ${({ isActive }) =>
               isActive ? "active" : "default"}`}
-            to={"/dashboard"}
+            to={"/dashboard/user-home"}
           >
             Dashboard
           </NavLink>
@@ -77,6 +77,7 @@ const Navbar = () => {
                 user ? user?.photoURL : "https://i.ibb.co/PCJCS96/blank.jpg"
               }`}
               alt=""
+              title={user?.email}
             />
           </Link>
 
