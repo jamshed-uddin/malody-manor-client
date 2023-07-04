@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./SideNav.css";
-import useRole from "../../../../Hooks/useRole";
-import SideNavItems from "../SideNavItems";
 
 const SideNav = ({ displayName }) => {
-  const [currentUser, role] = useRole();
-  console.log(currentUser, role);
+  const [admin, setAdmin] = useState(true);
+  const [student, setStudent] = useState(false);
+  const [instructor, setInstructor] = useState(false);
   return (
     <div className="bg-white shadow-lg h-screen lg:w-[20vw] w-72 pt-6">
       <h1 className="pl-5 text-2xl font-semibold py-3">{displayName}</h1>
@@ -21,14 +20,89 @@ const SideNav = ({ displayName }) => {
             Home
           </NavLink>
         </li>
-        <SideNavItems></SideNavItems>
-        <hr />
-        <li>
-          <Link to={"/"}>Back to home</Link>
-        </li>
-        <li>
-          <Link to={"/classes"}>Classes</Link>
-        </li>
+
+        {student && (
+          <>
+            <li>
+              <NavLink
+                to={"/dashboard/selected-classes"}
+                className={({ isActive }) =>
+                  isActive ? "bg-gradient-to-r from-slate-300" : ""
+                }
+              >
+                Selected classes
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to={"/dashboard/enrolled-classes"}
+                className={({ isActive }) =>
+                  isActive ? "bg-gradient-to-r from-slate-300" : ""
+                }
+              >
+                enrolled classes
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to={"/dashboard/payment-history"}
+                className={({ isActive }) =>
+                  isActive ? "bg-gradient-to-r from-slate-300" : ""
+                }
+              >
+                payment history
+              </NavLink>
+            </li>
+          </>
+        )}
+        {instructor && (
+          <>
+            <li>
+              <NavLink
+                to={"/dashboard/add-class"}
+                className={({ isActive }) =>
+                  isActive ? "bg-gradient-to-r from-slate-300" : ""
+                }
+              >
+                Add class
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to={"/dashboard/my-classes"}
+                className={({ isActive }) =>
+                  isActive ? "bg-gradient-to-r from-slate-300" : ""
+                }
+              >
+                My classes
+              </NavLink>
+            </li>
+          </>
+        )}
+        {admin && (
+          <>
+            <li>
+              <NavLink
+                to={`/dashboard/${"manage-user"}`}
+                className={({ isActive }) =>
+                  isActive ? "bg-gradient-to-r from-slate-300" : ""
+                }
+              >
+                Manage users
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to={"/dashboard/manage-classes"}
+                className={({ isActive }) =>
+                  isActive ? "bg-gradient-to-r from-slate-300" : ""
+                }
+              >
+                Manage classes
+              </NavLink>
+            </li>
+          </>
+        )}
       </ul>
     </div>
   );

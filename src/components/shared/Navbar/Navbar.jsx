@@ -18,9 +18,7 @@ const Navbar = () => {
       <div>
         <Link to={"/"}>
           {" "}
-          <h1 className="text-4xl font-bold">
-            Melody <span className="">Manor</span>{" "}
-          </h1>
+          <h1 className="text-4xl font-bold">Melody Manor</h1>
         </Link>
       </div>
 

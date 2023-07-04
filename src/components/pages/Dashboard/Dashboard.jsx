@@ -17,21 +17,21 @@ const Dashboard = () => {
       <div className="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
 
-        <div className="drawer-content flex flex-col items-center justify-center">
+        <div className="drawer-content  items-center justify-center">
           {/* navigator */}
           <label
             htmlFor="my-drawer-2"
-            className=" drawer-button lg:hidden fixed top-0 left-0"
+            className=" drawer-button lg:hidden fixed top-0 left-0 cursor-pointer"
           >
             <FontAwesomeIcon className="text-4xl p-3" icon={faBars} />
           </label>
 
           {/* drawer content */}
-          <div className="pt-16 lg:pt-0 px-6">
+          <div className="pt-16 lg:pt-10 lg:px-6 px-3">
             <Outlet></Outlet>
           </div>
         </div>
-        <div className="drawer-side">
+        <div className="drawer-side border border-black">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
 
           <SideNav navItems={navItems} displayName={displayName}></SideNav>
