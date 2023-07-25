@@ -1,10 +1,11 @@
-import { Box, Button, Modal, Typography } from "@mui/material";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Box, CircularProgress, Modal } from "@mui/material";
 import React, { useState } from "react";
 
-const ManageClassActions = ({ params, rowId, setRowId }) => {
-  //   console.log(params);
+const ManageClassActions = ({ params }) => {
+  const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
-
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -26,10 +27,9 @@ const ManageClassActions = ({ params, rowId, setRowId }) => {
     event.preventDefault();
     const feedback = event.target.feedback.value;
     const updateStatusAndFeedback = { status: params.row.status, feedback };
+    // console.log(updateStatusAndFeedback);
 
-    console.log(updateStatusAndFeedback);
-    // console.log(feedback, params.row._id, params.row.status);
-
+    setLoading(true);
     fetch(`http://localhost:3000/updateStatus/${params?.row?._id}`, {
       method: "PATCH",
       headers: {
@@ -40,16 +40,28 @@ const ManageClassActions = ({ params, rowId, setRowId }) => {
       .then((res) => res.json())
       .then((result) => {
         if (result.modifiedCount) {
-          handleClose();
+          setLoading(false);
+          setSuccess(true);
+          console.log(result);
+        } else {
+          setLoading(false);
         }
       });
 
-    // handleOpen();
+    setTimeout(() => {
+      setSuccess(false);
+      handleClose();
+    }, 4000);
   };
 
   return (
     <div>
-      <Button onClick={handleOpen}>next</Button>
+      <button
+        className="border-2 border-black rounded-full px-4 py-1  "
+        onClick={handleOpen}
+      >
+        <FontAwesomeIcon icon={faArrowRight} />
+      </button>
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
           <div>
@@ -64,11 +76,31 @@ const ManageClassActions = ({ params, rowId, setRowId }) => {
                 placeholder="Feedback"
                 required
               ></textarea>
-              <input
-                className=" text-lg font-semibold border-2 mt-3 border-black px-2 mr-3 rounded-xl cursor-pointer hover:bg-gray-100"
+              <button
+                className={` text-lg font-semibold border-2 mt-3 border-black px-2 mr-3 rounded-xl cursor-pointer hover:bg-gray-100 relative ${
+                  success && "bg-green-500 border-green-500 text-white"
+                }`}
                 type="submit"
                 value="Update"
-              />
+              >
+                {success ? (
+                  <span className="px-[6px]">Updated</span>
+                ) : (
+                  <span>Update</span>
+                )}
+                <span>
+                  {loading && (
+                    <CircularProgress
+                      size={20}
+                      sx={{
+                        position: "absolute",
+                        left: "40%",
+                      }}
+                    />
+                  )}
+                </span>
+              </button>
+
               <button
                 onClick={handleClose}
                 className=" text-lg font-semibold border-2 mt-3 border-black px-2 rounded-xl cursor-pointer hover:bg-red-400 hover:border-white hover:text-white"

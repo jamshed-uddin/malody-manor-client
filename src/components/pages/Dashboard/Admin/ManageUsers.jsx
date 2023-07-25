@@ -49,11 +49,11 @@ const ManageUsers = () => {
 
   return (
     <div>
-      <Box sx={{ height: 500, width: "100%" }}>
+      <Box sx={{ height: "100%", width: "100vw" }}>
         <Typography
           variant="h6"
           component="h6"
-          sx={{ textAlign: "center", mt: 3, mb: 3 }}
+          sx={{ textAlign: "left", mt: 3, mb: 3 }}
         >
           Manage Users
         </Typography>
