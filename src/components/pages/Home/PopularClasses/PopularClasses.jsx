@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import ClassCard from "./ClassCard";
 import { Link } from "react-router-dom";
-import Button from "../../../shared/Button";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import MyButton from "../../../shared/MyButton";
 
 const PopularClasses = () => {
   const [classes, setClasses] = useState([]);
@@ -13,7 +14,6 @@ const PopularClasses = () => {
       .then((res) => res.json())
       .then((data) => setClasses(data));
   }, []);
-  console.log(classes);
 
   return (
     <div className="py-8 w-3/4 mx-auto">
@@ -27,9 +27,9 @@ const PopularClasses = () => {
         ))}
       </div>
       <Link to={"/classes"} className="text-end mt-4">
-        <Button>
+        <MyButton>
           See All <FontAwesomeIcon icon={faArrowRight} />
-        </Button>
+        </MyButton>
       </Link>
     </div>
   );

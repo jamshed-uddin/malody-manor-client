@@ -9,12 +9,13 @@ import "swiper/css/pagination";
 
 // import required modules
 import { Navigation, Autoplay, Pagination, Mousewheel, Keyboard } from "swiper";
-import Button from "../../../shared/Button";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowRight,
   faArrowUpRightDots,
 } from "@fortawesome/free-solid-svg-icons";
+import MyButton from "../../../shared/MyButton";
 
 const Banner = () => {
   return (
@@ -42,9 +43,9 @@ const Banner = () => {
                 From Novice to Virtuoso: Ignite Your Passion for Music
                 Instruments and Let Your Talent Soar!
               </h1>
-              <Button>
+              <MyButton>
                 Explore Classes <FontAwesomeIcon icon={faArrowRight} />
-              </Button>
+              </MyButton>
             </div>
             <div className="hidden lg:block w-1/2 ">
               <h1 className="w-3/4 ml-auto font-semibold mb-40">
@@ -63,9 +64,9 @@ const Banner = () => {
                 Embrace the Symphony Within: Embark on a Transformative Musical
                 Expedition at Our Camp!
               </h1>
-              <Button>
+              <MyButton>
                 Explore Classes <FontAwesomeIcon icon={faArrowRight} />
-              </Button>
+              </MyButton>
             </div>
             <div className="hidden lg:block">
               <h1>
@@ -84,9 +85,9 @@ const Banner = () => {
                 Unleash Your Musical Talent at our Instrument Learning School -
                 Where Melodies Come Alive!
               </h1>
-              <Button>
+              <MyButton>
                 Explore Classes <FontAwesomeIcon icon={faArrowRight} />
-              </Button>
+              </MyButton>
             </div>
             <div className="hidden lg:block">
               <h1>

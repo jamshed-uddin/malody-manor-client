@@ -11,10 +11,9 @@ const Dashboard = () => {
   const { user } = useContext(AuthContext);
   const displayName = user?.displayName;
 
-  console.log(user);
   return (
     <div>
-      <div className="drawer lg:drawer-open">
+      <div className="drawer lg:drawer-open ">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
 
         <div className="drawer-content  items-center justify-center">
@@ -27,7 +26,7 @@ const Dashboard = () => {
           </label>
 
           {/* drawer content */}
-          <div className="pt-16 lg:pt-10 lg:px-6 px-3">
+          <div className="pt-16 lg:pt-10 lg:px-6 px-3 ">
             <Outlet></Outlet>
           </div>
         </div>

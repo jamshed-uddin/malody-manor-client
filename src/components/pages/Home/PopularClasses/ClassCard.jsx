@@ -7,7 +7,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 
 const ClassCard = ({ singleClass }) => {
-  console.log(singleClass);
   return (
     <div className="shadow h-[400px] rounded-2xl overflow-hidden">
       <div className=" h-1/2 overflow-hidden">

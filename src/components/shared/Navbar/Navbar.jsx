@@ -2,10 +2,11 @@ import React, { useContext, useState } from "react";
 import "./Navbar.css";
 
 import { Link, NavLink } from "react-router-dom";
-import Button from "../Button";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { AuthContext } from "../../Provider/AuthProvider";
+import MyButton from "../MyButton";
 // import { AuthContext } from "../../pages/userManagement/AuthProvider";
 
 const Navbar = () => {
@@ -81,11 +82,11 @@ const Navbar = () => {
 
           {user ? (
             <Link onClick={userLogout}>
-              <Button>Logout</Button>
+              <MyButton>Logout</MyButton>
             </Link>
           ) : (
             <Link onClick={() => setOpen(false)} to={"/login"}>
-              <Button>Login</Button>
+              <MyButton>Login</MyButton>
             </Link>
           )}
         </div>

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import InstructorsCard from "./InstructorsCard";
-import Button from "../../../shared/Button";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import MyButton from "../../../shared/MyButton";
 
 const PopularInstructor = () => {
   const [instructors, setInstructors] = useState([]);
@@ -30,9 +31,9 @@ const PopularInstructor = () => {
         ))}
       </div>
       <Link to={"/instructors"} className="text-end mt-4">
-        <Button>
+        <MyButton>
           See All <FontAwesomeIcon icon={faArrowRight} />
-        </Button>
+        </MyButton>
       </Link>
     </div>
   );

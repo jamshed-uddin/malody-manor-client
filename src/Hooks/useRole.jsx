@@ -6,7 +6,6 @@ const useRole = () => {
   const { user, loading } = useContext(AuthContext);
   const [currentUser, setCurrentUser] = useState([]);
   const [role, setRole] = useState("");
-  console.log(user);
 
   useEffect(() => {
     fetch(`http://localhost:3000/users/${user?.email}`)

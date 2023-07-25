@@ -3,7 +3,7 @@ import useRole from "../../../Hooks/useRole";
 
 const UserHome = () => {
   const [currentUser] = useRole();
-  console.log(currentUser);
+
   return (
     <div className="flex flex-col lg:flex-row lg:items-end items-center ">
       <div>
