@@ -62,6 +62,7 @@ const ManageClassActions = ({ params, rowId, setRowId }) => {
                 cols="40"
                 rows="5"
                 placeholder="Feedback"
+                required
               ></textarea>
               <input
                 className=" text-lg font-semibold border-2 mt-3 border-black px-2 mr-3 rounded-xl cursor-pointer hover:bg-gray-100"
@@ -70,7 +71,7 @@ const ManageClassActions = ({ params, rowId, setRowId }) => {
               />
               <button
                 onClick={handleClose}
-                className=" text-lg font-semibold border-2 mt-3 border-black px-2 rounded-xl cursor-pointer hover:bg-red-400"
+                className=" text-lg font-semibold border-2 mt-3 border-black px-2 rounded-xl cursor-pointer hover:bg-red-400 hover:border-white hover:text-white"
                 type="button"
               >
                 Cancel
