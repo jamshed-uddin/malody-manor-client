@@ -3,8 +3,8 @@ import { NavLink } from "react-router-dom";
 import "./SideNav.css";
 
 const SideNav = ({ displayName }) => {
-  const [admin, setAdmin] = useState(true);
-  const [student, setStudent] = useState(false);
+  const [admin, setAdmin] = useState(false);
+  const [student, setStudent] = useState(true);
   const [instructor, setInstructor] = useState(false);
   return (
     <div className="bg-white shadow-lg h-screen lg:w-[20vw] w-72 pt-6">
