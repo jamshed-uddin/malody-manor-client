@@ -6,9 +6,12 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import useRole from "../../../../Hooks/useRole";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ClassCard = ({ singleClass }) => {
   const [currentUser, role] = useRole();
+  const notify = () => toast("Class add to the Selected Classes");
 
   const handleBookmark = (userEmail, classId) => {
     fetch(`http://localhost:3000/selectedClasses/${userEmail}`, {
@@ -16,10 +19,14 @@ const ClassCard = ({ singleClass }) => {
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify({ classId }),
+      body: JSON.stringify({ classId: classId }),
     })
       .then((res) => res.json())
-      .then((result) => console.log(result))
+      .then((result) => {
+        if (result.modifiedCount) {
+          notify();
+        }
+      })
       .catch((error) => console.log(error));
   };
 
@@ -72,6 +79,7 @@ const ClassCard = ({ singleClass }) => {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

@@ -13,7 +13,8 @@ const useRole = () => {
       .then((user) => {
         setCurrentUser(user);
         setRole(user?.role);
-      });
+      })
+      .catch((error) => console.log(error));
   }, [user]);
 
   return [currentUser, role];
