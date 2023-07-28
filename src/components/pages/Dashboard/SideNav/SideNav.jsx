@@ -4,8 +4,8 @@ import "./SideNav.css";
 
 const SideNav = ({ displayName }) => {
   const [admin, setAdmin] = useState(false);
-  const [student, setStudent] = useState(true);
-  const [instructor, setInstructor] = useState(false);
+  const [student, setStudent] = useState(false);
+  const [instructor, setInstructor] = useState(true);
   return (
     <div className="bg-white shadow-lg h-screen lg:w-[20vw] w-72 pt-6">
       <h1 className="pl-5 text-2xl font-semibold py-3">{displayName}</h1>

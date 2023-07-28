@@ -72,7 +72,9 @@ const Navbar = () => {
           <Link onClick={() => setOpen(false)} className="cursor-pointer">
             <img
               className="w-10 border border-black  mb-4   lg:mb-0 mx-auto rounded-full"
-              src={`${user?.photoURL && "https://i.ibb.co/PCJCS96/blank.jpg"}`}
+              src={`${
+                user ? user?.photoURL : "https://i.ibb.co/PCJCS96/blank.jpg"
+              }`}
               alt=""
               title={user?.email}
             />
