@@ -7,26 +7,28 @@ import { DataGrid } from "@mui/x-data-grid";
 const MyClasses = () => {
   const { user } = useContext(AuthContext);
   const [myClasses, setMyClasses] = useState([]);
+  const [reload, setReload] = useState(false);
 
   useEffect(() => {
     fetch(`http://localhost:3000/instructorsClasses/${user?.email}`)
       .then((res) => res.json())
       .then((result) => setMyClasses(result))
       .catch((error) => console.log(error));
-  }, [user]);
+  }, [user, reload]);
 
   const columns = useMemo(
     () => [
       {
         field: "image",
         headerName: "Photo",
-        width: "90",
+        width: "60",
         renderCell: (params) => <Avatar src={params.row.image}></Avatar>,
         sortable: false,
         editable: false,
       },
-      { field: "class_name", headerName: "Class Name", width: "150" },
-      { field: "instructor_name", headerName: "Instructor", width: "170" },
+      { field: "class_name", headerName: "Class Name", width: "140" },
+      { field: "instructor_name", headerName: "Instructor", width: "140" },
+      { field: "price", headerName: "Price", width: "80" },
       {
         field: "available_seat",
         headerName: "Available seat",
@@ -48,7 +50,7 @@ const MyClasses = () => {
         headerName: "Actions",
         type: "actions",
         width: "250",
-        renderCell: (params) => <MyClassesActions {...{ params }} />,
+        renderCell: (params) => <MyClassesActions {...{ params, setReload }} />,
       },
     ],
     []
