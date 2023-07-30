@@ -1,23 +1,29 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../../Provider/AuthProvider";
+import { CircularProgress } from "@mui/material";
 
 const AddClass = () => {
   const { user } = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
+  // data submit for create a new class
   const onSubmit = (data) => {
-    console.log("clicked");
     data.price = parseInt(data.price);
     data.available_seat = parseInt(data.available_seat);
     data.enrolled = 0;
     data.status = "pending";
-    console.log(data);
+    // console.log(data);
 
+    // --------------
+    setLoading(true);
     fetch("http://localhost:3000/addNewClass", {
       method: "POST",
       headers: {
@@ -26,11 +32,30 @@ const AddClass = () => {
       body: JSON.stringify(data),
     })
       .then((res) => res.json())
-      .then((result) => console.log(result));
+      .then((result) => {
+        if (result.insertedId) {
+          setLoading(false);
+          setSuccess(true);
+          setTimeout(() => {
+            reset();
+          }, 1500);
+        } else {
+          setLoading(false);
+        }
+      })
+      .catch((err) => console.log(err));
+
+    setTimeout(() => {
+      setSuccess(false);
+    }, 4000);
   };
+
+  // styles for input and label
   const labelStyle = "block text-gray-700 font-bold ml-1";
   const inputStyle =
     "border border-gray-400 p-2 w-full rounded-xl focus:outline-none";
+  // --------
+
   return (
     <div>
       <div>
@@ -138,23 +163,41 @@ const AddClass = () => {
             htmlFor="description"
             className="block text-gray-700 font-bold "
           >
-            Description
+            Description <span className="font-extralight">(Optional)</span>
           </label>
           <textarea
             id="description"
             name="description"
             className=" border border-gray-400 focus:outline-none p-2 w-full rounded-xl"
             {...register("description")}
-            required
           />
         </div>
 
         <div className="flex justify-center mt-4">
           <button
             type="submit"
-            className="text-xl font-semibold border-2 border-black px-3 py-1 rounded-xl w-1/2"
+            className={`text-xl font-semibold border-2 border-black px-3 py-1 rounded-xl w-1/2 relative ${
+              success && "bg-green-400 border-green-400"
+            }`}
           >
-            Submit
+            {success ? (
+              <span className="px-[6px]">Added the class</span>
+            ) : (
+              <span>Add class</span>
+            )}
+            <span>
+              {loading && (
+                <CircularProgress
+                  size={20}
+                  sx={{
+                    position: "absolute",
+                    left: "50%",
+
+                    right: "50%",
+                  }}
+                />
+              )}
+            </span>
           </button>
         </div>
       </form>

@@ -3,11 +3,14 @@ import { AuthContext } from "../../../Provider/AuthProvider";
 import MyClassesActions from "./MyClassesActions";
 import { Avatar, Box, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
+import { ToastContainer, toast } from "react-toastify";
 
 const MyClasses = () => {
   const { user } = useContext(AuthContext);
   const [myClasses, setMyClasses] = useState([]);
   const [reload, setReload] = useState(false);
+
+  const notify = () => toast("Class deleted!");
 
   useEffect(() => {
     fetch(`http://localhost:3000/instructorsClasses/${user?.email}`)
@@ -50,7 +53,9 @@ const MyClasses = () => {
         headerName: "Actions",
         type: "actions",
         width: "250",
-        renderCell: (params) => <MyClassesActions {...{ params, setReload }} />,
+        renderCell: (params) => (
+          <MyClassesActions {...{ params, setReload, notify }} />
+        ),
       },
     ],
     []
@@ -76,6 +81,7 @@ const MyClasses = () => {
           ></DataGrid>
         </Box>
       </div>
+      <ToastContainer />
     </div>
   );
 };

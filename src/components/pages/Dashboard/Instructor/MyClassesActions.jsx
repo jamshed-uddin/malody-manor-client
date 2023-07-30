@@ -3,12 +3,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Box, CircularProgress, Modal } from "@mui/material";
 import React, { useState } from "react";
 
-const MyClassesActions = ({ params, setReload }) => {
+const MyClassesActions = ({ params, setReload, notify }) => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
   const inputStyle =
     "block border-2  border-black rounded-xl p-2 font-semibold";
 
@@ -24,6 +25,7 @@ const MyClassesActions = ({ params, setReload }) => {
     borderRadius: 3,
     p: 4,
   };
+
   const updataClassHandler = (event) => {
     event.preventDefault();
     const updatedInfo = {
@@ -56,6 +58,25 @@ const MyClassesActions = ({ params, setReload }) => {
       setSuccess(false);
       handleClose();
     }, 4000);
+  };
+  // delete class function-------------
+  const handleDeleteClass = (classId) => {
+    console.log(classId);
+
+    fetch(`http://localhost:3000/deleteClass/${classId}`, {
+      method: "DELETE",
+      headers: {
+        "content-type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        if (result.deletedCount) {
+          notify();
+          setReload((prevReload) => !prevReload);
+        }
+        console.log(result);
+      });
   };
   return (
     <div>
@@ -160,7 +181,10 @@ const MyClassesActions = ({ params, setReload }) => {
           </div>
         </Box>
       </Modal>
-      <button className="border-2  px-2 rounded-lg text-lg bg-red-500 text-white border-red-500 ">
+      <button
+        onClick={() => handleDeleteClass(params.row._id)}
+        className="border-2  px-2 rounded-lg text-lg bg-red-500 text-white border-red-500 "
+      >
         Delete
       </button>
     </div>

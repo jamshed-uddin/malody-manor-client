@@ -11,7 +11,8 @@ const SelectedClasses = () => {
   const [selectedClasses, setSelectedClasses] = useState([]);
   const [reload, setReload] = useState(false);
   const notify = () => toast("Class romoved!");
-  console.log(user);
+
+  // remove from selected class handler---
   const removeClassHandler = (classId, userEmail) => {
     console.log(userEmail);
     fetch(`http://localhost:3000/removeClass/${userEmail}`, {
