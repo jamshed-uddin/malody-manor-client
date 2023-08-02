@@ -19,6 +19,7 @@ import EnrolledClasses from "./components/pages/Dashboard/Student/EnrolledClasse
 import PaymentHistory from "./components/pages/Dashboard/Student/PaymentHistory.jsx";
 import AddClass from "./components/pages/Dashboard/Instructor/AddClass.jsx";
 import MyClasses from "./components/pages/Dashboard/Instructor/MyClasses.jsx";
+import Payment from "./components/pages/Dashboard/Payment.jsx";
 
 const router = createBrowserRouter([
   {
@@ -76,6 +77,10 @@ const router = createBrowserRouter([
       {
         path: "payment-history",
         element: <PaymentHistory></PaymentHistory>,
+      },
+      {
+        path: "payment/:classId",
+        element: <Payment></Payment>,
       },
       //instructor routes
       {

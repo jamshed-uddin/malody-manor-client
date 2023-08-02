@@ -3,16 +3,18 @@ import { useContext } from "react";
 import { AuthContext } from "../components/Provider/AuthProvider";
 
 const useRole = () => {
-  const { user, loading } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [currentUser, setCurrentUser] = useState([]);
   const [role, setRole] = useState("");
 
   useEffect(() => {
-    fetch(`http://localhost:3000/users/${user?.email}`)
+    if (!user?.email) return;
+
+    fetch(`http://localhost:3000/singleUser/${user?.email}`)
       .then((res) => res.json())
-      .then((user) => {
-        setCurrentUser(user);
-        setRole(user?.role);
+      .then((userData) => {
+        setCurrentUser(userData);
+        setRole(userData?.role);
       })
       .catch((error) => console.log(error));
   }, [user]);

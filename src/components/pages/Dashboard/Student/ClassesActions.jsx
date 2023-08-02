@@ -2,13 +2,14 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext } from "react";
 import { AuthContext } from "../../../Provider/AuthProvider";
+import { Link } from "react-router-dom";
 
 const ClassesActions = ({ params, removeClassHandler }) => {
   const { user } = useContext(AuthContext);
   return (
     <div>
       <button className="border-2 border-black px-2 rounded-lg text-lg mr-3">
-        Checkout
+        <Link to={`/dashboard/payment/${params.row._id}`}>Checkout</Link>
       </button>
       <button
         onClick={() => removeClassHandler(params.row._id, user?.email)}

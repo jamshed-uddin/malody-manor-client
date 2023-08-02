@@ -3,7 +3,6 @@ import useRole from "../../../Hooks/useRole";
 
 const UserHome = () => {
   const [currentUser] = useRole();
-  console.log(currentUser);
 
   return (
     <div>

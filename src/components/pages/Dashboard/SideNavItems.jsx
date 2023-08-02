@@ -3,7 +3,6 @@ import useRole from "../../../Hooks/useRole";
 
 const SideNavItems = () => {
   const [, role] = useRole();
-  console.log(role);
 
   if (role === "student") {
     return (
