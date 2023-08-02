@@ -4,6 +4,7 @@ import MyClassesActions from "./MyClassesActions";
 import { Avatar, Box, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { ToastContainer, toast } from "react-toastify";
+import TableComponent from "../TableComponent";
 
 const MyClasses = () => {
   const { user } = useContext(AuthContext);
@@ -64,22 +65,7 @@ const MyClasses = () => {
   return (
     <div>
       <div>
-        <Box sx={{ height: "80vh", width: "100%" }}>
-          <Typography
-            variant="h6"
-            component="h6"
-            sx={{ textAlign: "left", mt: 3, mb: 3 }}
-          >
-            Selected Classes
-          </Typography>
-          <DataGrid
-            columns={columns}
-            rows={myClasses}
-            getRowId={(row) => row._id}
-            // processRowUpdate={(params) => setRowId(params.id)}
-            // onProcessRowUpdateError={(error) => console.log(error)}
-          ></DataGrid>
-        </Box>
+        <TableComponent columns={columns} data={myClasses} />
       </div>
       <ToastContainer />
     </div>

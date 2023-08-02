@@ -122,9 +122,7 @@ const Checkout = ({ price, singleClass }) => {
       </form>
       {cardError && <p className="text-sm text-red-500 mt-3">{cardError}</p>}
       {transectionId && (
-        <p className="text-sm text-green-400 mt-3">
-          Payment completed.ID:{transectionId}
-        </p>
+        <p className="text-sm text-green-400 mt-3">Payment completed.</p>
       )}
     </div>
   );

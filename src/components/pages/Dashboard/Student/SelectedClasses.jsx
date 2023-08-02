@@ -5,6 +5,7 @@ import SelectedClassesActions from "./ClassesActions";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import ClassesActions from "./ClassesActions";
 import { ToastContainer, toast } from "react-toastify";
+import TableComponent from "../TableComponent";
 
 const SelectedClasses = () => {
   const { user } = useContext(AuthContext);
@@ -26,7 +27,6 @@ const SelectedClasses = () => {
           notify();
           setReload(!reload);
         }
-        console.log(result);
       })
       .catch((error) => console.log(error));
   };
@@ -37,7 +37,6 @@ const SelectedClasses = () => {
         .then((res) => res.json())
         .then((result) => {
           setSelectedClasses(result);
-          // console.log(result);
         });
     }
   }, [user, reload]);
@@ -76,22 +75,7 @@ const SelectedClasses = () => {
   return (
     <div>
       <div>
-        <Box sx={{ height: "80vh", width: "100%" }}>
-          <Typography
-            variant="h6"
-            component="h6"
-            sx={{ textAlign: "left", mt: 3, mb: 3 }}
-          >
-            Selected Classes
-          </Typography>
-          <DataGrid
-            columns={columns}
-            rows={selectedClasses}
-            getRowId={(row) => row._id}
-            // processRowUpdate={(params) => setRowId(params.id)}
-            // onProcessRowUpdateError={(error) => console.log(error)}
-          ></DataGrid>
-        </Box>
+        <TableComponent columns={columns} data={selectedClasses} />
       </div>
       <ToastContainer />
     </div>
