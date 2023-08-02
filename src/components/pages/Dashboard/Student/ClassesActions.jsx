@@ -9,10 +9,10 @@ const ClassesActions = ({ params, removeClassHandler }) => {
   return (
     <div>
       <button className="border-2 border-black px-2 rounded-lg text-lg mr-3">
-        <Link to={`/dashboard/payment/${params.row._id}`}>Checkout</Link>
+        <Link to={`/dashboard/payment/${params.row.classId}`}>Checkout</Link>
       </button>
       <button
-        onClick={() => removeClassHandler(params.row._id, user?.email)}
+        onClick={() => removeClassHandler(params.row.classId)}
         className="border-2  px-2 rounded-lg text-lg bg-red-500 text-white border-red-500 "
       >
         <FontAwesomeIcon icon={faXmark} /> Remove

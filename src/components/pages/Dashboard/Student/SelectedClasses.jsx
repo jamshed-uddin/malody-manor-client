@@ -13,18 +13,16 @@ const SelectedClasses = () => {
   const notify = () => toast("Class romoved!");
 
   // remove from selected class handler---
-  const removeClassHandler = (classId, userEmail) => {
-    console.log(userEmail);
-    fetch(`http://localhost:3000/removeClass/${userEmail}`, {
-      method: "PATCH",
+  const removeClassHandler = (classId) => {
+    fetch(`http://localhost:3000/removeSelectedClass/${classId}`, {
+      method: "DELETE",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify({ classId: classId }),
     })
       .then((res) => res.json())
       .then((result) => {
-        if (result.modifiedCount) {
+        if (result.deletedCount) {
           notify();
           setReload(!reload);
         }

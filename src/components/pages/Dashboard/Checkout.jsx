@@ -3,8 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import useRole from "../../../Hooks/useRole";
 
-const Checkout = ({ price }) => {
-  console.log(price);
+const Checkout = ({ price, singleClass }) => {
   const [currentUser] = useRole();
   const [cardError, setCardError] = useState("");
   const [processing, setProcessing] = useState(false);
@@ -68,7 +67,29 @@ const Checkout = ({ price }) => {
 
     if (paymentIntent.status === "succeeded") {
       setTransectionId(paymentIntent.id);
-      // todo : save to data
+
+      const paymentInfo = {
+        transectionId: paymentIntent?.id,
+        userEmail: currentUser?.email,
+        userName: currentUser?.name,
+        classId: singleClass?._id,
+        className: singleClass?.class_name,
+        paymentDate: new Date(),
+        amount: parseFloat(paymentIntent?.amount / 100),
+        status: paymentIntent?.status,
+      };
+
+      fetch("http://localhost:3000/paymentHistory", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(paymentInfo),
+      })
+        .then((res) => res.json())
+        .then((result) => {
+          console.log(result);
+        });
     }
   };
 

@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Home from "./components/pages/Home/Home/Home.jsx";
 import Instructors from "./components/pages/Instructors/Instructors.jsx";
 import Classes from "./components/pages/Classes/Classes.jsx";
@@ -21,6 +22,7 @@ import AddClass from "./components/pages/Dashboard/Instructor/AddClass.jsx";
 import MyClasses from "./components/pages/Dashboard/Instructor/MyClasses.jsx";
 import Payment from "./components/pages/Dashboard/Payment.jsx";
 
+const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
     path: "/",
@@ -98,8 +100,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthProvider>
-      {" "}
-      <RouterProvider router={router} />
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
     </AuthProvider>
   </React.StrictMode>
 );

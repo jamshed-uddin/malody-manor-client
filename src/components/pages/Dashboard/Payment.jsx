@@ -3,19 +3,15 @@ import { loadStripe } from "@stripe/stripe-js";
 import React, { useEffect, useState } from "react";
 import Checkout from "./Checkout";
 import { useParams } from "react-router-dom";
+import useSingleClass from "../../../Hooks/useSingleClass";
 
 const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_PK);
 
 // todo : provide publishable key
 const Payment = () => {
   const { classId } = useParams();
-  const [singleClass, setSingleClass] = useState({});
-
-  useEffect(() => {
-    fetch(`http://localhost:3000/singleClass/${classId}`)
-      .then((res) => res.json())
-      .then((result) => setSingleClass(result));
-  }, []);
+  const [singleClass] = useSingleClass(classId);
+  console.log(singleClass);
 
   if (!singleClass?._id) {
     return <h1>Loading...</h1>;
@@ -43,7 +39,10 @@ const Payment = () => {
 
         <div className="flex-grow ">
           <Elements stripe={stripePromise}>
-            <Checkout price={singleClass?.price}></Checkout>
+            <Checkout
+              singleClass={singleClass}
+              price={singleClass?.price}
+            ></Checkout>
           </Elements>
         </div>
       </div>

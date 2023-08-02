@@ -4,27 +4,38 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, { useState } from "react";
 import useRole from "../../../../Hooks/useRole";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const ClassCard = ({ singleClass }) => {
   const [currentUser, role] = useRole();
-  const notify = () => toast("Class add to the Selected Classes");
 
-  const handleBookmark = (userEmail, classId) => {
-    fetch(`http://localhost:3000/selectedClasses/${userEmail}`, {
-      method: "PATCH",
+  const seleted = () => toast("You have added this class to selected class");
+  const alreadySelected = () => toast("You have already selected this class");
+
+  const handleBookmark = () => {
+    singleClass.userEmail = currentUser?.email;
+    const { _id, ...newData } = singleClass;
+    const newBookmarkedClass = { ...newData, classId: _id };
+    console.log(newBookmarkedClass);
+
+    fetch(`http://localhost:3000/addToSelected`, {
+      method: "POST",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify({ classId: classId }),
+      body: JSON.stringify(newBookmarkedClass),
     })
       .then((res) => res.json())
       .then((result) => {
-        if (result.modifiedCount) {
-          notify();
+        console.log(result);
+        if (result.insertedId) {
+          seleted();
+        }
+        if (result.message) {
+          alreadySelected();
         }
       })
       .catch((error) => console.log(error));
