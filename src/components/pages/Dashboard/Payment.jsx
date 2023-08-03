@@ -11,7 +11,6 @@ const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_PK);
 const Payment = () => {
   const { classId } = useParams();
   const [singleClass] = useSingleClass(classId);
-  console.log(singleClass);
 
   if (!singleClass?._id) {
     return <h1>Loading...</h1>;

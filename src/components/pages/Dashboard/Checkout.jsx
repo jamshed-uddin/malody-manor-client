@@ -1,7 +1,8 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import React, { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../Provider/AuthProvider";
 import useRole from "../../../Hooks/useRole";
+import clearPaidClass from "./clearPaidClass";
+import changeAvailability from "./changeAvailability";
 
 const Checkout = ({ price, singleClass }) => {
   const [currentUser] = useRole();
@@ -89,6 +90,10 @@ const Checkout = ({ price, singleClass }) => {
         .then((res) => res.json())
         .then((result) => {
           console.log(result);
+          if (result.insertedId) {
+            clearPaidClass(singleClass._id);
+            changeAvailability(singleClass._id);
+          }
         });
     }
   };

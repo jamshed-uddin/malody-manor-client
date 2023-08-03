@@ -1,7 +1,6 @@
 import { Avatar, Box, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import React, { useContext, useEffect, useMemo, useState } from "react";
-import SelectedClassesActions from "./ClassesActions";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import ClassesActions from "./ClassesActions";
 import { ToastContainer, toast } from "react-toastify";
@@ -24,21 +23,19 @@ const SelectedClasses = () => {
       .then((res) => res.json())
       .then((result) => {
         if (result.deletedCount) {
-          notify();
           setReload(!reload);
+          notify();
         }
       })
       .catch((error) => console.log(error));
   };
-  // console.log(currentUser);
+  // fetching data from different data collection for selected class,not all class data
   useEffect(() => {
-    if (user) {
-      fetch(`http://localhost:3000/getSelectedClasses/${user?.email}`)
-        .then((res) => res.json())
-        .then((result) => {
-          setSelectedClasses(result);
-        });
-    }
+    fetch(`http://localhost:3000/getSelectedClasses/${user?.email}`)
+      .then((res) => res.json())
+      .then((result) => {
+        setSelectedClasses(result);
+      });
   }, [user, reload]);
 
   const columns = useMemo(
@@ -58,6 +55,11 @@ const SelectedClasses = () => {
         headerName: "Instructor Email",
         width: "220",
       },
+      {
+        field: "available_seat",
+        headerName: "Seats",
+        width: "80",
+      },
 
       {
         field: "actions",
@@ -72,6 +74,9 @@ const SelectedClasses = () => {
     []
   );
 
+  if (!selectedClasses) {
+    return <h1>Loading...</h1>;
+  }
   return (
     <div>
       <div>

@@ -16,8 +16,6 @@ const TableComponent = ({ columns, data }) => {
         columns={columns}
         rows={data}
         getRowId={(row) => row._id}
-        // processRowUpdate={(params) => setRowId(params.id)}
-        // onProcessRowUpdateError={(error) => console.log(error)}
       ></DataGrid>
     </Box>
   );
