@@ -86,7 +86,7 @@ const router = createBrowserRouter([
         element: <PaymentHistory></PaymentHistory>,
       },
       {
-        path: "payment/:classId",
+        path: "payment/:selectedClassId",
         element: <Payment></Payment>,
       },
       //instructor routes

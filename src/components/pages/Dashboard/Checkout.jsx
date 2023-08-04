@@ -3,8 +3,10 @@ import React, { useContext, useEffect, useState } from "react";
 import useRole from "../../../Hooks/useRole";
 import clearPaidClass from "./clearPaidClass";
 import changeAvailability from "./changeAvailability";
+import { useNavigate } from "react-router-dom";
 
-const Checkout = ({ price, singleClass }) => {
+const Checkout = ({ singleSelectedClass, price, paymentCompleteToast }) => {
+  const navigate = useNavigate();
   const [currentUser] = useRole();
   const [cardError, setCardError] = useState("");
   const [processing, setProcessing] = useState(false);
@@ -73,8 +75,8 @@ const Checkout = ({ price, singleClass }) => {
         transectionId: paymentIntent?.id,
         userEmail: currentUser?.email,
         userName: currentUser?.name,
-        classId: singleClass?._id,
-        className: singleClass?.class_name,
+        classId: singleSelectedClass?.classId,
+        className: singleSelectedClass?.class_name,
         paymentDate: new Date(),
         amount: parseFloat(paymentIntent?.amount / 100),
         status: paymentIntent?.status,
@@ -91,8 +93,12 @@ const Checkout = ({ price, singleClass }) => {
         .then((result) => {
           console.log(result);
           if (result.insertedId) {
-            clearPaidClass(singleClass._id);
-            changeAvailability(singleClass._id);
+            clearPaidClass(singleSelectedClass._id);
+            changeAvailability(singleSelectedClass?.classId);
+            paymentCompleteToast();
+            setTimeout(() => {
+              navigate("/dashboard/enrolled-classes");
+            }, 4000);
           }
         });
     }
