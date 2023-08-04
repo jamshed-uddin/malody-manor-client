@@ -16,7 +16,7 @@ const Classes = () => {
 
       <div className="grid lg:grid-cols-3 my-8 gap-4">
         {classes.map((singleclass) => (
-          <ClassCard key={singleclass.id} singleClass={singleclass} />
+          <ClassCard key={singleclass._id} singleClass={singleclass} />
         ))}
       </div>
     </div>
