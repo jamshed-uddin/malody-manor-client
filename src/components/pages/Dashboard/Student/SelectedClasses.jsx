@@ -78,7 +78,7 @@ const SelectedClasses = () => {
       <div>
         <TableComponent columns={columns} data={selectedClasses} />
       </div>
-      <ToastContainer />
+      <ToastContainer autoClose={2500} />
     </div>
   );
 };

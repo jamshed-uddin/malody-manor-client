@@ -32,6 +32,7 @@ const Login = () => {
   const googleSignInHandler = () => {
     signInWithGoogle()
       .then((result) => {
+        console.log(result);
         if (result.user) {
           const newUser = {
             name: result.user.displayName,
@@ -50,11 +51,8 @@ const Login = () => {
             body: JSON.stringify(newUser),
           })
             .then((res) => res.json())
-            .then((data) => {
-              console.log(data);
-              if (data.insertedId) {
-                navigate("/");
-              }
+            .then(() => {
+              navigate(from, { replace: true });
             });
         }
       })
