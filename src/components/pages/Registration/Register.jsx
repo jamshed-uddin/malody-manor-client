@@ -5,6 +5,7 @@ import { AuthContext } from "../../Provider/AuthProvider";
 
 const Register = () => {
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const { registerUser, updateUserNamePhoto } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -32,23 +33,24 @@ const Register = () => {
 
     registerUser(data.email, data.password)
       .then((result) => {
-        const registeredUser = result.user;
+        if (result.user) {
+          updateUserNamePhoto(data.name, data.photo).then(() => {
+            fetch("http://localhost:3000/users", {
+              method: "POST",
+              headers: {
+                "content-type": "application/json",
+              },
+              body: JSON.stringify(newUser),
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                if (data.insertedId) {
+                  navigate("/");
+                }
+              });
+          });
+        }
 
-        updateUserNamePhoto(data.name, data.photo).then(() => {
-          fetch("http://localhost:3000/users", {
-            method: "POST",
-            headers: {
-              "content-type": "application/json",
-            },
-            body: JSON.stringify(newUser),
-          })
-            .then((res) => res.json())
-            .then((data) => {
-              if (data.insertedId) {
-                navigate("/");
-              }
-            });
-        });
         navigate("/");
       })
       .catch((error) => {
@@ -64,55 +66,57 @@ const Register = () => {
 
   return (
     <div className="h-screen flex justify-center items-center">
-      <div className="w-1/4 mx-auto p-4 shadow">
+      <div className="max-w-md p-6 shadow-lg rounded-xl">
         <h1 className="text-center text-2xl font-semibold my-3">Sign up</h1>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
           <input
             {...register("name")}
             type="text"
             placeholder="Name"
-            className="border-b border-black block outline-none w-full px-2 py-1"
+            className="border border-gray-400 p-2 w-full rounded-xl focus:outline-none"
           />
 
           <input
             {...register("photo")}
             type="text"
             placeholder="Photo URL"
-            className="border-b border-black block outline-none w-full px-2 py-1"
+            className="border border-gray-400 p-2 w-full rounded-xl focus:outline-none"
           />
 
           <input
             {...register("email", { required: true })}
             type="email"
             placeholder="Email*"
-            className="border-b border-black block outline-none w-full px-2 py-1"
+            className="border border-gray-400 p-2 w-full rounded-xl focus:outline-none"
           />
           {errors.email && (
             <p className="text-red-500 text-sm">Email is required</p>
           )}
 
-          <select
-            className="border-b border-black block outline-none w-full px-2 py-1"
-            {...register("gender")}
-          >
-            <option value="female">Gender</option>
-            <option value="female">Female</option>
-            <option value="male">Male</option>
-            <option value="other">Other</option>
-          </select>
+          <div className="flex space-x-2">
+            <select
+              className="border border-gray-400 p-2  rounded-xl focus:outline-none flex-grow"
+              {...register("gender")}
+            >
+              <option value="female">Gender</option>
+              <option value="female">Female</option>
+              <option value="male">Male</option>
+              <option value="other">Other</option>
+            </select>
 
-          <input
-            {...register("phone")}
-            type="tel"
-            placeholder="Phone Number"
-            className="border-b border-black block outline-none w-full px-2 py-1"
-          />
+            <input
+              {...register("phone")}
+              type="tel"
+              placeholder="Phone Number"
+              className="border border-gray-400 p-2 rounded-xl focus:outline-none flex-grow"
+            />
+          </div>
 
           <input
             {...register("address")}
             type="text"
             placeholder="Address"
-            className="border-b border-black block outline-none w-full px-2 py-1"
+            className="border border-gray-400 p-2 w-full rounded-xl focus:outline-none"
           />
 
           <input
@@ -122,9 +126,9 @@ const Register = () => {
               pattern:
                 /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d!@#$%^&*()]{6,}$/i,
             })}
-            type="password"
+            type={showPassword ? "text" : "password"}
             placeholder="Password*"
-            className="border-b border-black block outline-none w-full px-2 py-1"
+            className="border border-gray-400 p-2 w-full rounded-xl focus:outline-none"
           />
           {errors.password?.type === "required" && (
             <p className="text-red-500 text-sm">Password is required</p>
@@ -145,14 +149,24 @@ const Register = () => {
             {...register("confirmPassword", {
               validate: (value) => value === password,
             })}
-            type="password"
+            type={showPassword ? "text" : "password"}
             placeholder="Confirm Password*"
-            className="border-b border-black block outline-none w-full px-2 py-1"
+            className="border border-gray-400 p-2 w-full rounded-xl focus:outline-none"
           />
+          <div className="flex">
+            <input
+              onClick={() => setShowPassword(!showPassword)}
+              type="checkbox"
+            />
+            <label className="text-sm ml-2" htmlFor="showPassword">
+              Show Password
+            </label>
+          </div>
           {errors.confirmPassword && (
             <p className="text-red-500 text-sm">Passwords do not match</p>
           )}
           <p className="text-red-500 text-sm">{error}</p>
+
           <p className="text-center">
             {" "}
             <button

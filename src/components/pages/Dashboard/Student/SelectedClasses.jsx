@@ -1,5 +1,4 @@
-import { Avatar, Box, Typography } from "@mui/material";
-import { DataGrid } from "@mui/x-data-grid";
+import { Avatar } from "@mui/material";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import ClassesActions from "./ClassesActions";
@@ -74,9 +73,6 @@ const SelectedClasses = () => {
     []
   );
 
-  if (!selectedClasses) {
-    return <h1>Loading...</h1>;
-  }
   return (
     <div>
       <div>

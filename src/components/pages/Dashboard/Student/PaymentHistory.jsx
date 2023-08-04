@@ -6,9 +6,6 @@ const PaymentHistory = () => {
   const [payments, setPayments] = useState([]);
   const [currentUser] = useRole();
 
-  console.log(payments);
-  console.log(currentUser);
-
   useEffect(() => {
     if (currentUser.email) {
       fetch(`http://localhost:3000/getPaymentHistory/${currentUser?.email}`)

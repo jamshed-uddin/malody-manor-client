@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 
 const Login = () => {
-  const { userLogin } = useContext(AuthContext);
+  const { userLogin, loading, signInWithGoogle } = useContext(AuthContext);
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const location = useLocation();
@@ -28,25 +29,66 @@ const Login = () => {
       });
   };
 
+  const googleSignInHandler = () => {
+    signInWithGoogle()
+      .then((result) => {
+        if (result.user) {
+          const newUser = {
+            name: result.user.displayName,
+            photo: result.user.photoURL,
+            email: result.user.email,
+            gender: "",
+            phone: result.user.phoneNumber,
+            address: "",
+            role: "student",
+          };
+          fetch("http://localhost:3000/users", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(newUser),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              console.log(data);
+              if (data.insertedId) {
+                navigate("/");
+              }
+            });
+        }
+      })
+      .catch((error) => console.log(error));
+  };
+
   return (
     <div className="h-screen flex justify-center items-center">
-      <div className="w-1/4 mx-auto p-4 shadow">
+      <div className=" p-6 shadow-lg rounded-xl">
         <h1 className="text-center text-2xl font-semibold my-3">Log in</h1>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <input
             {...register("email", { required: true })}
             type="email"
             placeholder="Email"
-            className="border-b border-black block px-2 py-1 outline-none w-full"
+            className="border border-gray-400 p-2 w-full rounded-xl focus:outline-none"
           />
           {errors.email && <p className="text-red-500">Email is required</p>}
 
           <input
             {...register("password", { required: true })}
-            type="password"
+            type={showPassword ? "text" : "password"}
             placeholder="Password"
-            className="border-b border-black block px-2 py-1 outline-none w-full"
+            className="border border-gray-400 p-2 w-full rounded-xl focus:outline-none"
           />
+          <div className="flex">
+            <input
+              onClick={() => setShowPassword(!showPassword)}
+              type="checkbox"
+            />
+            <label className="text-sm ml-2" htmlFor="showPassword">
+              Show Password
+            </label>
+          </div>
           {errors.password && (
             <p className="text-red-500">Password is required</p>
           )}
@@ -55,12 +97,26 @@ const Login = () => {
             {" "}
             <button
               type="submit"
-              className=" py-1 px-4 text-xl font-semibold rounded-lg shadow "
+              className={` py-1 px-4 text-xl font-semibold rounded-lg shadow ${
+                loading && "btn-disabled bg-transparent opacity-80"
+              }`}
             >
               Login
             </button>
           </p>
         </form>
+        {/* google sign in  */}
+        <div className="mt-4 text-center py-3">
+          <h1 className="text-xl font-semibold">OR</h1>
+          <h1 className=" text-lg">Continue with</h1>
+
+          <button
+            onClick={googleSignInHandler}
+            className=" border border-black px-3 w-1/2 mt-2 rounded-lg mx-auto font-semibold"
+          >
+            GOOGLE
+          </button>
+        </div>
         <h1 className="mt-3">
           New to Melody Manor?
           <Link className="underline" to={"/register"}>

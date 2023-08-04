@@ -5,9 +5,16 @@ import { AuthContext } from "../Provider/AuthProvider";
 const PrivateRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
   const location = useLocation();
-
-  if (loading) {
-    return <progress className="progress w-56"></progress>;
+  console.log(user);
+  console.log(loading);
+  if (loading || !user) {
+    return (
+      <div className="h-screen flex justify-center items-center">
+        <div>
+          <span className="loading loading-dots loading-lg"></span>
+        </div>
+      </div>
+    );
   }
 
   if (user) {

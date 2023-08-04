@@ -8,8 +8,14 @@ const PrivateRoute = ({ children }) => {
   const [currentUser, role, isRoleLoading] = useRole();
   const location = useLocation();
 
-  if (loading || isRoleLoading) {
-    return <progress className="progress w-56"></progress>;
+  if (loading || isRoleLoading || !user) {
+    return (
+      <div className="h-screen flex justify-center items-center">
+        <div>
+          <span className="loading loading-dots loading-lg"></span>
+        </div>
+      </div>
+    );
   }
 
   if (user || role === "instructor") {

@@ -13,7 +13,6 @@ const useRole = () => {
     fetch(`http://localhost:3000/singleUser/${user?.email}`)
       .then((res) => res.json())
       .then((userData) => {
-        console.log(userData);
         if (userData?.email) {
           setIsRoleLoading(false);
           setCurrentUser(userData);

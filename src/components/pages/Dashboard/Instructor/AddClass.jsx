@@ -20,7 +20,6 @@ const AddClass = () => {
     data.available_seat = parseInt(data.available_seat);
     data.enrolled = 0;
     data.status = "pending";
-    // console.log(data);
 
     // --------------
     setLoading(true);

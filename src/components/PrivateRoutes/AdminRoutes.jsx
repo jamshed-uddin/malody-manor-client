@@ -9,7 +9,13 @@ const PrivateRoute = ({ children }) => {
   const location = useLocation();
 
   if (loading || isRoleLoading) {
-    return <progress className="progress w-56"></progress>;
+    return (
+      <div className="h-screen flex justify-center items-center">
+        <div>
+          <span className="loading loading-dots loading-lg"></span>
+        </div>
+      </div>
+    );
   }
 
   if (user || role === "admin") {
