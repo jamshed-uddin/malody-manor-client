@@ -11,10 +11,7 @@ import "swiper/css/pagination";
 import { Navigation, Autoplay, Pagination, Mousewheel, Keyboard } from "swiper";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faArrowRight,
-  faArrowUpRightDots,
-} from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import MyButton from "../../../shared/MyButton";
 
 const Banner = () => {
@@ -36,47 +33,47 @@ const Banner = () => {
         className="mySwiper"
       >
         <SwiperSlide>
-          <div className="h-screen flex justify-center items-center text-center lg:px-16 px-8">
-            <div className=" font-bold">
-              <h1 className="py-8 text-3xl lg:text-5xl leading-[55px] uppercase">
+          <div className="h-[calc(100vh-65px)] flex items-center  lg:px-16 px-8">
+            <div className=" font-bold w-full">
+              <h1 className="py-8 text-6xl lg:text-8xl uppercase leading-tight transition-all duration-500 ">
                 {" "}
-                Ignite Your Passion for Music Instruments and Let Your Talent
-                Soar!
+                <span className="">Ignite your</span>{" "}
+                <span className=" tracking-[0.1em]">potential</span> through{" "}
+                <span className="block tracking-[0.3em] lg:tracking-[0.3em] lg:hover:tracking-[0.4em]  transition-all duration-500 w-fit">
+                  melodies
+                </span>
               </h1>
+
               <MyButton>
                 Explore Classes <FontAwesomeIcon icon={faArrowRight} />
               </MyButton>
             </div>
-            <div className=""></div>
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <div className="h-screen flex justify-center items-center text-center lg:px-16 px-8">
+          <div className="h-[calc(100vh-65px)] flex items-center  lg:px-16 px-8">
             <div className=" font-bold ">
-              <h1 className="py-8 text-3xl lg:text-5xl leading-[55px] uppercase">
-                {" "}
-                Embark on a Transformative Musical Expedition at Our Camp!
+              <h1 className="py-8 text-6xl lg:text-8xl uppercase leading-tight transition-all duration-500 ">
+                In <span className="ml-8 tracking-[0.2em]">music</span>
+                <br /> we find solace and{" "}
+                <span className="lg:tracking-[0.3em]">inspiration</span>.
               </h1>
               <MyButton>
                 Explore Classes <FontAwesomeIcon icon={faArrowRight} />
               </MyButton>
             </div>
-            <div className=""></div>
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <div className="h-screen flex justify-center items-center text-center lg:px-16 px-8">
-            <div className=" font-bold ">
-              <h1 className="py-8 text-3xl lg:text-5xl leading-[55px] uppercase">
-                {" "}
-                Unleash Your Musical Talent at our Instrument Learning School -
-                Where Melodies Come Alive!
+          <div className="h-[calc(100vh-65px)] flex items-center  lg:px-16 px-8">
+            <div className=" font-bold w-full">
+              <h1 className="py-8 text-[3.50rem] lg:text-8xl uppercase leading-tight transition-all duration-500 ">
+                In a world of <br /> sound, let your melody shine.
               </h1>
               <MyButton>
                 Explore Classes <FontAwesomeIcon icon={faArrowRight} />
               </MyButton>
             </div>
-            <div className=""></div>
           </div>
         </SwiperSlide>
       </Swiper>

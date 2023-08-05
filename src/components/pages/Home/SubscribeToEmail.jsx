@@ -16,7 +16,7 @@ const SubscribeToEmail = () => {
               className="border border-black focus:outline-none rounded-lg py-2 pl-4 w-3/4 z-10"
               type="email"
             />
-            <button className="text-lg font-semibold hover:bg-black hover:text-white transition-all duration-500 pl-6 pr-3 rounded-lg absolute top-0 bottom-0 -right-3 lg:right-10 ">
+            <button className="text-lg font-semibold bg-black text-white pl-6 pr-3 rounded-lg absolute top-0 bottom-0 -right-3 lg:right-10 ">
               Subscribe
             </button>
           </div>

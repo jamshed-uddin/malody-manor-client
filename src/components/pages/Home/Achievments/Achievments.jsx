@@ -34,7 +34,7 @@ const Achievments = () => {
             <h1 className="text-5xl">
               <span className="text-5xl font-medium">{single.numbers}</span>+
             </h1>
-            <p className=" font-semibold">{single.text}</p>
+            <p>{single.text}</p>
           </div>
         ))}
       </div>
