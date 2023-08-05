@@ -13,9 +13,13 @@ const Navbar = () => {
   const [isOpen, setOpen] = useState(false);
   const { user, userLogout } = useContext(AuthContext);
   //   const { user, userLogOut } = useContext(AuthContext);
+  const handleLogOut = () => {
+    userLogout();
+    setOpen(false);
+  };
 
   return (
-    <div className="flex justify-between h-16  items-center px-6 lg:px-16 py-3 lg:py-0  fixed top-0 right-0 left-0 bg-white shadow-md  z-40">
+    <div className="flex justify-between h-16  items-center px-6 lg:px-16 py-3 lg:py-0  fixed top-0 right-0 left-0 bg-white  z-40">
       <div>
         <Link to={"/"}>
           {" "}
@@ -85,7 +89,7 @@ const Navbar = () => {
           </Link>
 
           {user ? (
-            <Link onClick={userLogout}>
+            <Link onClick={handleLogOut}>
               <MyButton>Logout</MyButton>
             </Link>
           ) : (
