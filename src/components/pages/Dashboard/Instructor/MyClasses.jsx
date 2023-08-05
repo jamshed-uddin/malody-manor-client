@@ -64,6 +64,7 @@ const MyClasses = () => {
 
   return (
     <div>
+      <h1 className="pb-5 text-2xl">My classes</h1>
       <div>
         <TableComponent columns={columns} data={myClasses} />
       </div>

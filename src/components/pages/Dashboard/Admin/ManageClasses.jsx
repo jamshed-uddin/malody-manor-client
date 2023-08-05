@@ -3,6 +3,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Avatar, Box, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import ManageClassActions from "./ManageClassActions";
+import TableComponent from "../TableComponent";
 
 const ManageClasses = () => {
   const [classes, setClasses] = useState([]);
@@ -54,22 +55,10 @@ const ManageClasses = () => {
 
   return (
     <div>
-      <Box sx={{ height: "100%", width: "100vw" }}>
-        <Typography
-          variant="h6"
-          component="h6"
-          sx={{ textAlign: "left", mt: 3, mb: 3 }}
-        >
-          Manage Classes
-        </Typography>
-        <DataGrid
-          columns={columns}
-          rows={classes}
-          getRowId={(row) => row._id}
-          // processRowUpdate={(params) => setRowId(params.id)}
-          // onProcessRowUpdateError={(error) => console.log(error)}
-        ></DataGrid>
-      </Box>
+      <h1 className="pb-5 text-2xl">All classes</h1>
+      <div>
+        <TableComponent columns={columns} data={classes}></TableComponent>
+      </div>
     </div>
   );
 };

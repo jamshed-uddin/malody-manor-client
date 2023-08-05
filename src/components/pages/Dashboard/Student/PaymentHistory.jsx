@@ -34,6 +34,7 @@ const PaymentHistory = () => {
 
   return (
     <div>
+      <h1 className="pb-5 text-2xl">Payment history</h1>
       <div>
         {!currentUser._id ? (
           <h1>Loading...</h1>

@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import UserActions from "./UserActions";
 import { Avatar, Box, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
+import TableComponent from "../TableComponent";
 
 const ManageUsers = () => {
   const [userData, setUserData] = useState([]);
@@ -49,22 +50,10 @@ const ManageUsers = () => {
 
   return (
     <div>
-      <Box sx={{ height: "100%", width: "100vw" }}>
-        <Typography
-          variant="h6"
-          component="h6"
-          sx={{ textAlign: "left", mt: 3, mb: 3 }}
-        >
-          Manage Users
-        </Typography>
-        <DataGrid
-          columns={columns}
-          rows={userData}
-          getRowId={(row) => row._id}
-          // processRowUpdate={(params) => setRowId(params.id)}
-          // onProcessRowUpdateError={(error) => console.log(error)}
-        ></DataGrid>
-      </Box>
+      <h1 className="pb-5 text-2xl">All users</h1>
+      <div>
+        <TableComponent columns={columns} data={userData}></TableComponent>
+      </div>
     </div>
   );
 };

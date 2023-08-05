@@ -75,6 +75,7 @@ const SelectedClasses = () => {
 
   return (
     <div>
+      <h1 className="pb-5 text-2xl">Selected classes</h1>
       <div>
         <TableComponent columns={columns} data={selectedClasses} />
       </div>

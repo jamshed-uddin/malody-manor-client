@@ -48,6 +48,7 @@ const EnrolledClasses = () => {
 
   return (
     <div>
+      <h1 className="pb-5 text-2xl">Enrolled classes</h1>
       <div>
         <TableComponent columns={columns} data={enrolledClasses} />
       </div>
