@@ -15,9 +15,6 @@ const Payment = () => {
     useSingleSelectedClass(selectedClassId);
 
   console.log(singleSelectedClass);
-  // const [singleClass] = useSingleClass(singleSelectedClass.classId);
-
-  // needed that object id from selectedClasses for deleting that selected class after payment and got original class id from selected class object and that needed to change the anoumt of available_seat and enrolled.
 
   const paymentCompleteToast = () =>
     toast("Payment completed.Redirecting to Enrolled classes...");
