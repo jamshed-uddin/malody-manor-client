@@ -40,8 +40,8 @@ const Banner = () => {
             <div className=" font-bold lg:w-1/2">
               <h1 className="py-8 text-3xl lg:text-5xl leading-[55px] uppercase">
                 {" "}
-                From Novice to Virtuoso: Ignite Your Passion for Music
-                Instruments and Let Your Talent Soar!
+                Ignite Your Passion for Music Instruments and Let Your Talent
+                Soar!
               </h1>
               <MyButton>
                 Explore Classes <FontAwesomeIcon icon={faArrowRight} />
@@ -61,8 +61,7 @@ const Banner = () => {
             <div className=" font-bold ">
               <h1 className="py-8 text-3xl lg:text-5xl leading-[55px] uppercase">
                 {" "}
-                Embrace the Symphony Within: Embark on a Transformative Musical
-                Expedition at Our Camp!
+                Embark on a Transformative Musical Expedition at Our Camp!
               </h1>
               <MyButton>
                 Explore Classes <FontAwesomeIcon icon={faArrowRight} />

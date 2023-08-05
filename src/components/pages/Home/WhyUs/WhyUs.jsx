@@ -15,7 +15,7 @@ const WhyUs = () => {
           </p>
         </div>
         <div class="bg-gray-200 p-6 rounded-lg shadow-md">
-          <h1 class="text-lg font-semibold ">Free Instrument</h1>
+          <h1 class="text-lg font-semibold ">FREE INSTRUMENT</h1>
           <p class="font-medium text-gray-800 mt-4">
             We provide high-quality instruments at no cost, empowering you to
             explore your musical talents without financial barriers. Discover
