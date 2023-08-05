@@ -1,7 +1,13 @@
 .link {
+  opacity: 80% !important;
   text-decoration: none !important;
+  transition: all;
+  transition-duration: 500ms;
+}
+.link:hover {
+  opacity: 100% !important;
 }
 
 .active {
-  border-bottom: 2px solid black !important;
+  border-bottom: 1.5px solid black !important;
 }

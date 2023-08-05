@@ -13,10 +13,7 @@ const impact = [
     numbers: 30,
     text: "Committed,talented,inspiring,paid teaching artists",
   },
-  {
-    numbers: 4,
-    text: "Learning hours per students per week",
-  },
+
   {
     numbers: 140000,
     text: "Learning hours per year",
@@ -33,9 +30,9 @@ const Achievments = () => {
       </div>
       <div className="lg:flex my-12 ">
         {impact.map((single, index) => (
-          <div className=" text-center space-y-4 px-6" key={index}>
+          <div className=" text-center w-full space-y-2 mb-6 px-6" key={index}>
             <h1 className="text-5xl">
-              <span className="text-5xl font-semibold">{single.numbers}</span>+
+              <span className="text-5xl font-medium">{single.numbers}</span>+
             </h1>
             <p className=" font-semibold">{single.text}</p>
           </div>

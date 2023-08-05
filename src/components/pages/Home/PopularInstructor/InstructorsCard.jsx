@@ -11,9 +11,7 @@ const InstructorsCard = ({ instructor }) => {
         />
       </div>
       <div>
-        <h1 className="text-center font-semibold text-xl">
-          {instructor?.name}
-        </h1>
+        <h1 className="text-center font-medium text-2xl">{instructor?.name}</h1>
       </div>
     </div>
   );
