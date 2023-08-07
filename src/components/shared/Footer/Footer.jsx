@@ -3,7 +3,7 @@ import React from "react";
 const Footer = () => {
   return (
     <>
-      <footer className="bg-gray-100 py-4">
+      <footer className="bg-slate-100 py-4 rounded-ss-[50px] rounded-se-[50px] rounded-es-none rounded-ee-none">
         <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
           <div className="text-center">
             <h3 className="text-gray-800 text-xl font-semibold">
@@ -85,7 +85,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <p class="text-gray-600 cursor-pointer my-2 text-center">
+        <p className="text-gray-600 cursor-pointer my-2 text-center">
           © 2023 Melody Manor. All rights reserved.
         </p>
       </footer>

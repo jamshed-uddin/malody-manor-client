@@ -1,12 +1,25 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import "./SideNav.css";
+
 import SideNavItems from "../SideNavItems";
 
-const SideNav = ({ displayName }) => {
+const SideNav = ({ setNavOpened }) => {
+  const navOpenHandler = () => {
+    setNavOpened((prevNavOpen) => !prevNavOpen);
+  };
+
   return (
-    <div className="bg-white shadow-lg h-screen lg:w-[20vw] w-72 pt-6">
-      <h1 className="pl-5 text-2xl font-semibold py-3">{displayName}</h1>
+    <div className="bg-white shadow-lg h-screen lg:w-[20vw] w-72">
+      <div className="grid place-items-end">
+        <p
+          onClick={navOpenHandler}
+          className="text-right lg:hidden border p-2 w-fit cursor-pointer"
+        >
+          CLOSE
+        </p>
+      </div>
+      <h1 className="pl-5 text-2xl font-semibold py-3 border">{}</h1>
       <ul className=" pl-5 space-y-2 text-xl">
         <li>
           <NavLink

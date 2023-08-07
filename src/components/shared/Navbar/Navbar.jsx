@@ -29,10 +29,10 @@ const Navbar = () => {
 
       <div
         className={` block lg:flex lg:w-[65%] w-full justify-end items-center px-24  lg:px-0 py-28 lg:py-0  z-40 lg:bg-inherit  lg:static transition-all duration-1000 text-center  ${
-          isOpen ? "absolute top-0 right-0" : "absolute top-0 -right-[500px]"
+          isOpen ? "absolute top-0 right-0" : "absolute top-0 -right-[1500px]"
         } bg-slate-100 `}
       >
-        <div className="flex flex-col lg:flex-row space-y-5 lg:space-y-0 lg:space-x-14 font-semibold nav-links ">
+        <div className="flex flex-col lg:flex-row space-y-5 lg:space-y-0  lg:space-x-8 font-semibold nav-links ">
           <NavLink
             onClick={() => setOpen(false)}
             className={`link text-3xl lg:text-base font-bold lg:font-bold tracking-[0.2em] lg:tracking-wide  px-2 py-1 lg:py-0 ${({

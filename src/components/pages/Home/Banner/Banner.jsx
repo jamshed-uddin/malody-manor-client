@@ -13,17 +13,19 @@ import { Navigation, Autoplay, Pagination, Mousewheel, Keyboard } from "swiper";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import MyButton from "../../../shared/MyButton";
+import { Link } from "react-router-dom";
 
 const Banner = () => {
   return (
     <div className="h-screen  flex items-center">
       {/* <h1 className="text-center">hello</h1> */}
       <Swiper
-        // autoplay={{
-        //   delay: 2500,
-        //   disableOnInteraction: false,
-        // }}
-        // loop={true}
+        autoplay={{
+          delay: 3000,
+
+          pauseOnMouseEnter: true,
+        }}
+        loop={true}
         cssMode={true}
         navigation={true}
         pagination={true}
@@ -38,15 +40,17 @@ const Banner = () => {
               <h1 className="py-8 text-6xl lg:text-8xl uppercase leading-tight transition-all duration-500 ">
                 {" "}
                 <span className="">Ignite your</span>{" "}
-                <span className=" tracking-[0.1em]">potential</span> through{" "}
+                <span className="tracking-wider">potential</span> through
                 <span className="block tracking-[0.3em] lg:tracking-[0.3em] lg:hover:tracking-[0.4em]  transition-all duration-500 w-fit">
                   melodies
                 </span>
               </h1>
 
-              <MyButton>
-                Explore Classes <FontAwesomeIcon icon={faArrowRight} />
-              </MyButton>
+              <button className="text-xl font-medium">
+                <Link to={"/classes"}>
+                  EXPLORE CLASSES <FontAwesomeIcon icon={faArrowRight} />
+                </Link>
+              </button>
             </div>
           </div>
         </SwiperSlide>
@@ -58,9 +62,11 @@ const Banner = () => {
                 <br /> we find solace and{" "}
                 <span className="lg:tracking-[0.3em]">inspiration</span>.
               </h1>
-              <MyButton>
-                Explore Classes <FontAwesomeIcon icon={faArrowRight} />
-              </MyButton>
+              <button className="text-xl font-medium">
+                <Link to={"/classes"}>
+                  EXPLORE CLASSES <FontAwesomeIcon icon={faArrowRight} />
+                </Link>
+              </button>
             </div>
           </div>
         </SwiperSlide>
@@ -68,11 +74,14 @@ const Banner = () => {
           <div className="h-[calc(100vh-65px)] flex items-center  lg:px-16 px-8">
             <div className=" font-bold w-full">
               <h1 className="py-8 text-[3.50rem] lg:text-8xl uppercase leading-tight transition-all duration-500 ">
-                In a world of <br /> sound, let your melody shine.
+                In a world of <br /> sound, let your{" "}
+                <span className="lg:tracking-[0.2em]">melody</span> shine.
               </h1>
-              <MyButton>
-                Explore Classes <FontAwesomeIcon icon={faArrowRight} />
-              </MyButton>
+              <button className="text-xl font-medium">
+                <Link to={"/classes"}>
+                  EXPLORE CLASSES <FontAwesomeIcon icon={faArrowRight} />
+                </Link>
+              </button>
             </div>
           </div>
         </SwiperSlide>

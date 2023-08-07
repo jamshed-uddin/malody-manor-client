@@ -28,7 +28,7 @@ const Achievments = () => {
           OUR IMPACT
         </h1>
       </div>
-      <div className="lg:flex my-12 ">
+      <div className="lg:flex lg:divide-x-4  my-12 ">
         {impact.map((single, index) => (
           <div className=" text-center w-full space-y-2 mb-6 px-6" key={index}>
             <h1 className="text-5xl">
