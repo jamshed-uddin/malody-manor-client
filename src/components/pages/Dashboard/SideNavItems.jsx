@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import useRole from "../../../Hooks/useRole";
 
-const SideNavItems = () => {
+const SideNavItems = ({ navOpenHandler }) => {
   const [, role] = useRole();
 
   if (role === "student") {
@@ -9,6 +9,7 @@ const SideNavItems = () => {
       <>
         <li>
           <NavLink
+            onClick={() => navOpenHandler()}
             to={"/dashboard/selected-classes"}
             className={({ isActive }) =>
               isActive ? "bg-gradient-to-r from-slate-300" : ""
@@ -19,6 +20,7 @@ const SideNavItems = () => {
         </li>
         <li>
           <NavLink
+            onClick={() => navOpenHandler()}
             to={"/dashboard/enrolled-classes"}
             className={({ isActive }) =>
               isActive ? "bg-gradient-to-r from-slate-300" : ""
@@ -29,6 +31,7 @@ const SideNavItems = () => {
         </li>
         <li>
           <NavLink
+            onClick={() => navOpenHandler()}
             to={"/dashboard/payment-history"}
             className={({ isActive }) =>
               isActive ? "bg-gradient-to-r from-slate-300" : ""
@@ -45,6 +48,7 @@ const SideNavItems = () => {
       <>
         <li>
           <NavLink
+            onClick={() => navOpenHandler()}
             to={"/dashboard/add-class"}
             className={({ isActive }) =>
               isActive ? "bg-gradient-to-r from-slate-300" : ""
@@ -55,6 +59,7 @@ const SideNavItems = () => {
         </li>
         <li>
           <NavLink
+            onClick={() => navOpenHandler()}
             to={"/dashboard/my-classes"}
             className={({ isActive }) =>
               isActive ? "bg-gradient-to-r from-slate-300" : ""
@@ -71,6 +76,7 @@ const SideNavItems = () => {
       <>
         <li>
           <NavLink
+            onClick={() => navOpenHandler()}
             to={`/dashboard/${"manage-user"}`}
             className={({ isActive }) =>
               isActive ? "bg-gradient-to-r from-slate-300" : ""
@@ -81,6 +87,7 @@ const SideNavItems = () => {
         </li>
         <li>
           <NavLink
+            onClick={() => navOpenHandler()}
             to={"/dashboard/manage-classes"}
             className={({ isActive }) =>
               isActive ? "bg-gradient-to-r from-slate-300" : ""

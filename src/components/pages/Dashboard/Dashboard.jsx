@@ -14,7 +14,7 @@ const Dashboard = () => {
         </div>
         {/* mobile sidenav */}
         <div
-          className={`col-span-1 absolute lg:hidden top-0 ${
+          className={`col-span-1 absolute lg:hidden bg-white z-20 top-0 ${
             navOpened ? "left-0" : "-left-96"
           }  transition-all duration-500`}
         >
@@ -23,9 +23,9 @@ const Dashboard = () => {
         <div className="col-span-4 px-4 py-2">
           <h1
             onClick={() => setNavOpened(true)}
-            className="lg:hidden cursor-pointer "
+            className="lg:hidden cursor-pointer font-semibold "
           >
-            OPEN
+            MENU
           </h1>
           <Outlet></Outlet>
         </div>

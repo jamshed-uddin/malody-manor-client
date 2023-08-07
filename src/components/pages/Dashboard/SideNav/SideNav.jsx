@@ -14,15 +14,16 @@ const SideNav = ({ setNavOpened }) => {
       <div className="grid place-items-end">
         <p
           onClick={navOpenHandler}
-          className="text-right lg:hidden border p-2 w-fit cursor-pointer"
+          className="text-right lg:hidden p-2 w-fit cursor-pointer font-semibold"
         >
-          CLOSE
+          CLOSE MENU
         </p>
       </div>
       <h1 className="pl-5 text-2xl font-semibold py-3 border">{}</h1>
       <ul className=" pl-5 space-y-2 text-xl">
         <li>
           <NavLink
+            onClick={navOpenHandler}
             to={"/dashboard/user-home"}
             className={({ isActive }) =>
               isActive ? "bg-gradient-to-r from-slate-300" : ""
@@ -33,7 +34,7 @@ const SideNav = ({ setNavOpened }) => {
         </li>
 
         {/* user specific dashboard navigation */}
-        <SideNavItems />
+        <SideNavItems navOpenHandler={navOpenHandler} />
       </ul>
 
       {/* back to homepages navigation for all users */}
