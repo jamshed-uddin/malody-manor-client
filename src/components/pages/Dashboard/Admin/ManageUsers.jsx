@@ -10,7 +10,7 @@ const ManageUsers = () => {
   const token = localStorage.getItem("access-token");
 
   useEffect(() => {
-    fetch("http://localhost:3000/users")
+    fetch(`${import.meta.env.VITE_SERVER_URL}/users`)
       .then((res) => res.json())
       .then((users) => setUserData(users));
   }, [reload]);

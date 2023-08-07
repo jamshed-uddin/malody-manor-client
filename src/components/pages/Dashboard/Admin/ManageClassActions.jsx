@@ -31,13 +31,16 @@ const ManageClassActions = ({ params }) => {
     // console.log(updateStatusAndFeedback);
 
     setLoading(true);
-    fetch(`http://localhost:3000/updateStatus/${params?.row?._id}`, {
-      method: "PATCH",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(updateStatusAndFeedback),
-    })
+    fetch(
+      `${import.meta.env.VITE_SERVER_URL}/updateStatus/${params?.row?._id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(updateStatusAndFeedback),
+      }
+    )
       .then((res) => res.json())
       .then((result) => {
         if (result.modifiedCount) {

@@ -8,7 +8,11 @@ const PaymentHistory = () => {
 
   useEffect(() => {
     if (currentUser.email) {
-      fetch(`http://localhost:3000/getPaymentHistory/${currentUser?.email}`)
+      fetch(
+        `${import.meta.env.VITE_SERVER_URL}/getPaymentHistory/${
+          currentUser?.email
+        }`
+      )
         .then((res) => res.json())
         .then((result) => setPayments(result));
     }

@@ -23,7 +23,7 @@ const AddClass = () => {
 
     // --------------
     setLoading(true);
-    fetch("http://localhost:3000/addNewClass", {
+    fetch(`${import.meta.env.VITE_SERVER_URL}/addNewClass`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

@@ -56,18 +56,18 @@ const AuthProvider = ({ children }) => {
       setUser(currentUser);
 
       //jwt token
-      if (currentUser) {
-        fetch("http://localhost:3000/jwt", {
-          method: "POST",
-          body: JSON.stringify({ email: currentUser.email }),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            localStorage.setItem("access-token", data.token);
-          });
-      } else {
-        localStorage.removeItem("access-token");
-      }
+      // if (currentUser) {
+      //   fetch("http://localhost:3000/jwt", {
+      //     method: "POST",
+      //     body: JSON.stringify({ email: currentUser.email }),
+      //   })
+      //     .then((res) => res.json())
+      //     .then((data) => {
+      //       localStorage.setItem("access-token", data.token);
+      //     });
+      // } else {
+      //   localStorage.removeItem("access-token");
+      // }
       setLoading(false);
     });
     return () => {

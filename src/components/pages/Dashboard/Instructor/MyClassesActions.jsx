@@ -35,13 +35,16 @@ const MyClassesActions = ({ params, setReload, notify }) => {
     };
 
     setLoading(true);
-    fetch(`http://localhost:3000/updateClassInfo/${params.row._id}`, {
-      method: "PATCH",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(updatedInfo),
-    })
+    fetch(
+      `${import.meta.env.VITE_SERVER_URL}/updateClassInfo/${params.row._id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(updatedInfo),
+      }
+    )
       .then((res) => res.json())
       .then((result) => {
         if (result.modifiedCount) {
@@ -59,7 +62,7 @@ const MyClassesActions = ({ params, setReload, notify }) => {
   };
   // delete class function-------------
   const handleDeleteClass = (classId) => {
-    fetch(`http://localhost:3000/deleteClass/${classId}`, {
+    fetch(`${import.meta.env.VITE_SERVER_URL}/deleteClass/${classId}`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",

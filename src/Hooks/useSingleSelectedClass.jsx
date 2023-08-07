@@ -5,7 +5,7 @@ const useSingleSelectedClass = (classId) => {
     queryKey: ["singleSelectedClass", classId],
     queryFn: async () => {
       const data = await fetch(
-        `http://localhost:3000/getSingleSelectedClass/${classId}`
+        `${import.meta.env.VITE_SERVER_URL}/getSingleSelectedClass/${classId}`
       );
       return data.json();
     },

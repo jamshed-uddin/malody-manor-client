@@ -12,7 +12,7 @@ const UserActions = ({ params, setReload }) => {
 
   const saveRoleHandler = (role, userId) => {
     setLoading(true);
-    fetch(`http://localhost:3000/changeRole/${userId}`, {
+    fetch(`${import.meta.env.VITE_SERVER_URL}/changeRole/${userId}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",

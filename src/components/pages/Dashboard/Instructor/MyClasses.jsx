@@ -14,7 +14,9 @@ const MyClasses = () => {
   const notify = () => toast("Class deleted!");
 
   useEffect(() => {
-    fetch(`http://localhost:3000/instructorsClasses/${user?.email}`)
+    fetch(
+      `${import.meta.env.VITE_SERVER_URL}/instructorsClasses/${user?.email}`
+    )
       .then((res) => res.json())
       .then((result) => setMyClasses(result))
       .catch((error) => console.log(error));

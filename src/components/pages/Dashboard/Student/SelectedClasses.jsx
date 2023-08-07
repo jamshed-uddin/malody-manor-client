@@ -13,7 +13,7 @@ const SelectedClasses = () => {
 
   // remove from selected class handler---
   const removeClassHandler = (classId) => {
-    fetch(`http://localhost:3000/removeSelectedClass/${classId}`, {
+    fetch(`${import.meta.env.VITE_SERVER_URL}/removeSelectedClass/${classId}`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",
@@ -30,7 +30,9 @@ const SelectedClasses = () => {
   };
   // fetching data from different data collection for selected class,not all class data
   useEffect(() => {
-    fetch(`http://localhost:3000/getSelectedClasses/${user?.email}`)
+    fetch(
+      `${import.meta.env.VITE_SERVER_URL}/getSelectedClasses/${user?.email}`
+    )
       .then((res) => res.json())
       .then((result) => {
         setSelectedClasses(result);

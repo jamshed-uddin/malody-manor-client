@@ -15,7 +15,7 @@ const EnrolledClasses = () => {
     queryKey: ["enrolledClasses", user?.email],
     queryFn: async () => {
       const data = await fetch(
-        `http://localhost:3000/enrolledClasses/${user?.email}`
+        `${import.meta.env.VITE_SERVER_URL}/enrolledClasses/${user?.email}`
       );
       return data.json();
     },

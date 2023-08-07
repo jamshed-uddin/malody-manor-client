@@ -33,7 +33,7 @@ const Register = () => {
       .then((result) => {
         if (result.user) {
           updateUserNamePhoto(data.name, data.photo).then(() => {
-            fetch("http://localhost:3000/users", {
+            fetch(`${import.meta.env.VITE_SERVER_URL}/users`, {
               method: "POST",
               headers: {
                 "content-type": "application/json",

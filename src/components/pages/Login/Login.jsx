@@ -43,7 +43,7 @@ const Login = () => {
             address: "",
             role: "student",
           };
-          fetch("http://localhost:3000/users", {
+          fetch(`${import.meta.env.VITE_SERVER_URL}/users`, {
             method: "POST",
             headers: {
               "content-type": "application/json",

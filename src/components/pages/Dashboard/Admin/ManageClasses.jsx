@@ -10,7 +10,7 @@ const ManageClasses = () => {
   const [rowId, setRowId] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:3000/all-classes")
+    fetch(`${import.meta.env.VITE_SERVER_URL}/all-classes`)
       .then((res) => res.json())
       .then((data) => setClasses(data));
   }, []);

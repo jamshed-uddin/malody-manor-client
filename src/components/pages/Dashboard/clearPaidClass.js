@@ -1,5 +1,5 @@
 const clearPaidClass = (classId) => {
-  fetch(`http://localhost:3000/removeSelectedClass/${classId}`, {
+  fetch(`${import.meta.env.VITE_SERVER_URL}/removeSelectedClass/${classId}`, {
     method: "DELETE",
     headers: {
       "content-type": "application/json",

@@ -32,7 +32,7 @@ const ClassCard = ({ singleClass }) => {
     const newBookmarkedClass = { ...newData, classId: _id };
     console.log(newBookmarkedClass);
 
-    fetch(`http://localhost:3000/addToSelected`, {
+    fetch(`${import.meta.env.VITE_SERVER_URL}/addToSelected`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

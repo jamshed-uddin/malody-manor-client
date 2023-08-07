@@ -1,10 +1,13 @@
 const changeAvailability = (classId) => {
-  fetch(`http://localhost:3000/updateSeatAndAvailableClass/${classId}`, {
-    method: "PATCH",
-    headers: {
-      "content-type": "application/json",
-    },
-  })
+  fetch(
+    `${import.meta.env.VITE_SERVER_URL}/updateSeatAndAvailableClass/${classId}`,
+    {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+      },
+    }
+  )
     .then((res) => res.json())
     .then((result) => console.log(result));
 };

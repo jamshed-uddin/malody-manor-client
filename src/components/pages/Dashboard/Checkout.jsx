@@ -16,7 +16,7 @@ const Checkout = ({ singleSelectedClass, price, paymentCompleteToast }) => {
   const [clientSecret, setClientSecret] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:3000/create-payment-intent", {
+    fetch(`${import.meta.env.VITE_SERVER_URL}/create-payment-intent`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ price: price }),
@@ -82,7 +82,7 @@ const Checkout = ({ singleSelectedClass, price, paymentCompleteToast }) => {
         status: paymentIntent?.status,
       };
 
-      fetch("http://localhost:3000/paymentHistory", {
+      fetch(`${import.meta.env.VITE_SERVER_URL}/paymentHistory`, {
         method: "POST",
         headers: {
           "content-type": "application/json",

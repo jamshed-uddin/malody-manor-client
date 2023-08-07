@@ -10,7 +10,7 @@ const useRole = () => {
   useEffect(() => {
     if (!user?.email) return;
     setIsRoleLoading(true);
-    fetch(`http://localhost:3000/singleUser/${user?.email}`)
+    fetch(`${import.meta.env.VITE_SERVER_URL}/singleUser/${user?.email}`)
       .then((res) => res.json())
       .then((userData) => {
         if (userData?.email) {

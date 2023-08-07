@@ -10,7 +10,7 @@ const PopularClasses = () => {
   const [classes, setClasses] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/classes")
+    fetch(`${import.meta.env.VITE_SERVER_URL}/classes`)
       .then((res) => res.json())
       .then((data) => setClasses(data));
   }, []);
