@@ -22,6 +22,8 @@ import AddClass from "./components/pages/Dashboard/Instructor/AddClass.jsx";
 import MyClasses from "./components/pages/Dashboard/Instructor/MyClasses.jsx";
 import Payment from "./components/pages/Dashboard/Payment.jsx";
 import PrivateRoute from "./components/PrivateRoutes/PrivateRoute.jsx";
+import AdminRoute from "./components/PrivateRoutes/AdminRoute.jsx";
+import InstructorRoute from "./components/PrivateRoutes/InstructorRoute.jsx";
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
@@ -66,11 +68,19 @@ const router = createBrowserRouter([
       //admin routes
       {
         path: "manage-user",
-        element: <ManageUsers></ManageUsers>,
+        element: (
+          <AdminRoute>
+            <ManageUsers></ManageUsers>
+          </AdminRoute>
+        ),
       },
       {
         path: "manage-classes",
-        element: <ManageClasses></ManageClasses>,
+        element: (
+          <AdminRoute>
+            <ManageClasses></ManageClasses>
+          </AdminRoute>
+        ),
       },
       //student routes
       {
@@ -92,11 +102,19 @@ const router = createBrowserRouter([
       //instructor routes
       {
         path: "add-class",
-        element: <AddClass></AddClass>,
+        element: (
+          <InstructorRoute>
+            <AddClass></AddClass>
+          </InstructorRoute>
+        ),
       },
       {
         path: "my-classes",
-        element: <MyClasses></MyClasses>,
+        element: (
+          <InstructorRoute>
+            <MyClasses></MyClasses>
+          </InstructorRoute>
+        ),
       },
     ],
   },
