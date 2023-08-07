@@ -59,9 +59,6 @@ const ManageClassActions = ({ params }) => {
 
   return (
     <div>
-      <Helmet>
-        <title>Melody Manor|Dashboard-all classes</title>
-      </Helmet>
       <button
         className="border-2 border-black rounded-full px-4 py-1  "
         onClick={handleOpen}

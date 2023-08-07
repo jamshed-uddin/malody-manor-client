@@ -66,6 +66,9 @@ const MyClasses = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Dashboard-my classes</title>
+      </Helmet>
       <h1 className="pb-5 text-2xl">My classes</h1>
       <div>
         <TableComponent columns={columns} data={myClasses} />

@@ -3,6 +3,7 @@ import UserActions from "./UserActions";
 import { Avatar, Box, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import TableComponent from "../TableComponent";
+import { Helmet } from "react-helmet";
 
 const ManageUsers = () => {
   const [userData, setUserData] = useState([]);
@@ -51,6 +52,9 @@ const ManageUsers = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Dashboard-manage users</title>
+      </Helmet>
       <h1 className="pb-5 text-2xl">All users</h1>
       <div>
         <TableComponent columns={columns} data={userData}></TableComponent>

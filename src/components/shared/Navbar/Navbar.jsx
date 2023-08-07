@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { AuthContext } from "../../Provider/AuthProvider";
 import MyButton from "../MyButton";
+import { Avatar } from "@mui/material";
 // import { AuthContext } from "../../pages/userManagement/AuthProvider";
 
 const Navbar = () => {
@@ -80,14 +81,12 @@ const Navbar = () => {
           //   title={user?.email}
         >
           <Link onClick={() => setOpen(false)} className="cursor-pointer">
-            <img
-              className="w-10 border border-black  mb-4   lg:mb-0 mx-auto rounded-full"
-              src={`${
-                user ? user?.photoURL : "https://i.ibb.co/PCJCS96/blank.jpg"
-              }`}
+            <Avatar
+              // className="w-10 border border-black  mb-4   lg:mb-0 mx-auto rounded-full"
+              src={`${user && user?.photoURL}`}
               alt=""
               title={user?.email}
-            />
+            ></Avatar>
           </Link>
 
           {user ? (

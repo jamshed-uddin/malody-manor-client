@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import useRole from "../../../../Hooks/useRole";
 import TableComponent from "../TableComponent";
+import { Helmet } from "react-helmet";
 
 const PaymentHistory = () => {
   const [payments, setPayments] = useState([]);
@@ -38,6 +39,9 @@ const PaymentHistory = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Dashboard-payment history</title>
+      </Helmet>
       <h1 className="pb-5 text-2xl">Payment history</h1>
       <div>
         {!currentUser._id ? (

@@ -1,13 +1,17 @@
 import React from "react";
 import useRole from "../../../Hooks/useRole";
+import { Avatar } from "@mui/material";
 
 const UserHome = () => {
   const [currentUser] = useRole();
 
   return (
     <div>
+      <Helmet>
+        <title>Dashboard-home</title>
+      </Helmet>
       <div className="flex flex-col lg:flex-row lg:items-end items-center mb-4">
-        <div>
+        <div className="">
           <img
             className="w-48 rounded-full"
             src={

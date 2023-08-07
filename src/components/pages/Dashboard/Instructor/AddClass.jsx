@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import { CircularProgress } from "@mui/material";
+import { Helmet } from "react-helmet";
 
 const AddClass = () => {
   const { user } = useContext(AuthContext);
@@ -57,6 +58,9 @@ const AddClass = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Dashboard-add classes</title>
+      </Helmet>
       <div>
         <h1 className="text-3xl font-bold ml-5">Add a class</h1>
       </div>

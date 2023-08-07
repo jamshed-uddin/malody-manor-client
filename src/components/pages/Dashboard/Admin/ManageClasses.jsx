@@ -4,6 +4,7 @@ import { Avatar, Box, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import ManageClassActions from "./ManageClassActions";
 import TableComponent from "../TableComponent";
+import { Helmet } from "react-helmet";
 
 const ManageClasses = () => {
   const [classes, setClasses] = useState([]);
@@ -55,6 +56,9 @@ const ManageClasses = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Dashboard-manage classes</title>
+      </Helmet>
       <h1 className="pb-5 text-2xl">All classes</h1>
       <div>
         <TableComponent columns={columns} data={classes}></TableComponent>
