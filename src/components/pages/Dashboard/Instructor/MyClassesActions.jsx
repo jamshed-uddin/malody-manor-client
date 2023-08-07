@@ -34,7 +34,6 @@ const MyClassesActions = ({ params, setReload, notify }) => {
       description: event.target.description.value,
     };
 
-    console.log(updatedInfo);
     setLoading(true);
     fetch(`http://localhost:3000/updateClassInfo/${params.row._id}`, {
       method: "PATCH",
@@ -49,7 +48,6 @@ const MyClassesActions = ({ params, setReload, notify }) => {
           setLoading(false);
           setSuccess(true);
           setReload((prevReload) => !prevReload);
-          console.log(result);
         } else {
           setLoading(false);
         }
@@ -61,8 +59,6 @@ const MyClassesActions = ({ params, setReload, notify }) => {
   };
   // delete class function-------------
   const handleDeleteClass = (classId) => {
-    console.log(classId);
-
     fetch(`http://localhost:3000/deleteClass/${classId}`, {
       method: "DELETE",
       headers: {
@@ -75,7 +71,6 @@ const MyClassesActions = ({ params, setReload, notify }) => {
           notify();
           setReload((prevReload) => !prevReload);
         }
-        console.log(result);
       });
   };
   return (

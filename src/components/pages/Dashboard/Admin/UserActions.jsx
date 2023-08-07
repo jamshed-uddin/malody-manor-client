@@ -9,7 +9,6 @@ const UserActions = ({ params, setReload }) => {
   const [userRole, setUserRole] = useState(params.row.role);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
-  //   console.log(params.row.role);
 
   const saveRoleHandler = (role, userId) => {
     setLoading(true);
@@ -25,7 +24,6 @@ const UserActions = ({ params, setReload }) => {
         if (result.modifiedCount) {
           setLoading(false);
           setSuccess(true);
-          console.log(result);
         } else {
           setLoading(false);
         }
@@ -34,7 +32,7 @@ const UserActions = ({ params, setReload }) => {
     setTimeout(() => {
       setSuccess(false);
     }, 4000);
-    // console.log(userId, role);
+
     // setReload(prevReload => !prevReload);
   };
 

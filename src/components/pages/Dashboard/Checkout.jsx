@@ -91,7 +91,6 @@ const Checkout = ({ singleSelectedClass, price, paymentCompleteToast }) => {
       })
         .then((res) => res.json())
         .then((result) => {
-          console.log(result);
           if (result.insertedId) {
             clearPaidClass(singleSelectedClass._id);
             changeAvailability(singleSelectedClass?.classId);

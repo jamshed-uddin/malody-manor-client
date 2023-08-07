@@ -14,8 +14,6 @@ const Payment = () => {
   const [isLoading, singleSelectedClass] =
     useSingleSelectedClass(selectedClassId);
 
-  console.log(singleSelectedClass);
-
   const paymentCompleteToast = () =>
     toast("Payment completed.Redirecting to Enrolled classes...");
 

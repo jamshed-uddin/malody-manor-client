@@ -29,8 +29,6 @@ const Register = () => {
       role: "student",
     };
 
-    console.log(newUser);
-
     registerUser(data.email, data.password)
       .then((result) => {
         if (result.user) {
@@ -54,8 +52,6 @@ const Register = () => {
         navigate("/");
       })
       .catch((error) => {
-        console.log(error.message);
-
         if (error.message === "Firebase: Error (auth/email-already-in-use).") {
           setError("An account already exists with this email");
         }

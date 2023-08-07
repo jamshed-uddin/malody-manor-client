@@ -63,8 +63,6 @@ const AuthProvider = ({ children }) => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data.token);
-
             localStorage.setItem("access-token", data.token);
           });
       } else {

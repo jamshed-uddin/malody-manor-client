@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import InstructorsCard from "../Home/PopularInstructor/InstructorsCard";
+import { Helmet } from "react-helmet";
 
 const Instructors = () => {
   const [instructors, setInstructors] = useState([]);
@@ -17,6 +18,9 @@ const Instructors = () => {
   }, []);
   return (
     <div className=" py-20 w-3/4  mx-auto">
+      <Helmet>
+        <title>Melody Manor|Classes</title>
+      </Helmet>
       <h1 className="text-3xl text-center font-semibold ">Instructors</h1>
       <div className="grid lg:grid-cols-3 gap-6">
         {instructors.map((instructor, index) => (
