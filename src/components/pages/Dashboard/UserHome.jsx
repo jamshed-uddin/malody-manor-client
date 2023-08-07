@@ -1,6 +1,7 @@
 import React from "react";
 import useRole from "../../../Hooks/useRole";
 import { Avatar } from "@mui/material";
+import { Helmet } from "react-helmet";
 
 const UserHome = () => {
   const [currentUser] = useRole();
