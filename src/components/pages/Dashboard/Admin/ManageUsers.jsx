@@ -7,6 +7,7 @@ import TableComponent from "../TableComponent";
 const ManageUsers = () => {
   const [userData, setUserData] = useState([]);
   const [reload, setReload] = useState(false);
+  const token = localStorage.getItem("access-token");
 
   useEffect(() => {
     fetch("http://localhost:3000/users")

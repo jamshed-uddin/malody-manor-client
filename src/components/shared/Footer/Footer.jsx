@@ -61,13 +61,15 @@ const Footer = () => {
           </div>
           <div className="text-center">
             <h3 className="text-gray-800 text-xl font-semibold">Contact Us</h3>
-            <p className="text-gray-600 cursor-pointer">123 Music Street</p>
-            <p className="text-gray-600 cursor-pointer">City, State ZIP</p>
+            <p className="text-gray-600 cursor-pointer">123 Mayhem Street</p>
+            <p className="text-gray-600 cursor-pointer">
+              New York City, New York
+            </p>
             <p className="text-gray-600 cursor-pointer">
               Phone: (123) 456-7890
             </p>
             <p className="text-gray-600 cursor-pointer">
-              Email: info@yourmusicschool.com
+              Email: info@melodymanor.com
             </p>
           </div>
           <div className="text-center">

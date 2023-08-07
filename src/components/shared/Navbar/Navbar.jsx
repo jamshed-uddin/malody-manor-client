@@ -23,12 +23,14 @@ const Navbar = () => {
       <div>
         <Link to={"/"}>
           {" "}
-          <h1 className="text-3xl font-extrabold">MELODY MANOR</h1>
+          <h1 className="md:text-3xl text-2xl  md:font-extrabold font-bold">
+            MELODY MANOR
+          </h1>
         </Link>
       </div>
 
       <div
-        className={` block lg:flex lg:w-[65%] w-full justify-end items-center px-24  lg:px-0 py-28 lg:py-0  z-40 lg:bg-inherit  lg:static transition-all duration-1000 text-center  ${
+        className={` block lg:flex lg:w-[65%] w-full h-screen lg:h-full justify-end items-center px-24  lg:px-0 py-28 lg:py-0  z-40 lg:bg-inherit  lg:static transition-all duration-1000 text-center  ${
           isOpen ? "absolute top-0 right-0" : "absolute top-0 -right-[1500px]"
         } bg-slate-100 `}
       >

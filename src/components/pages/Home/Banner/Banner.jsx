@@ -37,7 +37,7 @@ const Banner = () => {
         <SwiperSlide>
           <div className="h-[calc(100vh-65px)] flex items-center  lg:px-16 px-8">
             <div className=" font-bold w-full">
-              <h1 className="py-8 text-6xl lg:text-8xl uppercase leading-tight transition-all duration-500 ">
+              <h1 className="py-8 text-5xl lg:text-8xl uppercase leading-tight transition-all duration-500 ">
                 {" "}
                 <span className="">Ignite your</span>{" "}
                 <span className="tracking-wider">potential</span> through
@@ -57,7 +57,7 @@ const Banner = () => {
         <SwiperSlide>
           <div className="h-[calc(100vh-65px)] flex items-center  lg:px-16 px-8">
             <div className=" font-bold ">
-              <h1 className="py-8 text-6xl lg:text-8xl uppercase leading-tight transition-all duration-500 ">
+              <h1 className="py-8 text-5xl lg:text-8xl uppercase leading-tight transition-all duration-500 ">
                 In <span className="ml-8 tracking-[0.2em]">music</span>
                 <br /> we find solace and{" "}
                 <span className="lg:tracking-[0.3em]">inspiration</span>.
@@ -73,8 +73,8 @@ const Banner = () => {
         <SwiperSlide>
           <div className="h-[calc(100vh-65px)] flex items-center  lg:px-16 px-8">
             <div className=" font-bold w-full">
-              <h1 className="py-8 text-[3.50rem] lg:text-8xl uppercase leading-tight transition-all duration-500 ">
-                In a world of <br /> sound, let your{" "}
+              <h1 className="py-8 text-5xl lg:text-8xl uppercase leading-tight transition-all duration-500 ">
+                In a world of sound, let your{" "}
                 <span className="lg:tracking-[0.2em]">melody</span> shine.
               </h1>
               <button className="text-xl font-medium">
