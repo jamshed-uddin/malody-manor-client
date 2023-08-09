@@ -2,14 +2,15 @@ import axios from "axios";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../components/Provider/AuthProvider";
 import { useNavigate } from "react-router-dom";
-const [logOut] = useContext(AuthContext);
-const navigate = useNavigate();
 
 const axiosSecure = axios.create({
   baseURL: `http://localhost:3000`,
 });
 
 const useAxiosSecure = () => {
+  const { userLogOut } = useContext(AuthContext);
+  const navigate = useNavigate();
+  console.log(userLogOut);
   useEffect(() => {
     axiosSecure.interceptors.request.use((req) => {
       //try
@@ -27,17 +28,18 @@ const useAxiosSecure = () => {
     axiosSecure.interceptors.response.use(
       (response) => response,
       async (error) => {
+        console.log(error);
         if (
           error.response &&
           (error?.response.status === 401 || error?.response.status === 403)
         ) {
-          await logOut();
+          await userLogOut();
           navigate("/login");
         }
         return Promise.reject(error);
       }
     );
-  }, []);
+  }, [userLogOut, navigate]);
 
   return [axiosSecure];
 };

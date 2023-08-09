@@ -17,7 +17,6 @@ const Login = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
     userLogin(data.email, data.password)
       .then((result) => {
         if (result) {

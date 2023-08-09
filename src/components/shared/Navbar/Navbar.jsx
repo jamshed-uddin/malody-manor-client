@@ -12,10 +12,10 @@ import { Avatar } from "@mui/material";
 
 const Navbar = () => {
   const [isOpen, setOpen] = useState(false);
-  const { user, userLogout } = useContext(AuthContext);
+  const { user, userLogOut } = useContext(AuthContext);
   //   const { user, userLogOut } = useContext(AuthContext);
   const handleLogOut = () => {
-    userLogout();
+    userLogOut();
     setOpen(false);
   };
 

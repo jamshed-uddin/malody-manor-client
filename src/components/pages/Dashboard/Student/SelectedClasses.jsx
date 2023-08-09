@@ -5,7 +5,6 @@ import ClassesActions from "./ClassesActions";
 import { ToastContainer, toast } from "react-toastify";
 import TableComponent from "../TableComponent";
 import { Helmet } from "react-helmet";
-import axios from "axios";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
 const SelectedClasses = () => {
@@ -53,7 +52,7 @@ const SelectedClasses = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, [user, reload]);
+  }, [user, reload, axiosSecure]);
 
   const columns = useMemo(
     () => [
