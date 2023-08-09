@@ -5,12 +5,16 @@ import ClassesActions from "./ClassesActions";
 import { ToastContainer, toast } from "react-toastify";
 import TableComponent from "../TableComponent";
 import { Helmet } from "react-helmet";
+import axios from "axios";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
 const SelectedClasses = () => {
   const { user } = useContext(AuthContext);
   const [selectedClasses, setSelectedClasses] = useState([]);
   const [reload, setReload] = useState(false);
   const notify = () => toast("Class romoved!");
+
+  const [axiosSecure] = useAxiosSecure();
 
   // remove from selected class handler---
   const removeClassHandler = (classId) => {
@@ -29,14 +33,25 @@ const SelectedClasses = () => {
       })
       .catch((error) => console.log(error));
   };
-  // fetching data from different data collection for selected class,not all class data
+  // fetching data from different data collection for selected class,not from all class data
+  // useEffect(() => {
+  //   fetch(
+  //     `${import.meta.env.VITE_SERVER_URL}/getSelectedClasses/${user?.email}`
+  //   )
+  //     .then((res) => res.json())
+  //     .then((result) => {
+  //       setSelectedClasses(result);
+  //     });
+  // }, [user, reload]);
+
   useEffect(() => {
-    fetch(
-      `${import.meta.env.VITE_SERVER_URL}/getSelectedClasses/${user?.email}`
-    )
-      .then((res) => res.json())
-      .then((result) => {
-        setSelectedClasses(result);
+    axiosSecure(`/getSelectedClasses/${user?.email}`)
+      .then((data) => {
+        console.log(data.data);
+        setSelectedClasses(data?.data);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }, [user, reload]);
 
