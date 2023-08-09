@@ -4,6 +4,7 @@ import { AuthContext } from "../../../Provider/AuthProvider";
 import ClassesActions from "./ClassesActions";
 import { ToastContainer, toast } from "react-toastify";
 import TableComponent from "../TableComponent";
+import { Helmet } from "react-helmet";
 
 const SelectedClasses = () => {
   const { user } = useContext(AuthContext);

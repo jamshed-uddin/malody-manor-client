@@ -63,7 +63,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "user-home",
-        element: <UserHome></UserHome>,
+        element: (
+          <PrivateRoute>
+            <UserHome></UserHome>
+          </PrivateRoute>
+        ),
       },
       //admin routes
       {

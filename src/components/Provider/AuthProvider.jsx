@@ -17,7 +17,7 @@ const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   //register user
   const registerUser = (email, password) => {
     setLoading(true);
@@ -53,21 +53,26 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      // console.log(currentUser?.email);
       setUser(currentUser);
 
       //jwt token
-      // if (currentUser) {
-      //   fetch("http://localhost:3000/jwt", {
-      //     method: "POST",
-      //     body: JSON.stringify({ email: currentUser.email }),
-      //   })
-      //     .then((res) => res.json())
-      //     .then((data) => {
-      //       localStorage.setItem("access-token", data.token);
-      //     });
-      // } else {
-      //   localStorage.removeItem("access-token");
-      // }
+      if (currentUser) {
+        fetch("http://localhost:3000/jwt", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({ email: currentUser?.email }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            localStorage.setItem("access-token", data.token);
+          });
+      } else {
+        localStorage.removeItem("access-token");
+      }
       setLoading(false);
     });
     return () => {

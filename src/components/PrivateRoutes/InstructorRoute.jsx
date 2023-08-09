@@ -9,7 +9,7 @@ const InstructorRoute = ({ children }) => {
   const [currentUser, role, isRoleLoading] = useRole();
   const location = useLocation();
 
-  if (loading || isRoleLoading || !user) {
+  if (loading) {
     return (
       <div className="h-screen flex justify-center items-center">
         <div>

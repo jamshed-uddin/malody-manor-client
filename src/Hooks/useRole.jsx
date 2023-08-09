@@ -6,11 +6,16 @@ const useRole = () => {
   const [isRoleLoading, setIsRoleLoading] = useState(false);
   const [currentUser, setCurrentUser] = useState([]);
   const [role, setRole] = useState("");
+  const token = localStorage.getItem("access-token");
 
   useEffect(() => {
     if (!user?.email) return;
     setIsRoleLoading(true);
-    fetch(`${import.meta.env.VITE_SERVER_URL}/singleUser/${user?.email}`)
+    fetch(`http://localhost:3000/singleUser/${user?.email}`, {
+      headers: {
+        authorization: `bearer ${token}`,
+      },
+    })
       .then((res) => res.json())
       .then((userData) => {
         if (userData?.email) {
