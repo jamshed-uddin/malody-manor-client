@@ -58,7 +58,7 @@ const AuthProvider = ({ children }) => {
 
       //jwt token
       if (currentUser) {
-        fetch("http://localhost:3000/jwt", {
+        fetch(`${import.meta.env.VITE_SERVER_URL}/jwt`, {
           method: "POST",
           headers: {
             "content-type": "application/json",

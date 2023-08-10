@@ -4,16 +4,19 @@ import { Avatar, Box, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import TableComponent from "../TableComponent";
 import { Helmet } from "react-helmet";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
 const ManageUsers = () => {
   const [userData, setUserData] = useState([]);
   const [reload, setReload] = useState(false);
   const token = localStorage.getItem("access-token");
+  const [axiosSecure] = useAxiosSecure();
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_SERVER_URL}/users`)
-      .then((res) => res.json())
-      .then((users) => setUserData(users));
+    axiosSecure(`/users`).then((data) => {
+      console.log(data);
+      setUserData(data.data);
+    });
   }, [reload]);
 
   const columns = useMemo(

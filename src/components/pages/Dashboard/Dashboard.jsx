@@ -5,6 +5,9 @@ import { Outlet } from "react-router-dom";
 
 const Dashboard = () => {
   const [navOpened, setNavOpened] = useState(false);
+  const navOpenHandler = () => {
+    setNavOpened((prevNavOpen) => !prevNavOpen);
+  };
 
   return (
     <div>
@@ -18,7 +21,7 @@ const Dashboard = () => {
             navOpened ? "left-0" : "-left-96"
           }  transition-all duration-500`}
         >
-          <SideNav navOpened={navOpened} setNavOpened={setNavOpened}></SideNav>
+          <SideNav navOpenHandler={navOpenHandler}></SideNav>
         </div>
         <div className="col-span-4 px-4 py-2">
           <h1

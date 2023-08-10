@@ -32,16 +32,6 @@ const SelectedClasses = () => {
       })
       .catch((error) => console.log(error));
   };
-  // fetching data from different data collection for selected class,not from all class data
-  // useEffect(() => {
-  //   fetch(
-  //     `${import.meta.env.VITE_SERVER_URL}/getSelectedClasses/${user?.email}`
-  //   )
-  //     .then((res) => res.json())
-  //     .then((result) => {
-  //       setSelectedClasses(result);
-  //     });
-  // }, [user, reload]);
 
   useEffect(() => {
     axiosSecure(`/getSelectedClasses/${user?.email}`)
@@ -72,8 +62,8 @@ const SelectedClasses = () => {
         width: "220",
       },
       {
-        field: "available_seat",
-        headerName: "Seats",
+        field: "price",
+        headerName: "Price($)",
         width: "80",
       },
 
