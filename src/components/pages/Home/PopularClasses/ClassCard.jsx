@@ -16,8 +16,6 @@ const ClassCard = ({ singleClass }) => {
   const [currentUser, role] = useRole();
   const navigate = useNavigate();
 
-  console.log(currentUser);
-
   // console.log(user);
   const seleted = () => toast("You have selected this class");
   const alreadySelected = () => toast("You have already selected this class");
@@ -26,7 +24,7 @@ const ClassCard = ({ singleClass }) => {
 
   const handleBookmark = () => {
     if (!user) {
-      navigate("/login");
+      return navigate("/login");
     }
 
     singleClass.userEmail = currentUser?.email;
