@@ -11,7 +11,7 @@ const useSingleClass = (classId) => {
     },
   });
 
-  return [singleClass];
+  return [singleClass, isLoading];
 };
 
 export default useSingleClass;

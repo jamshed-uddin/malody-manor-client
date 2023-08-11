@@ -14,11 +14,13 @@ const Home = () => {
         <title>Melody Manor|Home</title>
       </Helmet>
       <Banner></Banner>
-      <PopularClasses></PopularClasses>
-      <PopularInstructor></PopularInstructor>
-      <Achievments></Achievments>
-      <WhyUs></WhyUs>
-      <SubscribeToEmail></SubscribeToEmail>
+      <div className="py-8 md:w-3/4 w-[85%] mx-auto">
+        <PopularClasses></PopularClasses>
+        <PopularInstructor></PopularInstructor>
+        <Achievments></Achievments>
+        <WhyUs></WhyUs>
+        <SubscribeToEmail></SubscribeToEmail>
+      </div>
     </div>
   );
 };

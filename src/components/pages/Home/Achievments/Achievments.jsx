@@ -22,7 +22,7 @@ const impact = [
 
 const Achievments = () => {
   return (
-    <div className="py-8 w-3/4 mx-auto">
+    <div>
       <div>
         <h1 className="text-3xl lg:text-4xl font-bold text-center">
           OUR IMPACT

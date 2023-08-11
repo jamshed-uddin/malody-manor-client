@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import useSingleClass from "../../../../Hooks/useSingleClass";
 
 const ClassesActions = ({ params, removeClassHandler }) => {
-  const [singleClass] = useSingleClass(params.row.classId);
+  const [singleClass, isLoading] = useSingleClass(params.row.classId);
 
   return (
     <div>
