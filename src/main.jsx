@@ -11,7 +11,6 @@ import Login from "./components/pages/Login/Login.jsx";
 import Register from "./components/pages/Registration/Register.jsx";
 import AuthProvider from "./components/Provider/AuthProvider.jsx";
 import Dashboard from "./components/pages/Dashboard/Dashboard.jsx";
-import Profile from "./components/pages/Dashboard/UserHome.jsx";
 import ManageUsers from "./components/pages/Dashboard/Admin/ManageUsers.jsx";
 import ManageClasses from "./components/pages/Dashboard/Admin/ManageClasses.jsx";
 import UserHome from "./components/pages/Dashboard/UserHome.jsx";
@@ -24,6 +23,7 @@ import Payment from "./components/pages/Dashboard/Payment.jsx";
 import PrivateRoute from "./components/PrivateRoutes/PrivateRoute.jsx";
 import AdminRoute from "./components/PrivateRoutes/AdminRoute.jsx";
 import InstructorRoute from "./components/PrivateRoutes/InstructorRoute.jsx";
+import ThemeProvider from "./components/Provider/ThemeProvider.jsx";
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
@@ -127,9 +127,11 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthProvider>
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-      </QueryClientProvider>
+      <ThemeProvider>
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router} />
+        </QueryClientProvider>
+      </ThemeProvider>
     </AuthProvider>
   </React.StrictMode>
 );
