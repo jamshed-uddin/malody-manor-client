@@ -4,8 +4,10 @@ import useRole from "../../../Hooks/useRole";
 import clearPaidClass from "./clearPaidClass";
 import changeAvailability from "./changeAvailability";
 import { useNavigate } from "react-router-dom";
+import { ThemeContext } from "../../Provider/ThemeProvider";
 
 const Checkout = ({ singleSelectedClass, price, paymentCompleteToast }) => {
+  const { theme } = useContext(ThemeContext);
   const navigate = useNavigate();
   const [currentUser] = useRole();
   const [cardError, setCardError] = useState("");
@@ -65,7 +67,7 @@ const Checkout = ({ singleSelectedClass, price, paymentCompleteToast }) => {
       console.log(confirmError);
     }
 
-    console.log(paymentIntent);
+    // console.log(paymentIntent);
     setProcessing(false);
 
     if (paymentIntent.status === "succeeded") {
@@ -111,7 +113,7 @@ const Checkout = ({ singleSelectedClass, price, paymentCompleteToast }) => {
             style: {
               base: {
                 fontSize: "16px",
-                color: "#424770",
+                color: `${theme === "black" ? "#fff" : "#424770"}`,
                 "::placeholder": {
                   color: "#aab7c4",
                 },
@@ -123,7 +125,9 @@ const Checkout = ({ singleSelectedClass, price, paymentCompleteToast }) => {
           }}
         />
         <button
-          className="border border-black px-4 py-1 rounded-lg mt-3"
+          className={`border ${
+            theme === "black" ? "border-white" : "border-black"
+          } px-4 py-1 rounded-lg mt-3`}
           type="submit"
           disabled={!stripe || !clientSecret || processing}
         >

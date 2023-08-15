@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 
 import { ToastContainer, toast } from "react-toastify";
 import useSingleSelectedClass from "../../../Hooks/useSingleSelectedClass";
+import LoadingComponent from "./LoadingComponent";
 
 const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_PK);
 
@@ -18,14 +19,12 @@ const Payment = () => {
     toast("Payment completed.Redirecting to Enrolled classes...");
 
   if (isLoading || !singleSelectedClass?._id) {
-    return <h1>Loading...</h1>;
+    return <LoadingComponent />;
   }
   return (
     <div>
-      <h1 className="text-2xl font-semibold text-center">
-        Complete your payment process
-      </h1>
-      <div className="lg:flex lg:mt-14 mt-8">
+      <h1 className="text-2xl font-semibold lg:ml-11">Complete your payment</h1>
+      <div className="lg:flex lg:mt-14 mt-8 md:px-12">
         <div className="flex-grow">
           <h1 className="text-xl font-semibold mb-4">Class Detail</h1>
 
@@ -43,7 +42,7 @@ const Payment = () => {
           </div>
         </div>
 
-        <div className="flex-grow ">
+        <div className="flex-grow lg:mt-0 mt-8">
           <Elements stripe={stripePromise}>
             <Checkout
               singleSelectedClass={singleSelectedClass}
