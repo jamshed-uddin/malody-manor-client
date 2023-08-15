@@ -5,8 +5,9 @@ import { Link } from "react-router-dom";
 import useSingleClass from "../../../../Hooks/useSingleClass";
 
 const ClassesActions = ({ params, removeClassHandler }) => {
-  const [singleClass, isLoading] = useSingleClass(params.row.classId);
+  const [singleClass, isLoading] = useSingleClass(params.row?.classId);
 
+  if (!singleClass?._id) return;
   return (
     <div>
       <p
@@ -18,7 +19,7 @@ const ClassesActions = ({ params, removeClassHandler }) => {
             singleClass?.available_seat === 0 && "btn-disabled bg-transparent"
           }`}
         >
-          <Link to={`/dashboard/payment/${params.row._id}`}>
+          <Link to={`/dashboard/payment/${params.row?._id}`}>
             {singleClass?.available_seat ? (
               "Checkout"
             ) : (

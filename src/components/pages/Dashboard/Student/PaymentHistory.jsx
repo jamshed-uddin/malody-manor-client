@@ -2,22 +2,27 @@ import React, { useEffect, useMemo, useState } from "react";
 import useRole from "../../../../Hooks/useRole";
 import TableComponent from "../TableComponent";
 import { Helmet } from "react-helmet";
+import { useQuery } from "@tanstack/react-query";
+import LoadingComponent from "../LoadingComponent";
 
 const PaymentHistory = () => {
-  const [payments, setPayments] = useState([]);
   const [currentUser] = useRole();
 
-  useEffect(() => {
-    if (currentUser?.email) {
-      fetch(
+  const {
+    isLoading,
+    refetch,
+    data: payments = [],
+  } = useQuery({
+    queryKey: ["paymentHistory", currentUser?.email],
+    queryFn: async () => {
+      const data = await fetch(
         `${import.meta.env.VITE_SERVER_URL}/getPaymentHistory/${
           currentUser?.email
         }`
-      )
-        .then((res) => res.json())
-        .then((result) => setPayments(result));
-    }
-  }, [currentUser]);
+      );
+      return data.json();
+    },
+  });
 
   const columns = useMemo(
     () => [
@@ -42,14 +47,16 @@ const PaymentHistory = () => {
       <Helmet>
         <title>Dashboard-payment history</title>
       </Helmet>
-      <h1 className="pb-5 text-2xl">Payment history</h1>
-      <div>
-        {!currentUser?._id ? (
-          <h1>Loading...</h1>
-        ) : (
-          <TableComponent columns={columns} data={payments} />
-        )}
-      </div>
+      {isLoading ? (
+        <LoadingComponent />
+      ) : (
+        <div>
+          <h1 className="pb-5 text-2xl">Payment history</h1>
+          <div>
+            <TableComponent columns={columns} data={payments} />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

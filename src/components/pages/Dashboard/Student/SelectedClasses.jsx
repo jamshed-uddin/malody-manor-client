@@ -6,11 +6,13 @@ import { ToastContainer, toast } from "react-toastify";
 import TableComponent from "../TableComponent";
 import { Helmet } from "react-helmet";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import LoadingComponent from "../LoadingComponent";
 
 const SelectedClasses = () => {
   const { user } = useContext(AuthContext);
   const [selectedClasses, setSelectedClasses] = useState([]);
   const [reload, setReload] = useState(false);
+  const [loading, setLoading] = useState(false);
   const notify = () => toast("Class romoved!");
 
   const [axiosSecure] = useAxiosSecure();
@@ -34,10 +36,11 @@ const SelectedClasses = () => {
   };
 
   useEffect(() => {
+    setLoading(true);
     axiosSecure(`/getSelectedClasses/${user?.email}`)
       .then((data) => {
-        console.log(data.data);
         setSelectedClasses(data?.data);
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
@@ -85,10 +88,16 @@ const SelectedClasses = () => {
       <Helmet>
         <title>Dashboard-selected classes</title>
       </Helmet>
-      <h1 className="pb-5 text-2xl">Selected classes</h1>
-      <div>
-        <TableComponent columns={columns} data={selectedClasses} />
-      </div>
+      {loading ? (
+        <LoadingComponent />
+      ) : (
+        <div>
+          <h1 className="pb-5 text-2xl">Selected classes</h1>
+          <div>
+            <TableComponent columns={columns} data={selectedClasses} />
+          </div>
+        </div>
+      )}
       <ToastContainer autoClose={2500} />
     </div>
   );

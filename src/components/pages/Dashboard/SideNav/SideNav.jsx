@@ -81,7 +81,11 @@ const SideNav = ({ navOpenHandler }) => {
                 onClick={navOpenHandler}
                 to={"/dashboard/add-class"}
                 className={({ isActive }) =>
-                  isActive ? "bg-gradient-to-r from-slate-300" : ""
+                  isActive
+                    ? theme === "black"
+                      ? "border-l-4 border-white"
+                      : "border-l-4 border-black"
+                    : ""
                 }
               >
                 Add class
@@ -92,7 +96,11 @@ const SideNav = ({ navOpenHandler }) => {
                 onClick={navOpenHandler}
                 to={"/dashboard/my-classes"}
                 className={({ isActive }) =>
-                  isActive ? "bg-gradient-to-r from-slate-300" : ""
+                  isActive
+                    ? theme === "black"
+                      ? "border-l-4 border-white"
+                      : "border-l-4 border-black"
+                    : ""
                 }
               >
                 My classes
@@ -107,7 +115,11 @@ const SideNav = ({ navOpenHandler }) => {
                 onClick={navOpenHandler}
                 to={"/dashboard/selected-classes"}
                 className={({ isActive }) =>
-                  isActive ? "bg-gradient-to-r from-slate-300" : ""
+                  isActive
+                    ? theme === "black"
+                      ? "border-l-4 border-white"
+                      : "border-l-4 border-black"
+                    : ""
                 }
               >
                 Selected classes
@@ -118,7 +130,11 @@ const SideNav = ({ navOpenHandler }) => {
                 onClick={navOpenHandler}
                 to={"/dashboard/enrolled-classes"}
                 className={({ isActive }) =>
-                  isActive ? "bg-gradient-to-r from-slate-300" : ""
+                  isActive
+                    ? theme === "black"
+                      ? "border-l-4 border-white"
+                      : "border-l-4 border-black"
+                    : ""
                 }
               >
                 enrolled classes
@@ -129,7 +145,11 @@ const SideNav = ({ navOpenHandler }) => {
                 onClick={navOpenHandler}
                 to={"/dashboard/payment-history"}
                 className={({ isActive }) =>
-                  isActive ? "bg-gradient-to-r from-slate-300" : ""
+                  isActive
+                    ? theme === "black"
+                      ? "border-l-4 border-white"
+                      : "border-l-4 border-black"
+                    : ""
                 }
               >
                 payment history

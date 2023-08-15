@@ -4,6 +4,7 @@ import { AuthContext } from "../../../Provider/AuthProvider";
 import TableComponent from "../TableComponent";
 import { Avatar } from "@mui/material";
 import { Helmet } from "react-helmet";
+import LoadingComponent from "../LoadingComponent";
 
 const EnrolledClasses = () => {
   const { user } = useContext(AuthContext);
@@ -52,10 +53,16 @@ const EnrolledClasses = () => {
       <Helmet>
         <title>Dashboard-enrolled classes</title>
       </Helmet>
-      <h1 className="pb-5 text-2xl">Enrolled classes</h1>
-      <div>
-        <TableComponent columns={columns} data={enrolledClasses} />
-      </div>
+      {isLoading ? (
+        <LoadingComponent />
+      ) : (
+        <div>
+          <h1 className="pb-5 text-2xl">Enrolled classes</h1>
+          <div>
+            <TableComponent columns={columns} data={enrolledClasses} />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
