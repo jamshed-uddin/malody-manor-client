@@ -25,7 +25,7 @@ const Achievments = () => {
     <div>
       <div>
         <h1 className="text-3xl lg:text-4xl font-bold text-center">
-          OUR IMPACT
+          Our Impact
         </h1>
       </div>
       <div className="lg:flex lg:divide-x-4  my-12 ">

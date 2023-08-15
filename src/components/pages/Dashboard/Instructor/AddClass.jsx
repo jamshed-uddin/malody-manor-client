@@ -3,11 +3,13 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import { CircularProgress } from "@mui/material";
 import { Helmet } from "react-helmet";
+import { ThemeContext } from "../../../Provider/ThemeProvider";
 
 const AddClass = () => {
   const { user } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const { theme } = useContext(ThemeContext);
   const {
     register,
     handleSubmit,
@@ -51,9 +53,10 @@ const AddClass = () => {
   };
 
   // styles for input and label
-  const labelStyle = "block text-gray-700 font-bold ml-1";
-  const inputStyle =
-    "border border-gray-400 p-2 w-full rounded-xl focus:outline-none";
+  const labelStyle = "block  ml-1";
+  const inputStyle = `border border-gray-400 p-2 w-full rounded-xl focus:outline-none ${
+    theme === "black" && "bg-slate-900"
+  }`;
   // --------
 
   return (
@@ -62,9 +65,9 @@ const AddClass = () => {
         <title>Dashboard-add classes</title>
       </Helmet>
       <div>
-        <h1 className="text-3xl font-bold ml-5">Add a class</h1>
+        <h1 className="pb-4 text-2xl">Add class</h1>
       </div>
-      <form onSubmit={handleSubmit(onSubmit)} className="p-4">
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="lg:flex gap-4">
           <div className="mb-2 flex-grow">
             <label htmlFor="className" className={labelStyle}>
@@ -162,16 +165,15 @@ const AddClass = () => {
           </div>
         </div>
         <div className="mb-2">
-          <label
-            htmlFor="description"
-            className="block text-gray-700 font-bold "
-          >
+          <label htmlFor="description" className="block   ">
             Description <span className="font-extralight">(Optional)</span>
           </label>
           <textarea
             id="description"
             name="description"
-            className=" border border-gray-400 focus:outline-none p-2 w-full rounded-xl"
+            className={` border border-gray-400 focus:outline-none p-2 w-full rounded-xl ${
+              theme === "black" && "bg-slate-900"
+            }`}
             {...register("description")}
           />
         </div>
@@ -181,7 +183,7 @@ const AddClass = () => {
             type="submit"
             className={`text-xl font-semibold border-2 border-black px-3 py-1 rounded-xl w-1/2 relative ${
               success && "bg-green-400 border-green-400"
-            }`}
+            } ${theme === "black" && "bg-slate-900"}`}
           >
             {success ? (
               <span className="px-[6px]">Added the class</span>

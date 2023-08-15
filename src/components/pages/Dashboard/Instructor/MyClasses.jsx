@@ -5,20 +5,27 @@ import { Avatar, Box, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { ToastContainer, toast } from "react-toastify";
 import TableComponent from "../TableComponent";
+import { Helmet } from "react-helmet";
+import LoadingComponent from "../LoadingComponent";
 
 const MyClasses = () => {
   const { user } = useContext(AuthContext);
   const [myClasses, setMyClasses] = useState([]);
   const [reload, setReload] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const notify = () => toast("Class deleted!");
 
   useEffect(() => {
+    setLoading(true);
     fetch(
       `${import.meta.env.VITE_SERVER_URL}/instructorsClasses/${user?.email}`
     )
       .then((res) => res.json())
-      .then((result) => setMyClasses(result))
+      .then((result) => {
+        setMyClasses(result);
+        setLoading(false);
+      })
       .catch((error) => console.log(error));
   }, [user, reload]);
 
@@ -69,10 +76,16 @@ const MyClasses = () => {
       <Helmet>
         <title>Dashboard-my classes</title>
       </Helmet>
-      <h1 className="pb-5 text-2xl">My classes</h1>
-      <div>
-        <TableComponent columns={columns} data={myClasses} />
-      </div>
+      {loading ? (
+        <LoadingComponent />
+      ) : (
+        <div>
+          <h1 className="pb-5 text-2xl">My classes</h1>
+          <div>
+            <TableComponent columns={columns} data={myClasses} />
+          </div>
+        </div>
+      )}
       <ToastContainer />
     </div>
   );
