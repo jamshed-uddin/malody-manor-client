@@ -4,9 +4,11 @@ import TableComponent from "../TableComponent";
 import { Helmet } from "react-helmet";
 import { useQuery } from "@tanstack/react-query";
 import LoadingComponent from "../LoadingComponent";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
 const PaymentHistory = () => {
   const [currentUser] = useRole();
+  const [axiosSecure] = useAxiosSecure();
 
   const {
     isLoading,
@@ -15,14 +17,14 @@ const PaymentHistory = () => {
   } = useQuery({
     queryKey: ["paymentHistory", currentUser?.email],
     queryFn: async () => {
-      const data = await fetch(
-        `${import.meta.env.VITE_SERVER_URL}/getPaymentHistory/${
-          currentUser?.email
-        }`
+      const data = await axiosSecure(
+        `/getPaymentHistory/${currentUser?.email}`
       );
-      return data.json();
+      return data.data;
     },
   });
+
+  console.log(payments);
 
   const columns = useMemo(
     () => [
