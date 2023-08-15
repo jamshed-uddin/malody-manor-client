@@ -2,12 +2,18 @@ import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
+import { ThemeContext } from "../../Provider/ThemeProvider";
 
 const Register = () => {
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const { registerUser, updateUserNamePhoto } = useContext(AuthContext);
+  const { theme } = useContext(ThemeContext);
   const navigate = useNavigate();
+
+  const inputStyle = `border border-gray-400 p-2 w-full rounded-xl focus:outline-none ${
+    theme === "black" && "bg-slate-900"
+  }`;
 
   const {
     register,
@@ -69,21 +75,21 @@ const Register = () => {
             {...register("name")}
             type="text"
             placeholder="Name"
-            className="border border-gray-400 p-2 w-full rounded-xl focus:outline-none"
+            className={inputStyle}
           />
 
           <input
             {...register("photo")}
             type="text"
             placeholder="Photo URL"
-            className="border border-gray-400 p-2 w-full rounded-xl focus:outline-none"
+            className={inputStyle}
           />
 
           <input
             {...register("email", { required: true })}
             type="email"
             placeholder="Email*"
-            className="border border-gray-400 p-2 w-full rounded-xl focus:outline-none"
+            className={inputStyle}
           />
           {errors.email && (
             <p className="text-red-500 text-sm">Email is required</p>
@@ -91,7 +97,9 @@ const Register = () => {
 
           <div className="flex space-x-2">
             <select
-              className="border border-gray-400 p-2  rounded-xl focus:outline-none flex-grow"
+              className={`border border-gray-400 p-2 rounded-xl focus:outline-none flex-grow ${
+                theme === "black" && "bg-slate-900"
+              }`}
               {...register("gender")}
             >
               <option value="female">Gender</option>
@@ -104,7 +112,9 @@ const Register = () => {
               {...register("phone")}
               type="tel"
               placeholder="Phone Number"
-              className="border border-gray-400 p-2 rounded-xl focus:outline-none flex-grow"
+              className={`border border-gray-400 p-2 rounded-xl focus:outline-none flex-grow ${
+                theme === "black" && "bg-slate-900"
+              }`}
             />
           </div>
 
@@ -112,7 +122,7 @@ const Register = () => {
             {...register("address")}
             type="text"
             placeholder="Address"
-            className="border border-gray-400 p-2 w-full rounded-xl focus:outline-none"
+            className={inputStyle}
           />
 
           <input
@@ -124,7 +134,7 @@ const Register = () => {
             })}
             type={showPassword ? "text" : "password"}
             placeholder="Password*"
-            className="border border-gray-400 p-2 w-full rounded-xl focus:outline-none"
+            className={inputStyle}
           />
           {errors.password?.type === "required" && (
             <p className="text-red-500 text-sm">Password is required</p>
@@ -147,7 +157,7 @@ const Register = () => {
             })}
             type={showPassword ? "text" : "password"}
             placeholder="Confirm Password*"
-            className="border border-gray-400 p-2 w-full rounded-xl focus:outline-none"
+            className={inputStyle}
           />
           <div className="flex">
             <input
