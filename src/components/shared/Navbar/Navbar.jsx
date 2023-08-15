@@ -37,9 +37,9 @@ const Navbar = () => {
       </div>
 
       <div
-        className={` block lg:flex lg:w-[65%] w-full h-screen lg:h-full justify-end items-center px-24  lg:px-0 py-28 lg:py-0  z-40 lg:bg-inherit  lg:static transition-all duration-1000 text-center  ${
-          isOpen ? "absolute top-0 right-0" : "absolute top-0 -right-[1500px]"
-        } ${theme === "black" && "bg-black"} ml-auto`}
+        className={` block lg:flex lg:w-[65%] w-full h-screen lg:h-full justify-end items-center px-24  lg:px-0 py-28 lg:py-0  z-40 lg:bg-inherit  lg:static transition-all duration-[800ms]  ${
+          isOpen ? "absolute top-0 right-0" : "absolute top-0 -right-[1000px]"
+        } ${theme === "black" ? "bg-black" : "bg-white"} ml-auto`}
       >
         <div className="flex flex-col lg:flex-row space-y-5 lg:space-y-0  lg:space-x-8 font-semibold nav-links ">
           <NavLink
@@ -83,7 +83,7 @@ const Navbar = () => {
         </div>
 
         <div className=" mt-5 lg:mt-0 lg:flex items-center lg:gap-4 lg:ml-10 lg:mr-5">
-          <div className="flex justify-center">
+          <div className="flex ">
             <Link onClick={() => setOpen(false)} className="cursor-pointer">
               <Avatar
                 src={`${user && user?.photoURL}`}
@@ -117,11 +117,19 @@ const Navbar = () => {
           )}
         </div>
 
-        <div className="lg:hidden z-50 text-3xl cursor-pointer">
+        <div className="lg:hidden z-50 text-3xl cursor-pointer w-7 ">
           {isOpen ? (
-            <FontAwesomeIcon onClick={() => setOpen(false)} icon={faXmark} />
+            <FontAwesomeIcon
+              className="transition-all duration-700"
+              onClick={() => setOpen(false)}
+              icon={faXmark}
+            />
           ) : (
-            <FontAwesomeIcon onClick={() => setOpen(true)} icon={faBars} />
+            <FontAwesomeIcon
+              className="transition-all duration-700"
+              onClick={() => setOpen(true)}
+              icon={faBars}
+            />
           )}
         </div>
       </div>

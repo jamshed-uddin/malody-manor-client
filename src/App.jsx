@@ -8,7 +8,7 @@ import { ThemeContext } from "./components/Provider/ThemeProvider";
 function App() {
   const { theme } = useContext(ThemeContext);
   return (
-    <div className={`${theme === "black" && "text-slate-200"}`}>
+    <div className={`${theme === "black" && "text-gray-300"}`}>
       <Navbar></Navbar>
       <Outlet></Outlet>
       <Footer></Footer>
