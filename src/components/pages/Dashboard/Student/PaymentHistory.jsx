@@ -8,7 +8,7 @@ const PaymentHistory = () => {
   const [currentUser] = useRole();
 
   useEffect(() => {
-    if (currentUser.email) {
+    if (currentUser?.email) {
       fetch(
         `${import.meta.env.VITE_SERVER_URL}/getPaymentHistory/${
           currentUser?.email
@@ -44,7 +44,7 @@ const PaymentHistory = () => {
       </Helmet>
       <h1 className="pb-5 text-2xl">Payment history</h1>
       <div>
-        {!currentUser._id ? (
+        {!currentUser?._id ? (
           <h1>Loading...</h1>
         ) : (
           <TableComponent columns={columns} data={payments} />

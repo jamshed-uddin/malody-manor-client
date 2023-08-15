@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import SideNav from "./SideNav/SideNav";
 import { Outlet } from "react-router-dom";
+import { ThemeContext } from "../../Provider/ThemeProvider";
 
 const Dashboard = () => {
+  const { theme } = useContext(ThemeContext);
   const [navOpened, setNavOpened] = useState(false);
   const navOpenHandler = () => {
     setNavOpened((prevNavOpen) => !prevNavOpen);
@@ -23,7 +25,11 @@ const Dashboard = () => {
         >
           <SideNav navOpenHandler={navOpenHandler}></SideNav>
         </div>
-        <div className="col-span-4 px-4 py-2">
+        <div
+          className={`col-span-4 px-4 py-2 ${
+            theme === "black" && "bg-black text-white"
+          }`}
+        >
           <h1
             onClick={() => setNavOpened(true)}
             className="lg:hidden cursor-pointer font-semibold "

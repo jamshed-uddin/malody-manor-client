@@ -60,7 +60,7 @@ const Banner = () => {
               <h1 className="py-8 text-5xl lg:text-8xl uppercase leading-tight transition-all duration-500 ">
                 In <span className="ml-8 tracking-[0.2em]">music</span>
                 <br /> we find solace and{" "}
-                <span className="lg:tracking-[0.3em]">inspiration</span>.
+                <span className="lg:tracking-[0.3em]">inspiration</span>
               </h1>
               <button className="text-xl font-medium">
                 <Link to={"/classes"}>
@@ -75,7 +75,7 @@ const Banner = () => {
             <div className=" font-bold w-full">
               <h1 className="py-8 text-5xl lg:text-8xl uppercase leading-tight transition-all duration-500 ">
                 In a world of sound, let your{" "}
-                <span className="lg:tracking-[0.2em]">melody</span> shine.
+                <span className="lg:tracking-[0.2em]">melody</span> shine
               </h1>
               <button className="text-xl font-medium">
                 <Link to={"/classes"}>

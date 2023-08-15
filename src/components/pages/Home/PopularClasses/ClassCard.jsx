@@ -10,10 +10,12 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import { useNavigate } from "react-router-dom";
+import { ThemeContext } from "../../../Provider/ThemeProvider";
 
 const ClassCard = ({ singleClass }) => {
   const { user } = useContext(AuthContext);
   const [currentUser, role] = useRole();
+  const { theme } = useContext(ThemeContext);
   const navigate = useNavigate();
 
   // console.log(user);
@@ -55,10 +57,14 @@ const ClassCard = ({ singleClass }) => {
   };
 
   return (
-    <div className={`shadow h-[400px] rounded-2xl overflow-hidden`}>
+    <div
+      className={`shadow h-[400px] rounded-2xl overflow-hidden ${
+        theme === "black" && "bg-slate-900"
+      }`}
+    >
       <div className=" h-1/2 overflow-hidden">
         <img
-          className="rounded-2xl hover:scale-105 transition-all duration-500 "
+          className="rounded-2xl hover:scale-105 transition-all duration-500 w-full object-cover"
           src={singleClass?.image}
           alt=""
         />

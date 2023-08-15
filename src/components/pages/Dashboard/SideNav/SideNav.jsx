@@ -2,12 +2,18 @@ import React, { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import "./SideNav.css";
 import useRole from "../../../../Hooks/useRole";
+import { ThemeContext } from "../../../Provider/ThemeProvider";
 
 const SideNav = ({ navOpenHandler }) => {
-  const [, role] = useRole();
+  const { theme } = useContext(ThemeContext);
+  const [currentUser, role] = useRole();
 
   return (
-    <div className="bg-white shadow-lg h-screen lg:w-[20vw] w-72">
+    <div
+      className={`${
+        theme === "black" ? "bg-slate-900" : "bg-white"
+      } shadow-lg h-screen lg:w-[20vw] w-72`}
+    >
       <div className="grid place-items-end">
         <p
           onClick={navOpenHandler}
@@ -16,7 +22,7 @@ const SideNav = ({ navOpenHandler }) => {
           CLOSE MENU
         </p>
       </div>
-      <h1 className="pl-5 text-2xl font-semibold py-3 border">{}</h1>
+      <h1 className="pl-7 text-lg font-semibold py-3 ">{currentUser?.email}</h1>
       <ul className=" pl-5 space-y-2 text-xl">
         <li>
           <NavLink

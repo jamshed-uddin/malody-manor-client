@@ -1,8 +1,10 @@
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, { useContext } from "react";
+import { ThemeContext } from "../../Provider/ThemeProvider";
 
 const SubscribeToEmail = () => {
+  const { theme } = useContext(ThemeContext);
   return (
     <div>
       <h1 className="text-3xl lg:text-4xl font-bold text-center">
@@ -10,13 +12,23 @@ const SubscribeToEmail = () => {
       </h1>
       <div className="grid grid-cols-1 lg:grid-cols-5  my-10 items-center space-y-9 lg:space-y-0">
         <div className="lg:col-span-3">
-          <div className="flex relative w-full">
+          <div className="flex  w-full">
             <input
               placeholder="Your Email"
-              className="border border-black focus:outline-none rounded-lg py-2 pl-4 w-3/4 z-10"
+              className={`focus:outline-none rounded-s-lg rounded-e-none py-3 pl-4 w-3/4 ${
+                theme === "black"
+                  ? "border-0 bg-slate-900"
+                  : "border border-black "
+              }`}
               type="email"
             />
-            <button className="text-lg font-semibold bg-black text-white md:pl-6 md:pr-3 px-3np rounded-lg md:absolute top-0 bottom-0 -right-5 lg:right-10 ">
+            <button
+              className={` ${
+                theme === "black"
+                  ? "bg-white text-black"
+                  : "bg-black text-white "
+              } px-3 rounded-e-lg`}
+            >
               Subscribe
             </button>
           </div>

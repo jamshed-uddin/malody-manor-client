@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import { ThemeContext } from "../../Provider/ThemeProvider";
-// import useLocalTheme from "../../../Hooks/useLocalTheme";
 
 const Footer = () => {
   const { theme } = useContext(ThemeContext);
