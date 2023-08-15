@@ -3,6 +3,8 @@ import { useContext, useState } from "react";
 import SideNav from "./SideNav/SideNav";
 import { Outlet } from "react-router-dom";
 import { ThemeContext } from "../../Provider/ThemeProvider";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 
 const Dashboard = () => {
   const { theme } = useContext(ThemeContext);
@@ -25,18 +27,25 @@ const Dashboard = () => {
         >
           <SideNav navOpenHandler={navOpenHandler}></SideNav>
         </div>
+
+        {/* dashboard pages */}
         <div
-          className={`col-span-4 px-4 py-2 ${
+          className={`col-span-4 py-2 ${
             theme === "black" && "bg-black text-white"
           }`}
         >
-          <h1
-            onClick={() => setNavOpened(true)}
-            className="lg:hidden cursor-pointer font-semibold "
-          >
-            MENU
-          </h1>
-          <Outlet></Outlet>
+          <div className="flex items-center shadow px-1 mb-2 lg:hidden">
+            <h1
+              onClick={() => setNavOpened(true)}
+              className=" cursor-pointer font-semibold text-3xl"
+            >
+              <FontAwesomeIcon icon={faBars} />
+            </h1>
+            <h1 className="ml-4 font-semibold text-4xl">Dashboard</h1>
+          </div>
+          <div className="px-4">
+            <Outlet></Outlet>
+          </div>
         </div>
       </div>
     </div>
