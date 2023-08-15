@@ -5,17 +5,20 @@ import { DataGrid } from "@mui/x-data-grid";
 import TableComponent from "../TableComponent";
 import { Helmet } from "react-helmet";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import LoadingComponent from "../LoadingComponent";
 
 const ManageUsers = () => {
   const [userData, setUserData] = useState([]);
   const [reload, setReload] = useState(false);
+  const [loading, setLoading] = useState(false);
   const token = localStorage.getItem("access-token");
   const [axiosSecure] = useAxiosSecure();
 
   useEffect(() => {
+    setLoading(true);
     axiosSecure(`/users`).then((data) => {
-      console.log(data);
       setUserData(data.data);
+      setLoading(false);
     });
   }, [reload]);
 
@@ -58,10 +61,16 @@ const ManageUsers = () => {
       <Helmet>
         <title>Dashboard-manage users</title>
       </Helmet>
-      <h1 className="pb-5 text-2xl">All users</h1>
-      <div>
-        <TableComponent columns={columns} data={userData}></TableComponent>
-      </div>
+      {loading ? (
+        <LoadingComponent />
+      ) : (
+        <div>
+          <h1 className="pb-5 text-2xl">All users</h1>
+          <div>
+            <TableComponent columns={columns} data={userData}></TableComponent>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

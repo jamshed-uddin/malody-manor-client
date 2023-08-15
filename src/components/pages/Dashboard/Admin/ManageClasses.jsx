@@ -5,15 +5,21 @@ import { DataGrid } from "@mui/x-data-grid";
 import ManageClassActions from "./ManageClassActions";
 import TableComponent from "../TableComponent";
 import { Helmet } from "react-helmet";
+import LoadingComponent from "../LoadingComponent";
 
 const ManageClasses = () => {
   const [classes, setClasses] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [rowId, setRowId] = useState(null);
 
   useEffect(() => {
+    setLoading(true);
     fetch(`${import.meta.env.VITE_SERVER_URL}/all-classes`)
       .then((res) => res.json())
-      .then((data) => setClasses(data));
+      .then((data) => {
+        setLoading(false);
+        setClasses(data);
+      });
   }, []);
 
   const columns = useMemo(
@@ -59,10 +65,16 @@ const ManageClasses = () => {
       <Helmet>
         <title>Dashboard-manage classes</title>
       </Helmet>
-      <h1 className="pb-5 text-2xl">All classes</h1>
-      <div>
-        <TableComponent columns={columns} data={classes}></TableComponent>
-      </div>
+      {loading ? (
+        <LoadingComponent />
+      ) : (
+        <div>
+          <h1 className="pb-5 text-2xl">All classes</h1>
+          <div>
+            <TableComponent columns={columns} data={classes}></TableComponent>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

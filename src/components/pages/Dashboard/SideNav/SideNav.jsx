@@ -32,7 +32,7 @@ const SideNav = ({ navOpenHandler }) => {
         </p>
       </div>
       <div>
-        <h1 className="pl-7 text-lg font-semibold pb-3 ">
+        <h1 className="pl-7 text-lg font-semibold py-2 ">
           {currentUser?.email}
         </h1>
       </div>

@@ -1,28 +1,44 @@
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Box, CircularProgress, Modal } from "@mui/material";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Helmet } from "react-helmet";
+import { ThemeContext } from "../../../Provider/ThemeProvider";
 
 const ManageClassActions = ({ params }) => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const { theme } = useContext(ThemeContext);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 450,
-    bgcolor: "background.paper",
-    border: "2px solid #000",
-    boxShadow: 10,
-    borderRadius: 3,
-    p: 4,
-  };
+  const style =
+    theme === "black"
+      ? {
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: 450,
+          bgcolor: "#000",
+          border: "2px solid #000",
+          boxShadow: 10,
+          borderRadius: 3,
+          p: 4,
+        }
+      : {
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: 450,
+          bgcolor: "background.paper",
+          border: "2px solid #000",
+          boxShadow: 10,
+          borderRadius: 3,
+          p: 4,
+        };
 
   const handleUpdate = (event) => {
     event.preventDefault();
@@ -68,12 +84,16 @@ const ManageClassActions = ({ params }) => {
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
           <div>
-            <h1 className="text-xl font-bold">Status: {params.row.status}</h1>
-            <h1 className="text-xl font-bold mb-3">Send feedback.</h1>
+            <h1 className="text-xl font-semibold">
+              Status: {params.row.status}
+            </h1>
+            <h1 className="text-xl font-semibold mb-3">Send feedback.</h1>
             <form onSubmit={handleUpdate}>
               <textarea
                 name="feedback"
-                className="block resize-none border-2 border-black rounded-xl p-2 font-semibold"
+                className={`block resize-none border-2 border-black rounded-xl p-2 font-semibold ${
+                  theme === "black" && "bg-slate-900"
+                }`}
                 cols="40"
                 rows="5"
                 placeholder="Feedback"
