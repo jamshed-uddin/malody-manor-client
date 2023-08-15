@@ -3,10 +3,19 @@ import { Link, NavLink } from "react-router-dom";
 import "./SideNav.css";
 import useRole from "../../../../Hooks/useRole";
 import { ThemeContext } from "../../../Provider/ThemeProvider";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const SideNav = ({ navOpenHandler }) => {
   const { theme } = useContext(ThemeContext);
   const [currentUser, role] = useRole();
+
+  const sideNavStyle = ({ isActive }) =>
+    isActive
+      ? theme === "black"
+        ? "border-l-2 border-white"
+        : "border-l-2 border-black"
+      : "";
 
   return (
     <div
@@ -17,13 +26,13 @@ const SideNav = ({ navOpenHandler }) => {
       <div className="grid place-items-end">
         <p
           onClick={navOpenHandler}
-          className="text-right lg:hidden p-2 w-fit cursor-pointer font-semibold"
+          className="text-right text-3xl lg:hidden py-2 pr-3 w-fit cursor-pointer"
         >
-          CLOSE MENU
+          <FontAwesomeIcon icon={faXmark} />
         </p>
       </div>
       <div>
-        <h1 className="pl-7 text-lg font-semibold py-3 ">
+        <h1 className="pl-7 text-lg font-semibold pb-3 ">
           {currentUser?.email}
         </h1>
       </div>
@@ -33,13 +42,7 @@ const SideNav = ({ navOpenHandler }) => {
             <NavLink
               onClick={navOpenHandler}
               to={"/dashboard/user-home"}
-              className={({ isActive }) =>
-                isActive
-                  ? theme === "black"
-                    ? "border-l-4 border-white"
-                    : "border-l-4 border-black"
-                  : ""
-              }
+              className={sideNavStyle}
             >
               Home
             </NavLink>
@@ -51,13 +54,7 @@ const SideNav = ({ navOpenHandler }) => {
                 <NavLink
                   onClick={navOpenHandler}
                   to={`/dashboard/${"manage-user"}`}
-                  className={({ isActive }) =>
-                    isActive
-                      ? theme === "black"
-                        ? "border-l-4 border-white"
-                        : "border-l-4 border-black"
-                      : ""
-                  }
+                  className={sideNavStyle}
                 >
                   Manage users
                 </NavLink>
@@ -66,13 +63,7 @@ const SideNav = ({ navOpenHandler }) => {
                 <NavLink
                   onClick={navOpenHandler}
                   to={"/dashboard/manage-classes"}
-                  className={({ isActive }) =>
-                    isActive
-                      ? theme === "black"
-                        ? "border-l-4 border-white"
-                        : "border-l-4 border-black"
-                      : ""
-                  }
+                  className={sideNavStyle}
                 >
                   Manage classes
                 </NavLink>
@@ -85,13 +76,7 @@ const SideNav = ({ navOpenHandler }) => {
                 <NavLink
                   onClick={navOpenHandler}
                   to={"/dashboard/add-class"}
-                  className={({ isActive }) =>
-                    isActive
-                      ? theme === "black"
-                        ? "border-l-4 border-white"
-                        : "border-l-4 border-black"
-                      : ""
-                  }
+                  className={sideNavStyle}
                 >
                   Add class
                 </NavLink>
@@ -100,13 +85,7 @@ const SideNav = ({ navOpenHandler }) => {
                 <NavLink
                   onClick={navOpenHandler}
                   to={"/dashboard/my-classes"}
-                  className={({ isActive }) =>
-                    isActive
-                      ? theme === "black"
-                        ? "border-l-4 border-white"
-                        : "border-l-4 border-black"
-                      : ""
-                  }
+                  className={sideNavStyle}
                 >
                   My classes
                 </NavLink>
@@ -119,13 +98,7 @@ const SideNav = ({ navOpenHandler }) => {
                 <NavLink
                   onClick={navOpenHandler}
                   to={"/dashboard/selected-classes"}
-                  className={({ isActive }) =>
-                    isActive
-                      ? theme === "black"
-                        ? "border-l-4 border-white"
-                        : "border-l-4 border-black"
-                      : ""
-                  }
+                  className={sideNavStyle}
                 >
                   Selected classes
                 </NavLink>
@@ -134,13 +107,7 @@ const SideNav = ({ navOpenHandler }) => {
                 <NavLink
                   onClick={navOpenHandler}
                   to={"/dashboard/enrolled-classes"}
-                  className={({ isActive }) =>
-                    isActive
-                      ? theme === "black"
-                        ? "border-l-4 border-white"
-                        : "border-l-4 border-black"
-                      : ""
-                  }
+                  className={sideNavStyle}
                 >
                   enrolled classes
                 </NavLink>
@@ -149,13 +116,7 @@ const SideNav = ({ navOpenHandler }) => {
                 <NavLink
                   onClick={navOpenHandler}
                   to={"/dashboard/payment-history"}
-                  className={({ isActive }) =>
-                    isActive
-                      ? theme === "black"
-                        ? "border-l-4 border-white"
-                        : "border-l-4 border-black"
-                      : ""
-                  }
+                  className={sideNavStyle}
                 >
                   payment history
                 </NavLink>
@@ -177,9 +138,6 @@ const SideNav = ({ navOpenHandler }) => {
             <Link to={"/instructors"}>Instructors</Link>
           </li>
         </ul>
-      </div>
-      <div>
-        <p className="text-xl pl-7">Logout</p>
       </div>
     </div>
   );

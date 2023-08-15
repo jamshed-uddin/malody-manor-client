@@ -34,7 +34,7 @@ const Dashboard = () => {
             theme === "black" && "bg-black text-white"
           }`}
         >
-          <div className="flex items-center shadow px-1 mb-2 lg:hidden">
+          <div className="flex items-center shadow px-4 mb-2 lg:hidden">
             <h1
               onClick={() => setNavOpened(true)}
               className=" cursor-pointer font-semibold text-3xl"
