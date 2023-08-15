@@ -29,7 +29,11 @@ const SideNav = ({ navOpenHandler }) => {
             onClick={navOpenHandler}
             to={"/dashboard/user-home"}
             className={({ isActive }) =>
-              isActive ? "bg-gradient-to-r from-slate-300" : ""
+              isActive
+                ? theme === "black"
+                  ? "border-l-4 border-white"
+                  : "border-l-4 border-black"
+                : ""
             }
           >
             Home
@@ -43,7 +47,11 @@ const SideNav = ({ navOpenHandler }) => {
                 onClick={navOpenHandler}
                 to={`/dashboard/${"manage-user"}`}
                 className={({ isActive }) =>
-                  isActive ? "bg-gradient-to-r from-slate-300" : ""
+                  isActive
+                    ? theme === "black"
+                      ? "border-l-4 border-white"
+                      : "border-l-4 border-black"
+                    : ""
                 }
               >
                 Manage users
@@ -54,7 +62,11 @@ const SideNav = ({ navOpenHandler }) => {
                 onClick={navOpenHandler}
                 to={"/dashboard/manage-classes"}
                 className={({ isActive }) =>
-                  isActive ? "bg-gradient-to-r from-slate-300" : ""
+                  isActive
+                    ? theme === "black"
+                      ? "border-l-4 border-white"
+                      : "border-l-4 border-black"
+                    : ""
                 }
               >
                 Manage classes
