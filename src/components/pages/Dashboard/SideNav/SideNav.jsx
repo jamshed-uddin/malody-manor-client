@@ -20,7 +20,7 @@ const SideNav = ({ navOpenHandler }) => {
   return (
     <div
       className={`${
-        theme === "black" ? "bg-slate-900" : "bg-white"
+        theme === "black" ? "bg-slate-900 text-white" : "bg-white"
       } shadow-lg h-screen lg:w-[20vw] w-72 `}
     >
       <div className="grid place-items-end">

@@ -1,16 +1,14 @@
-import { useState } from "react";
-
 import "./App.css";
-import Home from "./components/pages/Home/Home/Home";
 import Navbar from "./components/shared/Navbar/Navbar";
 import { Outlet } from "react-router-dom";
 import Footer from "./components/shared/Footer/Footer";
+import { useContext } from "react";
+import { ThemeContext } from "./components/Provider/ThemeProvider";
 
 function App() {
-  const [count, setCount] = useState(0);
-
+  const { theme } = useContext(ThemeContext);
   return (
-    <div>
+    <div className={`${theme === "black" && "text-slate-200"}`}>
       <Navbar></Navbar>
       <Outlet></Outlet>
       <Footer></Footer>
