@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import "./Navbar.css";
 
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
@@ -23,7 +23,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={` px-4 shadow bg-red fixed top-0 left-0 right-0 ${
+      className={` px-4 h-20 bg-red fixed top-0 left-0 right-0 ${
         theme === "black" ? "bg-black" : "bg-white"
       }  z-30`}
     >
