@@ -37,7 +37,7 @@ const SideNav = ({ navOpenHandler }) => {
         </h1>
       </div>
       <div>
-        <ul className=" pl-5 space-y-2 text-xl">
+        <ul className=" pl-5 space-y-3 text-xl">
           <li>
             <NavLink
               onClick={navOpenHandler}
@@ -127,7 +127,7 @@ const SideNav = ({ navOpenHandler }) => {
       </div>
       {/* back to homepages navigation for all users */}
       <div>
-        <ul className=" pl-5 space-y-2 text-xl py-2 border-t-2 mt-3">
+        <ul className=" pl-5 space-y-3 text-xl py-2 border-t-2 mt-3">
           <li>
             <Link to={"/"}>Back To Homepage</Link>
           </li>

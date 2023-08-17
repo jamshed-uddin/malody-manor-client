@@ -18,7 +18,6 @@ const ClassCard = ({ singleClass }) => {
   const { theme } = useContext(ThemeContext);
   const navigate = useNavigate();
 
-  // console.log(user);
   const seleted = () => toast("You have selected this class");
   const alreadySelected = () => toast("You have already selected this class");
   const alreadyEnrolled = () =>
@@ -32,7 +31,6 @@ const ClassCard = ({ singleClass }) => {
     singleClass.userEmail = currentUser?.email;
     const { _id, ...newData } = singleClass;
     const newBookmarkedClass = { ...newData, classId: _id };
-    console.log(newBookmarkedClass);
 
     fetch(`${import.meta.env.VITE_SERVER_URL}/addToSelected`, {
       method: "POST",

@@ -5,6 +5,7 @@ import TableComponent from "../TableComponent";
 import { Avatar } from "@mui/material";
 import { Helmet } from "react-helmet";
 import LoadingComponent from "../LoadingComponent";
+import NoItemText from "../NoItemText";
 
 const EnrolledClasses = () => {
   const { user } = useContext(AuthContext);
@@ -55,6 +56,8 @@ const EnrolledClasses = () => {
       </Helmet>
       {isLoading ? (
         <LoadingComponent />
+      ) : enrolledClasses.length === 0 ? (
+        <NoItemText text={"No enrolled classes"} />
       ) : (
         <div>
           <h1 className="pb-5 text-2xl">Enrolled classes</h1>

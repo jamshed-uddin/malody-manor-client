@@ -6,6 +6,7 @@ import ManageClassActions from "./ManageClassActions";
 import TableComponent from "../TableComponent";
 import { Helmet } from "react-helmet";
 import LoadingComponent from "../LoadingComponent";
+import NoItemText from "../NoItemText";
 
 const ManageClasses = () => {
   const [classes, setClasses] = useState([]);
@@ -67,6 +68,8 @@ const ManageClasses = () => {
       </Helmet>
       {loading ? (
         <LoadingComponent />
+      ) : classes.length === 0 ? (
+        <NoItemText text={"No classes to show"} />
       ) : (
         <div>
           <h1 className="pb-5 text-2xl">All classes</h1>

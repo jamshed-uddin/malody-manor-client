@@ -7,6 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import TableComponent from "../TableComponent";
 import { Helmet } from "react-helmet";
 import LoadingComponent from "../LoadingComponent";
+import NoItemText from "../NoItemText";
 
 const MyClasses = () => {
   const { user } = useContext(AuthContext);
@@ -78,6 +79,8 @@ const MyClasses = () => {
       </Helmet>
       {loading ? (
         <LoadingComponent />
+      ) : myClasses.length === 0 ? (
+        <NoItemText text={"No classes added"} />
       ) : (
         <div>
           <h1 className="pb-5 text-2xl">My classes</h1>

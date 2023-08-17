@@ -5,6 +5,7 @@ import { Helmet } from "react-helmet";
 import { useQuery } from "@tanstack/react-query";
 import LoadingComponent from "../LoadingComponent";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import NoItemText from "../NoItemText";
 
 const PaymentHistory = () => {
   const [currentUser] = useRole();
@@ -49,8 +50,11 @@ const PaymentHistory = () => {
       <Helmet>
         <title>Dashboard-payment history</title>
       </Helmet>
+
       {isLoading ? (
         <LoadingComponent />
+      ) : payments.length === 0 ? (
+        <NoItemText text={"No payment history"} />
       ) : (
         <div>
           <h1 className="pb-5 text-2xl">Payment history</h1>

@@ -7,6 +7,10 @@ import useSingleClass from "../../../../Hooks/useSingleClass";
 const ClassesActions = ({ params, removeClassHandler }) => {
   const [singleClass, isLoading] = useSingleClass(params.row?.classId);
 
+  const testF = () => {
+    console.log("hello");
+  };
+
   if (!singleClass?._id) return;
   return (
     <div>
@@ -29,7 +33,7 @@ const ClassesActions = ({ params, removeClassHandler }) => {
         </button>
       </p>
       <button
-        onClick={() => removeClassHandler(params.row.classId)}
+        onClick={() => removeClassHandler(params.row?._id)}
         className="border-2  px-2 rounded-lg text-lg bg-red-500 text-white border-red-500 "
       >
         <FontAwesomeIcon icon={faXmark} /> Remove

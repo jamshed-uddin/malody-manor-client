@@ -6,6 +6,7 @@ import TableComponent from "../TableComponent";
 import { Helmet } from "react-helmet";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import LoadingComponent from "../LoadingComponent";
+import NoItemText from "../NoItemText";
 
 const ManageUsers = () => {
   const [userData, setUserData] = useState([]);
@@ -63,6 +64,8 @@ const ManageUsers = () => {
       </Helmet>
       {loading ? (
         <LoadingComponent />
+      ) : userData.length === 0 ? (
+        <NoItemText text={"No users to show"} />
       ) : (
         <div>
           <h1 className="pb-5 text-2xl">All users</h1>
