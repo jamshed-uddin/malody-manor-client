@@ -5,11 +5,14 @@ import { ThemeContext } from "../../Provider/ThemeProvider";
 
 const TableComponent = ({ columns, data }) => {
   const { theme } = useContext(ThemeContext);
-  const lightStyle = { backgroundColor: "black", color: "white" };
+  const rowStyle = {
+    backgroundColor: theme === "black" ? "black" : "white",
+    color: theme === "black" ? "white" : "black",
+  };
   return (
     <Box sx={{ height: "80vh", width: "100%" }}>
       <DataGrid
-        sx={theme === "black" && lightStyle}
+        sx={rowStyle}
         columns={columns}
         rows={data}
         getRowId={(row) => row._id}

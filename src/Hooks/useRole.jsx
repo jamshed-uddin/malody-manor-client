@@ -11,10 +11,12 @@ const useRole = () => {
 
   useEffect(() => {
     if (!user?.email) return;
-    axiosSecure(`/singleUser/${user?.email}`).then((data) => {
-      setCurrentUser(data.data);
-      setRole(data.data?.role);
-    });
+    fetch(`${import.meta.env.VITE_SERVER_URL}/singleUser/${user?.email}`)
+      .then((res) => res.json())
+      .then((result) => {
+        setCurrentUser(result);
+        setRole(result?.role);
+      });
   }, [axiosSecure]);
 
   return [currentUser, role];

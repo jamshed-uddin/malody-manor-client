@@ -45,7 +45,7 @@ const Navbar = () => {
               <Link to={"/classes"}>Classes</Link>
             </div>
             <div>
-              <Link to={"/instructor"}>Instructor</Link>
+              <Link to={"/instructors"}>Instructor</Link>
             </div>
             <div>
               <Link to={"/dashboard/user-home"}>Dashboard</Link>
@@ -91,7 +91,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-
+      {/* mobile navigation menu */}
       <div
         className={`lg:hidden absolute top-0  ${
           isOpen ? "right-0" : "-right-[1000px]"
@@ -114,7 +114,7 @@ const Navbar = () => {
             </Link>
           </div>
           <div>
-            <Link onClick={() => setOpen(false)} to={"/instructor"}>
+            <Link onClick={() => setOpen(false)} to={"/instructors"}>
               Instructor
             </Link>
           </div>

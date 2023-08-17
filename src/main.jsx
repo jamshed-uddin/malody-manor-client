@@ -24,12 +24,14 @@ import PrivateRoute from "./components/PrivateRoutes/PrivateRoute.jsx";
 import AdminRoute from "./components/PrivateRoutes/AdminRoute.jsx";
 import InstructorRoute from "./components/PrivateRoutes/InstructorRoute.jsx";
 import ThemeProvider from "./components/Provider/ThemeProvider.jsx";
+import ErrorPage from "./components/pages/ErrorPage.jsx";
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App></App>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
