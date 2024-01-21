@@ -35,7 +35,12 @@ const ManageUsers = () => {
         editable: false,
       },
       { field: "name", headerName: "Name", width: "180" },
-      { field: "email", headerName: "User email", width: "220" },
+      {
+        field: "email",
+        headerName: "User email",
+        width: "220",
+        sortable: false,
+      },
 
       {
         field: "actions",

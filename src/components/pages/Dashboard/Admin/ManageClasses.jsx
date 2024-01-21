@@ -11,8 +11,6 @@ import useAdminData from "../../../../Hooks/useAdminData";
 import ErrorElement from "../../../shared/ErrorElement";
 
 const ManageClasses = () => {
-  const [classes, setClasses] = useState([]);
-
   const {
     data: classesData,
     isLoading: classesDataLoading,

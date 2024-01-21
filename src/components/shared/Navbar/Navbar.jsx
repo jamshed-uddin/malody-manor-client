@@ -6,20 +6,15 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { AuthContext } from "../../Provider/AuthProvider";
-import MyButton from "../MyButton";
+
 import { Avatar } from "@mui/material";
 import { faMoon, faSun } from "@fortawesome/free-regular-svg-icons";
 import { ThemeContext } from "../../Provider/ThemeProvider";
 
 const Navbar = () => {
   const [isOpen, setOpen] = useState(false);
-  const { user, userLogOut } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const { theme, toggleTheme } = useContext(ThemeContext);
-
-  const handleLogOut = async () => {
-    await userLogOut();
-    setOpen(false);
-  };
 
   return (
     <nav

@@ -25,7 +25,7 @@ const ManageClassActions = ({ params, refetch }) => {
           transform: "translate(-50%, -50%)",
           width: 450,
           bgcolor: "#000",
-          border: "2px solid #000",
+          border: "1px solid #fff",
           boxShadow: 10,
           borderRadius: 3,
           p: 4,
@@ -37,7 +37,7 @@ const ManageClassActions = ({ params, refetch }) => {
           transform: "translate(-50%, -50%)",
           width: 450,
           bgcolor: "background.paper",
-          border: "2px solid #000",
+          border: "1px solid #000",
           boxShadow: 10,
           borderRadius: 3,
           p: 4,
@@ -99,7 +99,9 @@ const ManageClassActions = ({ params, refetch }) => {
       />
       {status === "denied" ? (
         <button
-          className="border-2 border-black rounded-lg px-4 py-1  "
+          className={` rounded-lg px-4 py-1 border-[1px] ${
+            theme === "black" ? " border-white" : " border-black"
+          } `}
           onClick={handleOpen}
         >
           Feedback
@@ -109,11 +111,13 @@ const ManageClassActions = ({ params, refetch }) => {
           type="button"
           disabled={!status || params.row.status === status}
           onClick={handleUpdate}
-          className={`${
+          className={`border-[1px] ${
             !status || params.row.status === status
               ? "opacity-50 cursor-not-allowed"
               : ""
-          } border-2  border-black rounded-lg px-3 py-1 relative ${
+          } ${
+            theme === "black" ? "  border-white" : "  border-black"
+          } rounded-lg px-3 py-1 relative ${
             success && "bg-green-500 border-green-500 text-white"
           }`}
         >
@@ -145,8 +149,10 @@ const ManageClassActions = ({ params, refetch }) => {
                 name="feedback"
                 value={feedback}
                 onChange={(e) => setFeedback(e.target.value)}
-                className={`block resize-none border-2 border-black rounded-xl p-2 font-semibold ${
-                  theme === "black" && "bg-slate-900"
+                className={`block resize-none border-[1px]  rounded-xl p-2 font-semibold ${
+                  theme === "black"
+                    ? "bg-slate-900 border-white"
+                    : "border-black"
                 }`}
                 cols="40"
                 rows="5"
@@ -154,9 +160,9 @@ const ManageClassActions = ({ params, refetch }) => {
                 required
               ></textarea>
               <button
-                className={` text-lg font-semibold border-2 mt-3 border-black px-2 mr-3 rounded-lg cursor-pointer  relative ${
-                  success && "bg-green-500 border-green-500 text-white"
-                }`}
+                className={` text-lg font-semibold border-[1px] mt-3 border-black px-2 mr-3 rounded-lg cursor-pointer  relative ${
+                  theme === "black" ? "  border-white" : "  border-black"
+                } ${success && "bg-green-500 border-green-500 text-white"}`}
                 type="submit"
                 value="Update"
               >

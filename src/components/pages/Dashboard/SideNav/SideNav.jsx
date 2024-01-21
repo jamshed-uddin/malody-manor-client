@@ -29,12 +29,12 @@ const SideNav = ({ navOpenHandler }) => {
     <div
       className={`bg- ${
         theme === "black" ? "bg-slate-900 text-white" : "bg-white"
-      } shadow-lg h-screen `}
+      } shadow-lg h-screen lg:mt-14`}
     >
       <div className="grid place-items-end">
         <p
           onClick={navOpenHandler}
-          className="text-right text-3xl  py-2 pr-3 w-fit cursor-pointer"
+          className="text-right text-3xl  py-2 pr-3 w-fit cursor-pointer lg:hidden"
         >
           <FontAwesomeIcon icon={faXmark} />
         </p>

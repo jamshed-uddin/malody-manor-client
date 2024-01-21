@@ -1,14 +1,16 @@
 import { faFloppyDisk } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { CircularProgress } from "@mui/material";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
 import SelectComp from "./SelectComp";
+import { ThemeContext } from "../../../Provider/ThemeProvider";
+
 const UserActions = ({ params, refetch }) => {
   const [userRole, setUserRole] = useState();
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
-
+  const { theme } = useContext(ThemeContext);
   const saveRoleHandler = () => {
     try {
       if (!userRole) return;
@@ -52,11 +54,13 @@ const UserActions = ({ params, refetch }) => {
         type="button"
         disabled={!userRole || params.row.role === userRole}
         onClick={saveRoleHandler}
-        className={`${
+        className={`border-[1px] ${
           !userRole || params.row.role === userRole
             ? "opacity-50 cursor-not-allowed"
             : ""
-        } border-2  border-black rounded-lg px-3 py-1 relative ${
+        } ${
+          theme === "black" ? "  border-white" : "  border-black"
+        } rounded-lg px-3 py-1 relative ${
           success && "bg-green-500 border-green-500 text-white"
         }`}
       >

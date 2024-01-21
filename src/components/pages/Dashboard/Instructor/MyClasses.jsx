@@ -17,6 +17,21 @@ const MyClasses = () => {
 
   const notify = () => toast("Class deleted!");
 
+  // const {
+  //   data: instructorClassesData,
+  //   refetch: instructorClassesDataRefetch,
+  //   isLoading: instructorClassesDataLoading,
+  //   error: instructorClassesDataError,
+  // } = useQuery("instructorClasses", async () => {
+  //   const result = await axios.get(
+  //     `${import.meta.env.VITE_SERVER_URL}/instructorsClasses/${user?.email}`
+  //   );
+  //   if (!result) {
+  //     throw new Error();
+  //   }
+  //   return result.data;
+  // });
+
   useEffect(() => {
     setLoading(true);
     fetch(
