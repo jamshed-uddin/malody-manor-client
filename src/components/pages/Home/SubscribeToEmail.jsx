@@ -2,14 +2,13 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext } from "react";
 import { ThemeContext } from "../../Provider/ThemeProvider";
+import Title from "../../shared/Title";
 
 const SubscribeToEmail = () => {
   const { theme } = useContext(ThemeContext);
   return (
-    <div>
-      <h1 className="text-3xl lg:text-4xl font-bold text-center">
-        Stay Up-to-date with Melody Manor
-      </h1>
+    <div className="py-8 md:py-14 ">
+      <Title> Stay Up-to-date with Melody Manor</Title>
       <div className="grid grid-cols-1 lg:grid-cols-5  my-10 items-center space-y-9 lg:space-y-0">
         <div className="lg:col-span-3">
           <div className="flex  w-full">

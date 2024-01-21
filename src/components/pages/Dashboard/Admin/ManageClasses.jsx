@@ -1,27 +1,24 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 
-import { Avatar, Box, Typography } from "@mui/material";
-import { DataGrid } from "@mui/x-data-grid";
+import { Avatar } from "@mui/material";
+
 import ManageClassActions from "./ManageClassActions";
 import TableComponent from "../TableComponent";
 import { Helmet } from "react-helmet";
 import LoadingComponent from "../LoadingComponent";
 import NoItemText from "../NoItemText";
+import useAdminData from "../../../../Hooks/useAdminData";
+import ErrorElement from "../../../shared/ErrorElement";
 
 const ManageClasses = () => {
   const [classes, setClasses] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [rowId, setRowId] = useState(null);
 
-  useEffect(() => {
-    setLoading(true);
-    fetch(`${import.meta.env.VITE_SERVER_URL}/all-classes`)
-      .then((res) => res.json())
-      .then((data) => {
-        setLoading(false);
-        setClasses(data);
-      });
-  }, []);
+  const {
+    data: classesData,
+    isLoading: classesDataLoading,
+    error: classesDataError,
+    refetch: classesDataRefetch,
+  } = useAdminData("/all-classes");
 
   const columns = useMemo(
     () => [
@@ -54,27 +51,36 @@ const ManageClasses = () => {
         headerName: "Actions",
         type: "actions",
         renderCell: (params) => (
-          <ManageClassActions {...{ params, rowId, setRowId }} />
+          <ManageClassActions {...{ params, refetch: classesDataRefetch }} />
         ),
       },
     ],
-    [rowId]
+    []
   );
+
+  if (classesDataError) {
+    return (
+      <ErrorElement error={classesDataError} refetch={classesDataRefetch} />
+    );
+  }
 
   return (
     <div>
       <Helmet>
         <title>Dashboard-manage classes</title>
       </Helmet>
-      {loading ? (
+      {classesDataLoading ? (
         <LoadingComponent />
-      ) : classes.length === 0 ? (
+      ) : classesData.length === 0 ? (
         <NoItemText text={"No classes to show"} />
       ) : (
         <div>
           <h1 className="pb-5 text-2xl">All classes</h1>
           <div>
-            <TableComponent columns={columns} data={classes}></TableComponent>
+            <TableComponent
+              columns={columns}
+              data={classesData}
+            ></TableComponent>
           </div>
         </div>
       )}

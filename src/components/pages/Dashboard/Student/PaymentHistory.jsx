@@ -8,7 +8,7 @@ import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import NoItemText from "../NoItemText";
 
 const PaymentHistory = () => {
-  const [currentUser] = useRole();
+  const { currentUser } = useRole();
   const [axiosSecure] = useAxiosSecure();
 
   const {

@@ -6,27 +6,16 @@ import { Avatar } from "@mui/material";
 import { Helmet } from "react-helmet";
 import LoadingComponent from "../LoadingComponent";
 import NoItemText from "../NoItemText";
+import useStudentData from "../../../../Hooks/useStudentData";
+import ErrorElement from "../../../shared/ErrorElement";
 
 const EnrolledClasses = () => {
-  const { user } = useContext(AuthContext);
-
   const {
-    isLoading,
-    refetch,
-    data: enrolledClasses = [],
-  } = useQuery({
-    queryKey: ["enrolledClasses", user?.email],
-    queryFn: async () => {
-      const data = await fetch(
-        `${import.meta.env.VITE_SERVER_URL}/enrolledClasses/${user?.email}`
-      );
-      return data.json();
-    },
-  });
-
-  if (user) {
-    refetch;
-  }
+    data: enrolledClasses,
+    isLoading: enrolledClassesLoading,
+    error: enrolledClassesError,
+    refetch: enrolledClassesRefetch,
+  } = useStudentData("/enrolledClasses");
 
   const columns = useMemo(
     () => [
@@ -49,20 +38,29 @@ const EnrolledClasses = () => {
     []
   );
 
+  if (enrolledClassesError) {
+    return (
+      <ErrorElement
+        error={enrolledClassesError}
+        refetch={enrolledClassesRefetch}
+      />
+    );
+  }
+
   return (
     <div>
       <Helmet>
         <title>Dashboard-enrolled classes</title>
       </Helmet>
-      {isLoading ? (
+      {enrolledClassesLoading ? (
         <LoadingComponent />
-      ) : enrolledClasses.length === 0 ? (
+      ) : enrolledClasses?.length === 0 ? (
         <NoItemText text={"No enrolled classes"} />
       ) : (
         <div>
           <h1 className="pb-5 text-2xl">Enrolled classes</h1>
           <div>
-            <TableComponent columns={columns} data={enrolledClasses} />
+            <TableComponent columns={columns} data={enrolledClasses || []} />
           </div>
         </div>
       )}

@@ -2,7 +2,6 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Box, CircularProgress, Modal } from "@mui/material";
 import React, { useContext, useState } from "react";
-import { Helmet } from "react-helmet";
 import { ThemeContext } from "../../../Provider/ThemeProvider";
 
 const ManageClassActions = ({ params }) => {
@@ -44,7 +43,6 @@ const ManageClassActions = ({ params }) => {
     event.preventDefault();
     const feedback = event.target.feedback.value;
     const updateStatusAndFeedback = { status: params.row.status, feedback };
-    // console.log(updateStatusAndFeedback);
 
     setLoading(true);
     fetch(

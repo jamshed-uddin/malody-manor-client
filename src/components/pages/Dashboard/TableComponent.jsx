@@ -10,12 +10,20 @@ const TableComponent = ({ columns, data }) => {
     color: theme === "black" ? "white" : "black",
   };
   return (
-    <Box sx={{ height: "80vh", width: "100%" }}>
+    <Box sx={{ height: "88vh", width: "100%" }}>
       <DataGrid
         sx={rowStyle}
         columns={columns}
         rows={data}
         getRowId={(row) => row._id}
+        initialState={{
+          pagination: {
+            paginationModel: {
+              pageSize: 10,
+            },
+          },
+        }}
+        pageSizeOptions={[10, 20, 30, 40]}
       ></DataGrid>
     </Box>
   );

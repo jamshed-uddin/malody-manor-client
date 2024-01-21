@@ -1,23 +1,37 @@
 import { useContext, useEffect, useMemo, useState } from "react";
 import { AuthContext } from "../components/Provider/AuthProvider";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 const useRole = () => {
-  const { user, loading } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
-  const [currentUser, setCurrentUser] = useState();
-  const [role, setRole] = useState("");
+  const {
+    data: currentUser,
+    isLoading: currentUserLoading,
+    error: currentUserError,
+  } = useQuery(
+    ["currentUser"],
+    async () => {
+      try {
+        const result = await axios.get(
+          `${import.meta.env.VITE_SERVER_URL}/singleUser/${user?.email}`
+        );
 
-  useEffect(() => {
-    if (!user?.email) return;
-    fetch(`${import.meta.env.VITE_SERVER_URL}/singleUser/${user?.email}`)
-      .then((res) => res.json())
-      .then((result) => {
-        setCurrentUser(result);
-        setRole(result?.role);
-      });
-  }, [user]);
+        return result.data;
+      } catch (error) {
+        throw new Error();
+      }
+    },
+    { enabled: !!user }
+  );
 
-  return [currentUser, role];
+  return {
+    currentUser,
+    currentUserLoading,
+    currentUserError,
+    role: currentUser?.role,
+  };
 };
 
 export default useRole;

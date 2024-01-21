@@ -6,7 +6,7 @@ import { AuthContext } from "../Provider/AuthProvider";
 
 const InstructorRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
-  const [currentUser, role, isRoleLoading] = useRole();
+  const { role } = useRole();
   const location = useLocation();
 
   if (loading) {

@@ -14,9 +14,9 @@ const Dashboard = () => {
   };
 
   return (
-    <div>
-      <div className="grid grid-cols-1 lg:grid-cols-5  relative">
-        <div className="col-span-1 hidden lg:block">
+    <div className="h-screen">
+      <div className="flex h-full   relative">
+        <div className="w-[20%] hidden lg:block">
           <SideNav></SideNav>
         </div>
         {/* mobile sidenav */}
@@ -30,7 +30,7 @@ const Dashboard = () => {
 
         {/* dashboard pages */}
         <div
-          className={`col-span-4 py-2 ${
+          className={`flex-grow py-2 ${
             theme === "black" && "bg-black text-white"
           }`}
         >

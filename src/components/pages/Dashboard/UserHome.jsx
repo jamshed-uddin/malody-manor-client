@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet";
 import LoadingComponent from "./LoadingComponent";
 
 const UserHome = () => {
-  const [currentUser] = useRole();
+  const { currentUser } = useRole();
 
   return (
     <div>

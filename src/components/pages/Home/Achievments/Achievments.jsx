@@ -1,4 +1,5 @@
 import React from "react";
+import Title from "../../../shared/Title";
 
 const impact = [
   {
@@ -22,12 +23,9 @@ const impact = [
 
 const Achievments = () => {
   return (
-    <div>
-      <div>
-        <h1 className="text-3xl lg:text-4xl font-bold text-center">
-          Our Impact
-        </h1>
-      </div>
+    <div className="py-8 md:py-14">
+      <Title> Our Impact</Title>
+
       <div className="lg:flex lg:divide-x-4  my-12 ">
         {impact.map((single, index) => (
           <div className=" text-center w-full space-y-2 mb-6 px-6" key={index}>

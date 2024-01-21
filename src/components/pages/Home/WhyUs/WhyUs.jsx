@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { ThemeContext } from "../../../Provider/ThemeProvider";
+import Title from "../../../shared/Title";
 
 const WhyUs = () => {
   const { theme } = useContext(ThemeContext);
@@ -14,9 +15,7 @@ const WhyUs = () => {
  `;
   return (
     <div>
-      <h1 className="text-3xl lg:text-4xl font-bold text-center">
-        Why Choose Us
-      </h1>
+      <Title>Why choose us</Title>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5  gap-6 text-center  my-8 ">
         <div className={cardStyleOne}>
           <h1 className="text-lg font-semibold ">FREE INSTRUMENT</h1>

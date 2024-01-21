@@ -8,47 +8,35 @@ import { Helmet } from "react-helmet";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import LoadingComponent from "../LoadingComponent";
 import NoItemText from "../NoItemText";
+import useStudentData from "../../../../Hooks/useStudentData";
+import axios from "axios";
+import ErrorElement from "../../../shared/ErrorElement";
 
 const SelectedClasses = () => {
-  const { user } = useContext(AuthContext);
-  const [selectedClasses, setSelectedClasses] = useState([]);
-  const [reload, setReload] = useState(false);
-  const [loading, setLoading] = useState(false);
   const notify = () => toast("Class romoved!");
-  const [axiosSecure] = useAxiosSecure();
 
-  console.log(selectedClasses.length);
+  const {
+    data: selectedClasses,
+    isLoading: selectedClassesLoading,
+    error: selectedClassesError,
+    refetch: selectedClassesRefetch,
+  } = useStudentData("/getSelectedClasses");
 
   // remove from selected class handler---
-  const removeClassHandler = (classId) => {
-    console.log("clicked");
-    fetch(`${import.meta.env.VITE_SERVER_URL}/removeSelectedClass/${classId}`, {
-      method: "DELETE",
-      headers: {
-        "content-type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        if (result.deletedCount) {
-          setReload((prevReload) => !prevReload);
-          notify();
-        }
-      })
-      .catch((error) => console.log(error));
+  const removeClassHandler = async (classId) => {
+    try {
+      axios
+        .delete(
+          `${import.meta.env.VITE_SERVER_URL}/removeSelectedClass/${classId}`
+        )
+        .then((result) => {
+          if (result.data.deletedCount) {
+            selectedClassesRefetch();
+            notify();
+          }
+        });
+    } catch (error) {}
   };
-
-  useEffect(() => {
-    setLoading(true);
-    axiosSecure(`/getSelectedClasses/${user?.email}`)
-      .then((data) => {
-        setSelectedClasses(data?.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [user, reload, axiosSecure]);
 
   const columns = useMemo(
     () => [
@@ -86,26 +74,33 @@ const SelectedClasses = () => {
     []
   );
 
+  if (selectedClassesError) {
+    return (
+      <ErrorElement
+        error={selectedClassesError}
+        refetch={selectedClassesRefetch}
+      />
+    );
+  }
+
   return (
     <div>
       <Helmet>
-        <title>Dashboard-selected classes</title>
+        <title>Dashboard - selected classes</title>
       </Helmet>
 
-      {loading ? (
+      {selectedClassesLoading ? (
         <LoadingComponent />
-      ) : selectedClasses.length === 0 ? (
+      ) : selectedClasses?.length === 0 ? (
         <NoItemText text={"No selected classes"} />
       ) : (
         <div>
           <h1 className="pb-5 text-2xl">Selected classes</h1>
           <div>
-            <TableComponent columns={columns} data={selectedClasses} />
+            <TableComponent columns={columns} data={selectedClasses || []} />
           </div>
         </div>
       )}
-
-      {/* First it will check if the loading state is true.if the state is true loadingComponent will show up.When the loading state is false it will go to the next step.there will be another check.if the dataArray from database is empty a noItemText component will show up.if not the data row will show up.That what is done to each page in dashboard. */}
 
       <ToastContainer autoClose={2500} />
     </div>

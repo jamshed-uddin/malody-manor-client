@@ -7,21 +7,22 @@ import { Helmet } from "react-helmet";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import LoadingComponent from "../LoadingComponent";
 import NoItemText from "../NoItemText";
+import useAdminData from "../../../../Hooks/useAdminData";
+import ErrorElement from "../../../shared/ErrorElement";
 
 const ManageUsers = () => {
-  const [userData, setUserData] = useState([]);
+  // const [userData, setUserData] = useState([]);
   const [reload, setReload] = useState(false);
   const [loading, setLoading] = useState(false);
-  const token = localStorage.getItem("access-token");
+
   const [axiosSecure] = useAxiosSecure();
 
-  useEffect(() => {
-    setLoading(true);
-    axiosSecure(`/users`).then((data) => {
-      setUserData(data.data);
-      setLoading(false);
-    });
-  }, [reload]);
+  const {
+    data: userData,
+    isLoading: usersDataLoading,
+    error: usersDataError,
+    refetch: usersDataRefetch,
+  } = useAdminData("/users");
 
   const columns = useMemo(
     () => [
@@ -35,14 +36,6 @@ const ManageUsers = () => {
       },
       { field: "name", headerName: "Name", width: "180" },
       { field: "email", headerName: "User email", width: "220" },
-      {
-        field: "role",
-        headerName: "Role",
-        width: "130",
-        type: "singleSelect",
-        valueOptions: ["pending", "approved", "denied"],
-        editable: true,
-      },
 
       {
         field: "actions",
@@ -50,19 +43,23 @@ const ManageUsers = () => {
         width: "300",
         type: "actions",
         renderCell: (params) => (
-          <UserActions {...{ params, setReload }}></UserActions>
+          <UserActions {...{ params, refetch: usersDataRefetch }}></UserActions>
         ),
       },
     ],
     []
   );
 
+  if (usersDataError) {
+    return <ErrorElement error={usersDataError} refetch={usersDataRefetch} />;
+  }
+
   return (
     <div>
       <Helmet>
         <title>Dashboard-manage users</title>
       </Helmet>
-      {loading ? (
+      {usersDataLoading ? (
         <LoadingComponent />
       ) : userData.length === 0 ? (
         <NoItemText text={"No users to show"} />

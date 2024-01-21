@@ -9,7 +9,7 @@ import { ThemeContext } from "../../Provider/ThemeProvider";
 const Checkout = ({ singleSelectedClass, price, paymentCompleteToast }) => {
   const { theme } = useContext(ThemeContext);
   const navigate = useNavigate();
-  const [currentUser] = useRole();
+  const { currentUser } = useRole();
   const [cardError, setCardError] = useState("");
   const [processing, setProcessing] = useState(false);
   const [transectionId, setTransectionId] = useState("");

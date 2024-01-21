@@ -14,7 +14,7 @@ import { ThemeContext } from "../../../Provider/ThemeProvider";
 
 const ClassCard = ({ singleClass }) => {
   const { user } = useContext(AuthContext);
-  const [currentUser, role] = useRole();
+  const { currentUser, role } = useRole();
   const { theme } = useContext(ThemeContext);
   const navigate = useNavigate();
 
@@ -56,20 +56,22 @@ const ClassCard = ({ singleClass }) => {
 
   return (
     <div
-      className={`shadow h-[400px] rounded-2xl overflow-hidden ${
+      className={`shadow h-[18rem] md:h-[22rem] rounded-2xl overflow-hidden flex flex-col ${
         theme === "black" && "bg-slate-900"
       }`}
     >
       <div className=" h-1/2 overflow-hidden">
         <img
-          className="rounded-2xl hover:scale-105 transition-all duration-500 w-full object-cover"
+          className="h-full w-full rounded-2xl hover:scale-105 transition-all duration-500  object-cover"
           src={singleClass?.image}
           alt=""
         />
       </div>
-      <div className="p-4 flex flex-col h-1/2">
+      <div className="p-4 flex flex-col flex-grow">
         <div className="flex justify-between">
-          <h1 className="text-2xl font-semibold">{singleClass?.class_name}</h1>
+          <h1 className="text-xl md:text-2xl font-semibold">
+            {singleClass?.class_name}
+          </h1>
           <button
             onClick={() => handleBookmark(currentUser?.email, singleClass?._id)}
             className={`cursor-pointer text-2xl ${
@@ -86,16 +88,16 @@ const ClassCard = ({ singleClass }) => {
           </button>
         </div>
         <div>
-          <h1 className="py-1">
+          <h1 className=" py-0 md:py-1  text-sm md:text-base">
             With{" "}
-            <span className="font-semibold">
+            <span className="font-semibold md:text-lg">
               {singleClass?.instructor_name}
             </span>{" "}
           </h1>
         </div>
         <div className="mt-auto flex justify-between items-center">
           <h1>
-            $ <span className="text-3xl">{singleClass?.price}</span>
+            $ <span className="text-xl md:text-3xl">{singleClass?.price}</span>
           </h1>
           <div className="flex space-x-4">
             <p
@@ -114,11 +116,15 @@ const ClassCard = ({ singleClass }) => {
               }
             >
               <FontAwesomeIcon icon={faFileLines} />{" "}
-              <span className="text-3xl">{singleClass?.available_seat}</span>
+              <span className="text-xl md:text-3xl">
+                {singleClass?.available_seat}
+              </span>
             </p>
             <p title="Enrolled students" aria-label="Enrolled students">
               <FontAwesomeIcon icon={faCircleCheck} />{" "}
-              <span className="text-3xl">{singleClass?.enrolled}</span>
+              <span className="text-xl md:text-3xl">
+                {singleClass?.enrolled}
+              </span>
             </p>
           </div>
         </div>

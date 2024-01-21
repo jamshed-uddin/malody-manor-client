@@ -16,28 +16,27 @@ const Navbar = () => {
   const { user, userLogOut } = useContext(AuthContext);
   const { theme, toggleTheme } = useContext(ThemeContext);
 
-  const handleLogOut = () => {
-    userLogOut();
+  const handleLogOut = async () => {
+    await userLogOut();
     setOpen(false);
   };
 
   return (
     <nav
-      className={` px-4 h-20 bg-red fixed top-0 left-0 right-0 ${
+      className={`py-3 fixed top-0 left-0 right-0  ${
         theme === "black" ? "bg-black" : "bg-white"
       }  z-30`}
     >
-      <div className="flex items-center relative">
+      <div className="flex items-center relative md:w-[90%] w-[97%] mx-auto">
         <div className="flex-grow">
-          <Link to={"/"}>
-            {" "}
-            <h1 className="md:text-3xl text-2xl  md:font-extrabold font-bold">
+          <h1 className="md:text-3xl text-2xl font-bold tracking-tighter">
+            <Link className="p-0" to={"/"}>
               MELODY MANOR
-            </h1>
-          </Link>
+            </Link>
+          </h1>
         </div>
         <div className="hidden lg:block mr-5 ">
-          <div className="flex items-center gap-5 text-lg font-semibold">
+          <div className="flex items-center space-x-12 text-lg font-semibold">
             <div>
               <Link to={"/"}>Home</Link>
             </div>
@@ -45,35 +44,35 @@ const Navbar = () => {
               <Link to={"/classes"}>Classes</Link>
             </div>
             <div>
-              <Link to={"/instructors"}>Instructor</Link>
+              <Link to={"/instructors"}>Instructors</Link>
             </div>
-            <div>
-              <Link to={"/dashboard/user-home"}>Dashboard</Link>
-            </div>
-            <div>
-              <Avatar
-                src={`${user && user?.photoURL}`}
-                alt=""
-                title={user?.email}
-              ></Avatar>
-            </div>
-            <div>
-              {user ? (
-                <div onClick={handleLogOut}>
-                  <MyButton>Logout</MyButton>
+            {user ? (
+              <>
+                <div>
+                  <Link to={"/dashboard/user-home"}>Dashboard</Link>
                 </div>
-              ) : (
+                <div>
+                  <Avatar
+                    src={`${user?.photoURL}`}
+                    alt=""
+                    title={user?.email}
+                  ></Avatar>
+                </div>
+              </>
+            ) : (
+              <div>
                 <Link onClick={() => setOpen(false)} to={"/login"}>
-                  <MyButton>Login</MyButton>
+                  Login
                 </Link>
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </div>
 
         <div>
           <div className="flex gap-5 items-center">
-            <div className="text-2xl w-7 cursor-pointer text-center">
+            {/* theme mode */}
+            <div className="text-2xl w-7 cursor-pointer text-center transition-all duration-500">
               {theme === "light" ? (
                 <p onClick={() => toggleTheme()}>
                   <FontAwesomeIcon icon={faMoon} />
@@ -92,6 +91,7 @@ const Navbar = () => {
         </div>
       </div>
       {/* mobile navigation menu */}
+
       <div
         className={`lg:hidden absolute top-0  ${
           isOpen ? "right-0" : "-right-[1000px]"
@@ -102,44 +102,48 @@ const Navbar = () => {
         <div className="text-right text-4xl pt-6 pr-6 cursor-pointer">
           <FontAwesomeIcon onClick={() => setOpen(false)} icon={faXmark} />
         </div>
-        <div className="space-y-6 text-center text-3xl mt-10">
-          <div>
-            <Link onClick={() => setOpen(false)} to={"/"}>
-              Home
-            </Link>
-          </div>
-          <div>
-            <Link onClick={() => setOpen(false)} to={"/classes"}>
-              Classes
-            </Link>
-          </div>
-          <div>
-            <Link onClick={() => setOpen(false)} to={"/instructors"}>
-              Instructor
-            </Link>
-          </div>
-          <div>
-            <Link onClick={() => setOpen(false)} to={"/dashboard/user-home"}>
-              Dashboard
-            </Link>
-          </div>
-          <div>
-            <Avatar
-              className="mx-auto "
-              src={`${user && user?.photoURL}`}
-              alt=""
-              title={user?.email}
-            ></Avatar>
-          </div>
-          <div>
+        <div className="h-full flex items-center ">
+          <div className="space-y-6 text-center text-3xl  w-full">
+            <div>
+              <Link onClick={() => setOpen(false)} to={"/"}>
+                Home
+              </Link>
+            </div>
+            <div>
+              <Link onClick={() => setOpen(false)} to={"/classes"}>
+                Classes
+              </Link>
+            </div>
+            <div>
+              <Link onClick={() => setOpen(false)} to={"/instructors"}>
+                Instructors
+              </Link>
+            </div>
             {user ? (
-              <div onClick={handleLogOut}>
-                <MyButton>Logout</MyButton>
+              <div>
+                <div>
+                  <Link
+                    onClick={() => setOpen(false)}
+                    to={"/dashboard/user-home"}
+                  >
+                    Dashboard
+                  </Link>
+                </div>
+                <div className="hidden md:block">
+                  <Avatar
+                    className="mx-auto "
+                    src={`${user?.photoURL}`}
+                    alt=""
+                    title={user?.email}
+                  ></Avatar>
+                </div>
               </div>
             ) : (
-              <Link onClick={() => setOpen(false)} to={"/login"}>
-                <MyButton>Login</MyButton>
-              </Link>
+              <div>
+                <Link onClick={() => setOpen(false)} to={"/login"}>
+                  Login
+                </Link>
+              </div>
             )}
           </div>
         </div>

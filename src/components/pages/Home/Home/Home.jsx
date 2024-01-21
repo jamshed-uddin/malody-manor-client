@@ -11,10 +11,11 @@ const Home = () => {
   return (
     <div>
       <Helmet>
-        <title>Melody Manor|Home</title>
+        <title>Melody Manor</title>
       </Helmet>
-      <Banner></Banner>
-      <div className="py-8 md:w-3/4 w-[85%] mx-auto">
+
+      <div className=" md:w-[90%] w-[97%] mx-auto">
+        <Banner></Banner>
         <PopularClasses></PopularClasses>
         <PopularInstructor></PopularInstructor>
         <Achievments></Achievments>

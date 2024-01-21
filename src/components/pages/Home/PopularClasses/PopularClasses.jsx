@@ -5,32 +5,45 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import MyButton from "../../../shared/MyButton";
+import CardSkeleton from "../../../shared/CardSkeleton";
+import Title from "../../../shared/Title";
+import LoadingSkeleton from "../../../shared/LoadingSkeleton";
 
 const PopularClasses = () => {
   const [classes, setClasses] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     fetch(`${import.meta.env.VITE_SERVER_URL}/classes`)
       .then((res) => res.json())
-      .then((data) => setClasses(data));
+      .then((data) => {
+        setLoading(false);
+        setClasses(data);
+      })
+      .catch((err) => {
+        setLoading(false);
+      });
   }, []);
 
   return (
-    <div>
-      <h1 className="text-3xl lg:text-4xl font-bold text-center">
-        Popular Classes
-      </h1>
+    <div className="my-6">
+      <Title>Popular classes</Title>
 
-      <div className="grid lg:grid-cols-3 my-8 gap-4">
-        {classes.map((singleClass, index) => (
-          <ClassCard key={index} singleClass={singleClass} />
-        ))}
+      <div className="grid grid-cols-2 md:grid-cols-3 my-2 gap-4">
+        {loading ? (
+          <LoadingSkeleton type={"item"} />
+        ) : (
+          classes?.map((singleClass, index) => (
+            <ClassCard key={index} singleClass={singleClass} />
+          ))
+        )}
       </div>
-      <Link to={"/classes"} className="text-end mt-4">
-        <MyButton>
+      <div className="text-end text-xl mt-4 font-semibold">
+        <Link to={"/classes"}>
           See All <FontAwesomeIcon icon={faArrowRight} />
-        </MyButton>
-      </Link>
+        </Link>
+      </div>
     </div>
   );
 };

@@ -9,11 +9,12 @@ const Footer = () => {
       <footer
         className={` ${
           theme === "black" ? "bg-slate-900 text-white" : "bg-slate-100"
-        } py-4 rounded-ss-[50px] rounded-se-[50px] rounded-es-none rounded-ee-none`}
+        } p
+        pt-4 rounded-ss-[50px] rounded-se-[50px] rounded-es-none rounded-ee-none`}
       >
         <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
           <div className="text-center">
-            <h3 className=" text-xl font-semibold">Melody Manor</h3>
+            <h3 className=" text-xl font-semibold uppercase">Melody Manor</h3>
             <ul className="mt-4 space-y-2">
               <li>
                 <a className=" cursor-pointe">Home</a>
@@ -47,7 +48,7 @@ const Footer = () => {
             </ul>
           </div>
           <div className="text-center">
-            <h3 className=" text-xl font-semibold mb-4">Contact Us</h3>
+            <h3 className=" text-xl font-semibold mb-4">Contact</h3>
             <p className=" cursor-pointer">123 Mayhem Street</p>
             <p className=" cursor-pointer">New York City, New York</p>
             <p className=" cursor-pointer">Phone: (123) 456-7890</p>
@@ -62,7 +63,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <p className=" cursor-pointer my-2 text-center">
+        <p className=" cursor-pointer mt-2 text-center font-light text-sm">
           © 2023 Melody Manor. All rights reserved.
         </p>
       </footer>
