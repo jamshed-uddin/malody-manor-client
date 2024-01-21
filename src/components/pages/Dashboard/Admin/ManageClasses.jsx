@@ -37,19 +37,12 @@ const ManageClasses = () => {
         headerName: "Instructor Email",
         width: "200",
       },
-      {
-        field: "status",
-        headerName: "Status",
-        width: "150",
-        type: "singleSelect",
-        valueOptions: ["pending", "approved", "denied"],
-        editable: true,
-      },
 
       {
         field: "actions",
         headerName: "Actions",
         type: "actions",
+        width: "300",
         renderCell: (params) => (
           <ManageClassActions {...{ params, refetch: classesDataRefetch }} />
         ),

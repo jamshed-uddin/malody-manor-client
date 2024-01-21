@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { CircularProgress } from "@mui/material";
 import React, { useState } from "react";
 import axios from "axios";
+import SelectComp from "./SelectComp";
 const UserActions = ({ params, refetch }) => {
   const [userRole, setUserRole] = useState();
   const [loading, setLoading] = useState(false);
@@ -36,35 +37,17 @@ const UserActions = ({ params, refetch }) => {
     }
     setTimeout(() => {
       setSuccess(false);
-    }, 4000);
+    }, 3000);
   };
 
-  const handleRoleChange = (e) => {
-    setUserRole(e.target.value);
-  };
-
+  console.log(userRole);
   return (
     <div className="space-x-3">
-      <div class="relative inline-block">
-        <select
-          onChange={handleRoleChange}
-          className="appearance-none border border-gray-400 px-8 py-2 rounded-md focus:outline-none focus:border-transparent"
-        >
-          <option value="">{params.row.role}</option>
-          <option value="student">Student</option>
-          <option value="admin">Admin</option>
-          <option value="instructor">Instructor</option>
-        </select>
-        <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-          <svg
-            class="fill-current h-4 w-4"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-          >
-            <path d="M10 12l-4-4-4 4h8z" />
-          </svg>
-        </div>
-      </div>
+      <SelectComp
+        currentOption={params.row.role}
+        options={["student", "instructor", "admin"]}
+        setValue={setUserRole}
+      />
       <button
         type="button"
         disabled={!userRole || params.row.role === userRole}
