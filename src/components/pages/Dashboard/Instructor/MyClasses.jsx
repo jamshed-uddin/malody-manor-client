@@ -1,49 +1,36 @@
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import React, { useContext, useMemo, useState } from "react";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import MyClassesActions from "./MyClassesActions";
-import { Avatar, Box, Typography } from "@mui/material";
-import { DataGrid } from "@mui/x-data-grid";
+import { Avatar } from "@mui/material";
 import { ToastContainer, toast } from "react-toastify";
 import TableComponent from "../TableComponent";
 import { Helmet } from "react-helmet";
 import LoadingComponent from "../LoadingComponent";
 import NoItemText from "../NoItemText";
+import ErrorElement from "../../../shared/ErrorElement";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 const MyClasses = () => {
   const { user } = useContext(AuthContext);
-  const [myClasses, setMyClasses] = useState([]);
-  const [reload, setReload] = useState(false);
-  const [loading, setLoading] = useState(false);
 
-  const notify = () => toast("Class deleted!");
+  const notify = (msg) => toast(msg);
 
-  // const {
-  //   data: instructorClassesData,
-  //   refetch: instructorClassesDataRefetch,
-  //   isLoading: instructorClassesDataLoading,
-  //   error: instructorClassesDataError,
-  // } = useQuery("instructorClasses", async () => {
-  //   const result = await axios.get(
-  //     `${import.meta.env.VITE_SERVER_URL}/instructorsClasses/${user?.email}`
-  //   );
-  //   if (!result) {
-  //     throw new Error();
-  //   }
-  //   return result.data;
-  // });
-
-  useEffect(() => {
-    setLoading(true);
-    fetch(
-      `${import.meta.env.VITE_SERVER_URL}/instructorsClasses/${user?.email}`
-    )
-      .then((res) => res.json())
-      .then((result) => {
-        setMyClasses(result);
-        setLoading(false);
-      })
-      .catch((error) => console.log(error));
-  }, [user, reload]);
+  const {
+    data: instructorClassesData,
+    refetch: instructorClassesDataRefetch,
+    isLoading: instructorClassesDataLoading,
+    error: instructorClassesDataError,
+  } = useQuery(["instructorClasses"], async () => {
+    try {
+      const result = await axios.get(
+        `${import.meta.env.VITE_SERVER_URL}/instructorsClasses/${user?.email}`
+      );
+      return result.data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  });
 
   const columns = useMemo(
     () => [
@@ -78,29 +65,43 @@ const MyClasses = () => {
         field: "actions",
         headerName: "Actions",
         type: "actions",
-        width: "250",
+        width: "300",
         renderCell: (params) => (
-          <MyClassesActions {...{ params, setReload, notify }} />
+          <MyClassesActions
+            {...{ params, refetch: instructorClassesDataRefetch, notify }}
+          />
         ),
       },
     ],
     []
   );
 
+  if (instructorClassesDataError) {
+    return (
+      <ErrorElement
+        error={instructorClassesDataError}
+        refetch={instructorClassesDataRefetch}
+      />
+    );
+  }
+
   return (
     <div>
       <Helmet>
         <title>Dashboard-my classes</title>
       </Helmet>
-      {loading ? (
+      {instructorClassesDataLoading ? (
         <LoadingComponent />
-      ) : myClasses.length === 0 ? (
+      ) : instructorClassesData?.length === 0 ? (
         <NoItemText text={"No classes added"} />
       ) : (
         <div>
           <h1 className="pb-5 text-2xl">My classes</h1>
           <div>
-            <TableComponent columns={columns} data={myClasses} />
+            <TableComponent
+              columns={columns}
+              data={instructorClassesData || []}
+            />
           </div>
         </div>
       )}

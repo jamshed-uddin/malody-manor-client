@@ -1,22 +1,14 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import UserActions from "./UserActions";
-import { Avatar, Box, Typography } from "@mui/material";
-import { DataGrid } from "@mui/x-data-grid";
+import { Avatar } from "@mui/material";
 import TableComponent from "../TableComponent";
 import { Helmet } from "react-helmet";
-import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import LoadingComponent from "../LoadingComponent";
 import NoItemText from "../NoItemText";
 import useAdminData from "../../../../Hooks/useAdminData";
 import ErrorElement from "../../../shared/ErrorElement";
 
 const ManageUsers = () => {
-  // const [userData, setUserData] = useState([]);
-  const [reload, setReload] = useState(false);
-  const [loading, setLoading] = useState(false);
-
-  const [axiosSecure] = useAxiosSecure();
-
   const {
     data: userData,
     isLoading: usersDataLoading,

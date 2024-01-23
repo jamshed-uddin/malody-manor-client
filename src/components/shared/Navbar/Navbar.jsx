@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import "./Navbar.css";
 
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
@@ -15,6 +15,7 @@ const Navbar = () => {
   const [isOpen, setOpen] = useState(false);
   const { user } = useContext(AuthContext);
   const { theme, toggleTheme } = useContext(ThemeContext);
+  const { pathname } = useLocation();
 
   return (
     <nav
@@ -32,9 +33,11 @@ const Navbar = () => {
         </div>
         <div className="hidden lg:block mr-5 ">
           <div className="flex items-center space-x-12 text-lg font-semibold">
-            <div>
-              <Link to={"/"}>Home</Link>
-            </div>
+            {pathname !== "/" && (
+              <div>
+                <Link to={"/"}>Home</Link>
+              </div>
+            )}
             <div>
               <Link to={"/classes"}>Classes</Link>
             </div>
@@ -42,18 +45,19 @@ const Navbar = () => {
               <Link to={"/instructors"}>Instructors</Link>
             </div>
             {user ? (
-              <>
-                <div>
-                  <Link to={"/dashboard/user-home"}>Dashboard</Link>
-                </div>
-                <div>
+              <div>
+                <Link
+                  to={"/dashboard/user-home"}
+                  className="flex items-center gap-1"
+                >
+                  Dashboard
                   <Avatar
                     src={`${user?.photoURL}`}
                     alt=""
                     title={user?.email}
                   ></Avatar>
-                </div>
-              </>
+                </Link>
+              </div>
             ) : (
               <div>
                 <Link onClick={() => setOpen(false)} to={"/login"}>
@@ -99,11 +103,13 @@ const Navbar = () => {
         </div>
         <div className="h-full flex items-center ">
           <div className="space-y-6 text-center text-3xl  w-full">
-            <div>
-              <Link onClick={() => setOpen(false)} to={"/"}>
-                Home
-              </Link>
-            </div>
+            {pathname !== "/" && (
+              <div>
+                <Link onClick={() => setOpen(false)} to={"/"}>
+                  Home
+                </Link>
+              </div>
+            )}
             <div>
               <Link onClick={() => setOpen(false)} to={"/classes"}>
                 Classes
