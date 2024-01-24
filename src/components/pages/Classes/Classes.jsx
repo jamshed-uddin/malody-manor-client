@@ -4,36 +4,32 @@ import { Helmet } from "react-helmet";
 import CardSkeleton from "../../shared/CardSkeleton";
 import Title from "../../shared/Title";
 import LoadingSkeleton from "../../shared/LoadingSkeleton";
+import { useQuery } from "@tanstack/react-query";
+import useGetClasses from "../../../Hooks/useGetClasses";
+import PopularClasses from "../Home/PopularClasses/PopularClasses";
 
 const Classes = () => {
   const [classes, setClasses] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    setLoading(true);
-    fetch(`${import.meta.env.VITE_SERVER_URL}/classes`)
-      .then((res) => res.json())
-      .then((data) => {
-        setLoading(false);
-        setClasses(data);
-      })
-      .catch(() => setLoading(false));
-  }, []);
+  const { data: classData, isLoading: classDataLoading } = useGetClasses();
+
+  console.log(classData);
 
   return (
-    <div className="mt-14 py-8 md:w-3/4 px-3 mx-auto">
+    <div className="my-container py-10">
       <Helmet>
         <title>Melody Manor - Classes</title>
       </Helmet>
-      <div className="text-center">
+      <div className="text-center mb-4">
         <Title>Classes</Title>
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-3 my-2 gap-4">
-        {loading ? (
+        {classDataLoading ? (
           <LoadingSkeleton type={"item"} />
         ) : (
-          classes.map((singleclass) => (
+          classData?.classes.map((singleclass) => (
             <ClassCard key={singleclass._id} singleClass={singleclass} />
           ))
         )}

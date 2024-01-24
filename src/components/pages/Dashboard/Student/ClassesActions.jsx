@@ -1,30 +1,25 @@
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import useSingleClass from "../../../../Hooks/useSingleClass";
 
 const ClassesActions = ({ params, removeClassHandler }) => {
-  const [singleClass, isLoading] = useSingleClass(params.row?.classId);
+  const { data: singleClass } = useSingleClass(params.row?.classId);
 
-  const testF = () => {
-    console.log("hello");
-  };
-
-  if (!singleClass?._id) return;
   return (
     <div>
       <p
         className="inline"
-        title={singleClass?.available_seat ? "Proceed checkout" : "Out of seat"}
+        title={singleClass?.availableSeats ? "Proceed checkout" : "Out of seat"}
       >
         <button
           className={`border-2 border-black px-2 rounded-lg text-lg mr-3 ${
-            singleClass?.available_seat === 0 && "btn-disabled bg-transparent"
+            singleClass?.availableSeats === 0 && "btn-disabled bg-transparent"
           }`}
         >
           <Link to={`/dashboard/payment/${params.row?._id}`}>
-            {singleClass?.available_seat ? (
+            {singleClass?.availableSeats ? (
               "Checkout"
             ) : (
               <span className="text-[15px] text-red-500">Out of seat</span>

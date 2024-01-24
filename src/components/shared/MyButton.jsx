@@ -2,16 +2,12 @@ import React from "react";
 
 const MyButton = ({ children, clickFunction }) => {
   return (
-    <div className="relative ">
-      <div className="">
-        <button
-          onClick={clickFunction}
-          className=" text-xl font-semibold px-2 "
-        >
-          {children}
-        </button>
-      </div>
-    </div>
+    <button
+      onClick={clickFunction}
+      className=" text-lg font-semibold px-4 py-1 border-[1px] border-black rounded-lg"
+    >
+      {children}
+    </button>
   );
 };
 

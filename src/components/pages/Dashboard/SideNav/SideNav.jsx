@@ -27,9 +27,9 @@ const SideNav = ({ navOpenHandler }) => {
 
   return (
     <div
-      className={`bg- ${
+      className={` ${
         theme === "black" ? "bg-slate-900 text-white" : "bg-white"
-      } shadow-lg h-screen lg:mt-14`}
+      } shadow-lg h-screen lg:pt-14`}
     >
       <div className="grid place-items-end">
         <p
@@ -133,7 +133,7 @@ const SideNav = ({ navOpenHandler }) => {
         {/* back to homepages navigation for all users */}
         <div className="px-5 space-y-3 text-xl ">
           <div>
-            <Link to={"/"}>Back To Homepage</Link>
+            <Link to={"/"}>Homepage</Link>
           </div>
           <div>
             <Link to={"/classes"}>Classes</Link>

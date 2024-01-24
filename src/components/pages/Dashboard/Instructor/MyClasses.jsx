@@ -13,6 +13,7 @@ import axios from "axios";
 
 const MyClasses = () => {
   const { user } = useContext(AuthContext);
+  console.log(user?.email);
 
   const notify = (msg) => toast(msg);
 
@@ -24,8 +25,11 @@ const MyClasses = () => {
   } = useQuery(["instructorClasses"], async () => {
     try {
       const result = await axios.get(
-        `${import.meta.env.VITE_SERVER_URL}/instructorsClasses/${user?.email}`
+        `${
+          import.meta.env.VITE_SERVER_URL
+        }/instructorsClasses/jamsheduddin03@gmail.com`
       );
+      console.log(result);
       return result.data;
     } catch (error) {
       throw new Error(error.message);
@@ -35,18 +39,18 @@ const MyClasses = () => {
   const columns = useMemo(
     () => [
       {
-        field: "image",
+        field: "photoURL",
         headerName: "Photo",
         width: "60",
         renderCell: (params) => <Avatar src={params.row.image}></Avatar>,
         sortable: false,
         editable: false,
       },
-      { field: "class_name", headerName: "Class Name", width: "140" },
-      { field: "instructor_name", headerName: "Instructor", width: "140" },
+      { field: "className", headerName: "Class Name", width: "140" },
+      { field: "instructorName", headerName: "Instructor", width: "140" },
       { field: "price", headerName: "Price", width: "80" },
       {
-        field: "available_seat",
+        field: "availableSeats",
         headerName: "Available seat",
         width: "120",
       },
@@ -96,7 +100,7 @@ const MyClasses = () => {
         <NoItemText text={"No classes added"} />
       ) : (
         <div>
-          <h1 className="pb-5 text-2xl">My classes</h1>
+          <h1 className="pb-4 text-2xl">My classes</h1>
           <div>
             <TableComponent
               columns={columns}

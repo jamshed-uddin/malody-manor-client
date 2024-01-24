@@ -25,6 +25,7 @@ import AdminRoute from "./components/PrivateRoutes/AdminRoute.jsx";
 import InstructorRoute from "./components/PrivateRoutes/InstructorRoute.jsx";
 import ThemeProvider from "./components/Provider/ThemeProvider.jsx";
 import ErrorPage from "./components/pages/ErrorPage.jsx";
+import ClassDetail from "./components/pages/ClassDetail/ClassDetail.jsx";
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: "classes",
         element: <Classes></Classes>,
+      },
+      {
+        path: "class/:classId",
+        element: <ClassDetail></ClassDetail>,
       },
     ],
   },
@@ -108,6 +113,14 @@ const router = createBrowserRouter([
       //instructor routes
       {
         path: "add-class",
+        element: (
+          <InstructorRoute>
+            <AddClass></AddClass>
+          </InstructorRoute>
+        ),
+      },
+      {
+        path: "editClass/:classId",
         element: (
           <InstructorRoute>
             <AddClass></AddClass>

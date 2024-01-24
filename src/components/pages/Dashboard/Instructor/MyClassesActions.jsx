@@ -4,6 +4,7 @@ import { Box, CircularProgress, Modal } from "@mui/material";
 import React, { useContext, useState } from "react";
 import { ThemeContext } from "../../../Provider/ThemeProvider";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const MyClassesActions = ({ params, refetch, notify }) => {
   const { theme } = useContext(ThemeContext);
@@ -57,9 +58,12 @@ const MyClassesActions = ({ params, refetch, notify }) => {
           Feedback
         </button>
       )}
-      <button className="border-2 border-black px-2 rounded-lg text-lg mr-3">
-        Update
-      </button>
+      <Link
+        to={`/dashboard/editClass/${params?.row._id}`}
+        className="border-2 border-black px-2 rounded-lg text-lg mr-3"
+      >
+        Edit
+      </Link>
 
       <button
         onClick={() => handleDeleteClass(params.row._id)}

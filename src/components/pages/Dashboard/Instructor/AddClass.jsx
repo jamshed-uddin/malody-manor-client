@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useReducer, useState } from "react";
-import { AuthContext } from "../../../Provider/AuthProvider";
-import { CircularProgress, unstable_ClassNameGenerator } from "@mui/material";
+
+import { CircularProgress } from "@mui/material";
 import { Helmet } from "react-helmet";
 import { ThemeContext } from "../../../Provider/ThemeProvider";
 import uplaodPhotoToCloud from "../../../shared/uploadPhotoToCloud";
@@ -8,8 +8,9 @@ import deletePhotoFromCloud from "../../../shared/deletePhotoFromCloud";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useRole from "../../../../Hooks/useRole";
+import { useQuery } from "@tanstack/react-query";
 
 const initialState = {
   className: "",
@@ -26,6 +27,12 @@ const initialState = {
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case "CLASS_FOR_EDIT":
+      return {
+        ...state,
+        ...action.classForEdit,
+      };
+
     case "TEXT_INPUT":
       return {
         ...state,
@@ -57,17 +64,41 @@ const reducer = (state, action) => {
 const AddClass = () => {
   const { currentUser } = useRole();
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
   const { theme } = useContext(ThemeContext);
   const [photoUploading, setPhotoUploading] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const navigate = useNavigate();
-
   const [formState, dispatch] = useReducer(reducer, initialState);
+  const { classId } = useParams();
 
   console.log(previewImage);
   console.log(formState);
+
+  // using the add recipe form for editing recipe ..
+  const { isLoading, data, error } = useQuery(
+    ["classDetail"],
+    async () => {
+      const result = await axios.get(
+        `${import.meta.env.VITE_SERVER_URL}/singleClass/${classId}`
+      );
+      return result.data;
+    },
+    { enabled: !!classId } //query only enables when id is true or there is a id(id that comes in params)
+  );
+  console.log(isLoading);
+
+  useEffect(() => {
+    if (data) {
+      setEditMode(true);
+      // setting entire recipe data for edit to initial state
+      dispatch({ type: "CLASS_FOR_EDIT", classForEdit: data });
+      // getting publicId part from url and setting it to public_id state.it requires for deleting image from cloudinary
+      if (data.photoURL) {
+        setPreviewImage(data.photoURL);
+      }
+    }
+  }, [data]);
 
   useEffect(() => {
     if (!editMode) {
@@ -126,29 +157,41 @@ const AddClass = () => {
 
     try {
       setLoading(true);
-      await axios
-        .post(`${import.meta.env.VITE_SERVER_URL}/addNewClass`, formState)
+      if (editMode) {
+        await axios
+          .put(
+            `${import.meta.env.VITE_SERVER_URL}/updateClassInfo/${classId}`,
+            formState
+          )
 
-        .then((result) => {
-          if (result.data.insertedId) {
-            setLoading(false);
-            setSuccess(true);
-            setTimeout(() => {
-              reset();
-            }, 1500);
-          } else {
-            setLoading(false);
-          }
-        });
+          .then((result) => {
+            console.log(result);
+            if (result.data.modifiedCount || result.data) {
+              setLoading(false);
+
+              navigate("/dashboard/my-classes");
+            } else {
+              setLoading(false);
+            }
+          });
+      } else {
+        await axios
+          .post(`${import.meta.env.VITE_SERVER_URL}/addNewClass`, formState)
+
+          .then((result) => {
+            if (result.data.insertedId) {
+              setLoading(false);
+
+              navigate("/dashboard/my-classes");
+            } else {
+              setLoading(false);
+            }
+          });
+      }
     } catch (error) {
       setLoading(false);
     }
     // --------------
-
-    setTimeout(() => {
-      setSuccess(false);
-      navigate("/dashboard/my-classes");
-    }, 4000);
   };
 
   // styles for input and label
@@ -159,7 +202,7 @@ const AddClass = () => {
   // --------
 
   return (
-    <div>
+    <div className="pb-8">
       <Helmet>
         <title>Dashboard - add classes</title>
       </Helmet>
@@ -171,9 +214,9 @@ const AddClass = () => {
           <div
             className={`mb-2 ${
               previewImage ? "" : "border-[1px] border-gray-400"
-            } rounded-xl w-full mx-auto h-60 md:h-80 flex items-center justify-center overflow-hidden select-none relative`}
+            } rounded-xl lg:w-3/5 mx-auto h-60 md:h-80 flex items-center justify-center overflow-hidden select-none relative`}
           >
-            <div className={`${!previewImage && "hidden"}`}>
+            <div className={` ${!previewImage && "hidden"}`}>
               <img
                 className={`w-full h-full object-cover `}
                 src={previewImage}
@@ -184,7 +227,7 @@ const AddClass = () => {
                 disabled={photoUploading}
                 onClick={deleteImageHandler}
                 type="button"
-                className={`absolute bottom-3 left-3 bg-bgColor text-colorOne rounded-full flex items-center p-[2px] cursor-pointer text-gray-500  text-xl bg-white  ${
+                className={`absolute bottom-3 left-3 bg-bgColor text-colorOne rounded-full flex items-center px-[6px] py-[5px] cursor-pointer text-gray-500  text-xl bg-white  ${
                   photoUploading ? "opacity-50" : "opacity-100"
                 }`}
               >
@@ -217,6 +260,7 @@ const AddClass = () => {
             type="text"
             id="className"
             name="className"
+            value={formState.className}
             className={inputStyle}
             required
             onChange={(e) => {
@@ -236,6 +280,7 @@ const AddClass = () => {
           <textarea
             id="description"
             name="description"
+            value={formState.description}
             className={` border border-gray-400 focus:outline-none p-2 w-full rounded-xl ${
               theme === "black" && "bg-slate-900"
             }`}
@@ -259,6 +304,7 @@ const AddClass = () => {
               id="price"
               name="price"
               min="0"
+              value={formState.price}
               className={inputStyle}
               required
               onChange={(e) => {
@@ -282,6 +328,7 @@ const AddClass = () => {
               min="0"
               className={inputStyle}
               required
+              value={formState.availableSeats}
               onChange={(e) => {
                 dispatch({
                   type: "TEXT_INPUT",
@@ -348,27 +395,19 @@ const AddClass = () => {
           <button
             disabled={photoUploading}
             type="submit"
-            className={`text-xl font-semibold border-2 border-black px-3 py-1 rounded-xl w-1/2 relative ${
-              success && "bg-green-400 border-green-400"
-            } ${theme === "black" && "bg-slate-900"}`}
+            className={`text-xl font-semibold px-3 py-1 rounded-xl  relative ${
+              theme === "black"
+                ? " border-2 border-white"
+                : "border-2 border-black"
+            }`}
           >
-            {success ? (
-              <span className="px-[6px]">Added the class</span>
+            {editMode ? (
+              <span className="px-[6px]">Update class</span>
             ) : (
               <span>Add class</span>
             )}
-            <span>
-              {loading && (
-                <CircularProgress
-                  size={20}
-                  sx={{
-                    position: "absolute",
-                    left: "50%",
-
-                    right: "50%",
-                  }}
-                />
-              )}
+            <span className="absolute left-1/2 top-1/2 -translate-y-1/2">
+              {loading && <CircularProgress size={25} />}
             </span>
           </button>
         </div>

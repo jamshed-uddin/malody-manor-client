@@ -1,17 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 const useSingleClass = (classId) => {
-  const { isLoading, data: singleClass = [] } = useQuery({
+  return useQuery({
     queryKey: ["singleClass", classId],
     queryFn: async () => {
-      const data = await fetch(
+      const result = await axios.get(
         `${import.meta.env.VITE_SERVER_URL}/singleClass/${classId}`
       );
-      return data.json();
+      return result.data;
     },
   });
-
-  return [singleClass, isLoading];
 };
 
 export default useSingleClass;

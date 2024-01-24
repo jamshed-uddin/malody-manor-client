@@ -15,12 +15,11 @@ const Home = () => {
         <title>Melody Manor</title>
       </Helmet>
 
-      <div className=" md:w-[90%] w-[97%] mx-auto">
+      <div className="my-container">
         <Banner></Banner>
         <PopularClasses></PopularClasses>
         <PopularInstructor></PopularInstructor>
         <Achievments></Achievments>
-        <AddClass />
         <WhyUs></WhyUs>
         <SubscribeToEmail></SubscribeToEmail>
       </div>

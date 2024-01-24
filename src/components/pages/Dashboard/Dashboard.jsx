@@ -15,32 +15,32 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="h-screen">
-      <div className="flex h-full   relative">
-        <div className="w-[20%] hidden lg:block">
-          <SideNav></SideNav>
-        </div>
-        {/* mobile sidenav */}
-        <div
-          className={`col-span-1 absolute lg:hidden bg-white z-20 top-0 ${
-            navOpened ? "left-0" : "-left-96"
-          }  transition-all duration-500`}
-        >
-          <SideNav navOpenHandler={navOpenHandler}></SideNav>
-        </div>
+    <div className="h-screen  lg:flex ">
+      <div className=" hidden lg:block w-[20%] h-full">
+        <SideNav></SideNav>
+      </div>
+      <div
+        className={`w-[70%] h-full absolute lg:hidden bg-white z-20 top-0 ${
+          navOpened ? "left-0" : "-left-96"
+        }  transition-all duration-500`}
+      >
+        <SideNav navOpenHandler={navOpenHandler}></SideNav>
+      </div>
 
-        {/* dashboard pages */}
-        <div
-          className={`flex-grow  ${theme === "black" && "bg-black text-white"}`}
-        >
-          <div className="flex items-center justify-between shadow h-12 mb-2 ">
+      <div className="lg:w-[80%] h-full overflow-auto">
+        <div className={` ${theme === "black" ? "bg-black text-white" : ""}`}>
+          <div
+            className={`fixed top-0 left-0 right-0 flex items-center justify-between shadow h-12 mb-2 z-30 px-3 ${
+              theme === "black" ? "bg-slate-900" : "bg-white"
+            }`}
+          >
             <h1
               onClick={() => setNavOpened(true)}
               className=" cursor-pointer font-semibold text-3xl  lg:hidden"
             >
               <FontAwesomeIcon icon={faBars} />
             </h1>
-            <div className="text-end   w-full flex items-center justify-end lg:mr-5">
+            <div className="text-end   w-full flex items-center justify-end ">
               <div className="text-2xl w-7 cursor-pointer text-center transition-all duration-500">
                 {theme === "light" ? (
                   <p onClick={() => toggleTheme()}>
@@ -54,7 +54,7 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
-          <div className="px-4">
+          <div className="px-4 mt-14">
             <Outlet></Outlet>
           </div>
         </div>
