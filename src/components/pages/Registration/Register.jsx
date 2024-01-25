@@ -6,6 +6,7 @@ import { ThemeContext } from "../../Provider/ThemeProvider";
 
 const Register = () => {
   const [error, setError] = useState("");
+  const [isLoading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const { registerUser, updateUserNamePhoto } = useContext(AuthContext);
   const { theme } = useContext(ThemeContext);
@@ -30,7 +31,7 @@ const Register = () => {
       email: data.email,
       role: "student",
     };
-
+    setLoading(true);
     registerUser(data.email, data.password)
       .then((result) => {
         if (result.user) {
@@ -38,17 +39,21 @@ const Register = () => {
             axios
               .post(`${import.meta.env.VITE_SERVER_URL}/users`, newUser)
               .then((result) => {
+                setLoading(false);
                 if (result.data.insertedId) {
                   navigate("/");
                 }
               })
-              .catch((error) => console.log(error));
+              .catch(() => {
+                setLoading(false);
+              });
           });
         }
 
         navigate("/");
       })
       .catch((error) => {
+        setLoading(false);
         if (error.message === "Firebase: Error (auth/email-already-in-use).") {
           setError("An account already exists with this email");
         }
@@ -134,7 +139,9 @@ const Register = () => {
             {" "}
             <button
               type="submit"
-              className="text-xl font-semibold  py-1 px-4 rounded-lg shadow  "
+              className={`text-xl font-semibold  py-1 px-4 rounded-lg shadow ${
+                loading ? "opacity-90" : "opacity-100"
+              }`}
             >
               Sign up
             </button>

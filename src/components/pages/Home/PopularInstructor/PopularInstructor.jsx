@@ -21,7 +21,7 @@ const PopularInstructor = () => {
           <LoadingSkeleton type={"profile"} />
         ) : (
           popularInstructors
-            .slice(0, 6)
+            ?.slice(0, 6)
             .map((instructor) => (
               <InstructorsCard
                 instructor={instructor}

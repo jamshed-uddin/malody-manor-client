@@ -24,8 +24,21 @@ const PaymentHistory = () => {
 
   const columns = useMemo(
     () => [
-      { field: "className", headerName: "Class Name", width: "150" },
-      { field: "transectionId", headerName: "Transection id", width: "170" },
+      {
+        field: "className",
+        headerName: "Class Name",
+        width: "150",
+        sortable: false,
+        editable: false,
+        filter: false,
+      },
+      {
+        field: "transectionId",
+        headerName: "Transection id",
+        width: "170",
+        sortable: false,
+        editable: false,
+      },
       {
         field: "paymentDate",
         headerName: "Date",

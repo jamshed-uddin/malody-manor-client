@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import MyButton from "../../shared/MyButton";
 import AddToSelected from "../../shared/AddToSelected";
 import { ToastContainer, toast } from "react-toastify";
@@ -107,7 +107,9 @@ const ClassDetail = () => {
                     : ""
                 }`}
               >
-                <MyButton>Enroll now</MyButton>
+                <Link to={`/dashboard/payment/${classDetail._id}`}>
+                  <MyButton>Enroll now</MyButton>
+                </Link>
               </div>
             </div>
           </div>

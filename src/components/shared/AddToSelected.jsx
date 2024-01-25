@@ -18,7 +18,7 @@ const AddToSelected = ({ children, singleClass, toastHandler }) => {
   const handleBookmark = async (e) => {
     e.preventDefault();
     if (!user) {
-      return navigate("/login", { state: location });
+      return navigate("/login", { state: { from: location } });
     }
     const { _id, ...newData } = singleClass;
     const newBookmarkedClass = {

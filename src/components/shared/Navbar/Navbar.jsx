@@ -21,7 +21,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`py-3 fixed top-0 left-0 right-0  ${
+      className={`py-3 fixed top-0 left-0 right-0 shadow ${
         theme === "black" ? "bg-black" : "bg-white"
       }  z-30`}
     >
@@ -59,7 +59,13 @@ const Navbar = () => {
                 </Link>
               </div>
             ) : (
-              <div>
+              <div
+                className={`px-4 py-1 rounded-lg ${
+                  theme === "black"
+                    ? "bg-white text-black"
+                    : "bg-black text-white"
+                }`}
+              >
                 <Link onClick={() => setOpen(false)} to={"/login"}>
                   Login
                 </Link>

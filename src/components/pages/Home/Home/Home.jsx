@@ -6,7 +6,6 @@ import Achievments from "../Achievments/Achievments";
 import WhyUs from "../WhyUs/WhyUs";
 import SubscribeToEmail from "../SubscribeToEmail";
 import { Helmet } from "react-helmet";
-import AddClass from "../../Dashboard/Instructor/AddClass";
 
 const Home = () => {
   return (
@@ -19,6 +18,7 @@ const Home = () => {
         <Banner></Banner>
         <PopularClasses></PopularClasses>
         <PopularInstructor></PopularInstructor>
+
         <Achievments></Achievments>
         <WhyUs></WhyUs>
         <SubscribeToEmail></SubscribeToEmail>

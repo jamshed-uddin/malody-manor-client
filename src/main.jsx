@@ -26,12 +26,18 @@ import InstructorRoute from "./components/PrivateRoutes/InstructorRoute.jsx";
 import ThemeProvider from "./components/Provider/ThemeProvider.jsx";
 import ErrorPage from "./components/pages/ErrorPage.jsx";
 import ClassDetail from "./components/pages/ClassDetail/ClassDetail.jsx";
+import ScrollTop from "./ScrollTop.jsx";
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App></App>,
+    element: (
+      <>
+        <ScrollTop />
+        <App></App>
+      </>
+    ),
     errorElement: <ErrorPage></ErrorPage>,
     children: [
       {

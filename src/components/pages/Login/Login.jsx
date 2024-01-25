@@ -11,6 +11,7 @@ const Login = () => {
 
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
+  console.log(location);
   const {
     register,
     handleSubmit,
@@ -94,7 +95,7 @@ const Login = () => {
             <button
               type="submit"
               className={` py-1 px-4 text-xl font-semibold rounded-lg shadow ${
-                loading && "btn-disabled bg-transparent opacity-80"
+                loading && "btn-disabled bg-transparent opacity-90"
               }`}
             >
               Login
