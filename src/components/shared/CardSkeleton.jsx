@@ -9,7 +9,7 @@ const CardSkeleton = ({ type }) => {
         className={`${
           type === "item"
             ? "h-3/4  rounded-2xl"
-            : " h-[60%] md:h-60 w-full  md:w-60 rounded-full mx-auto"
+            : " h-44 md:h-60 w-44  md:w-60 rounded-full mx-auto"
         } bg-slate-200 bg-opacity-50 animate-pulse `}
       ></div>
 

@@ -27,11 +27,7 @@ const Register = () => {
 
     const newUser = {
       name: data.name,
-      photo: data.photo,
       email: data.email,
-      gender: data.gender,
-      phone: data.phone,
-      address: data.address,
       role: "student",
     };
 
@@ -39,19 +35,14 @@ const Register = () => {
       .then((result) => {
         if (result.user) {
           updateUserNamePhoto(data.name, data.photo).then(() => {
-            fetch(`${import.meta.env.VITE_SERVER_URL}/users`, {
-              method: "POST",
-              headers: {
-                "content-type": "application/json",
-              },
-              body: JSON.stringify(newUser),
-            })
-              .then((res) => res.json())
-              .then((data) => {
-                if (data.insertedId) {
+            axios
+              .post(`${import.meta.env.VITE_SERVER_URL}/users`, newUser)
+              .then((result) => {
+                if (result.data.insertedId) {
                   navigate("/");
                 }
-              });
+              })
+              .catch((error) => console.log(error));
           });
         }
 
@@ -72,18 +63,14 @@ const Register = () => {
         <h1 className="text-center text-2xl font-semibold my-3">Sign up</h1>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
           <input
-            {...register("name")}
+            {...register("name", { required: true })}
             type="text"
-            placeholder="Name"
+            placeholder="Name*"
             className={inputStyle}
           />
-
-          <input
-            {...register("photo")}
-            type="text"
-            placeholder="Photo URL"
-            className={inputStyle}
-          />
+          {errors.email && (
+            <p className="text-red-500 text-sm">Name is required</p>
+          )}
 
           <input
             {...register("email", { required: true })}
@@ -94,36 +81,6 @@ const Register = () => {
           {errors.email && (
             <p className="text-red-500 text-sm">Email is required</p>
           )}
-
-          <div className="flex space-x-2">
-            <select
-              className={`border border-gray-400 p-2 rounded-xl focus:outline-none flex-grow ${
-                theme === "black" && "bg-slate-900"
-              }`}
-              {...register("gender")}
-            >
-              <option value="female">Gender</option>
-              <option value="female">Female</option>
-              <option value="male">Male</option>
-              <option value="other">Other</option>
-            </select>
-
-            <input
-              {...register("phone")}
-              type="tel"
-              placeholder="Phone Number"
-              className={`border border-gray-400 p-2 rounded-xl focus:outline-none flex-grow ${
-                theme === "black" && "bg-slate-900"
-              }`}
-            />
-          </div>
-
-          <input
-            {...register("address")}
-            type="text"
-            placeholder="Address"
-            className={inputStyle}
-          />
 
           <input
             {...register("password", {

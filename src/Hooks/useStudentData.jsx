@@ -11,11 +11,11 @@ const useStudentData = (endPoint) => {
 
   const fetchData = async () => {
     try {
-      const result = await axiosSecure(`${endPoint}/${user?.email}`);
+      const result = await axiosSecure.get(`${endPoint}/${user?.email}`);
 
       return result.data;
     } catch (error) {
-      throw new Error(error.message);
+      return null;
     }
   };
 

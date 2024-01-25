@@ -4,53 +4,20 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useContext, useState } from "react";
-import useRole from "../../../../Hooks/useRole";
+import React, { useContext } from "react";
+
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { AuthContext } from "../../../Provider/AuthProvider";
-import { Link, useNavigate } from "react-router-dom";
+
+import { Link } from "react-router-dom";
 import { ThemeContext } from "../../../Provider/ThemeProvider";
-import axios from "axios";
+
 import AddToSelected from "../../../shared/AddToSelected";
 
 const ClassCard = ({ singleClass }) => {
-  const { user } = useContext(AuthContext);
-  const { currentUser, role } = useRole();
   const { theme } = useContext(ThemeContext);
-  const navigate = useNavigate();
 
   const toastHandler = (msg) => toast(msg);
-
-  const handleBookmark = async () => {
-    if (!user) {
-      return navigate("/login");
-    }
-    const { _id, ...newData } = singleClass;
-    const newBookmarkedClass = {
-      ...newData,
-      classId: _id,
-      userEmail: currentUser?.email,
-    };
-
-    await axios
-      .post(
-        `${import.meta.env.VITE_SERVER_URL}/addToSelected`,
-        newBookmarkedClass
-      )
-      .then((result) => {
-        if (result.data.insertedId) {
-          toastHandler("You have selected this class");
-        }
-        if (result.data.message === "already added") {
-          toastHandler("You have already selected this class");
-        }
-        if (result.data.message === "already enrolled") {
-          toastHandler(" You have already enrolled to this class");
-        }
-      })
-      .catch((error) => toastHandler("Something went wrong!"));
-  };
 
   return (
     <Link to={`/class/${singleClass?._id}`}>
@@ -72,13 +39,7 @@ const ClassCard = ({ singleClass }) => {
               {singleClass?.className}
             </h1>
             <div
-              className={`cursor-pointer text-2xl ${
-                role === "admin" ||
-                role === "instructor" ||
-                singleClass.availableSeats === 0
-                  ? "btn-disabled bg-transparent"
-                  : ""
-              }`}
+              className={` text-2xl `}
               title="Bookmark class"
               aria-label="Bookmark class"
             >

@@ -11,8 +11,6 @@ import useGetClasses from "../../../../Hooks/useGetClasses";
 const PopularClasses = () => {
   const { data: classData, isLoading: classDataLoading } = useGetClasses();
 
-  console.log(classData);
-
   return (
     <div className="my-6">
       <Title>Popular classes</Title>

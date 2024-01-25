@@ -10,10 +10,12 @@ import { AuthContext } from "../../Provider/AuthProvider";
 import { Avatar } from "@mui/material";
 import { faMoon, faSun } from "@fortawesome/free-regular-svg-icons";
 import { ThemeContext } from "../../Provider/ThemeProvider";
+import useRole from "../../../Hooks/useRole";
 
 const Navbar = () => {
   const [isOpen, setOpen] = useState(false);
   const { user } = useContext(AuthContext);
+  const { currentUser } = useRole();
   const { theme, toggleTheme } = useContext(ThemeContext);
   const { pathname } = useLocation();
 
@@ -41,9 +43,7 @@ const Navbar = () => {
             <div>
               <Link to={"/classes"}>Classes</Link>
             </div>
-            <div>
-              <Link to={"/instructors"}>Instructors</Link>
-            </div>
+
             {user ? (
               <div>
                 <Link
@@ -52,9 +52,9 @@ const Navbar = () => {
                 >
                   Dashboard
                   <Avatar
-                    src={`${user?.photoURL}`}
+                    src={`${currentUser?.photoURL}`}
                     alt=""
-                    title={user?.email}
+                    title={currentUser?.email}
                   ></Avatar>
                 </Link>
               </div>
@@ -115,11 +115,7 @@ const Navbar = () => {
                 Classes
               </Link>
             </div>
-            <div>
-              <Link onClick={() => setOpen(false)} to={"/instructors"}>
-                Instructors
-              </Link>
-            </div>
+
             {user ? (
               <div>
                 <div>
@@ -133,9 +129,9 @@ const Navbar = () => {
                 <div className="hidden md:block">
                   <Avatar
                     className="mx-auto "
-                    src={`${user?.photoURL}`}
+                    src={`${currentUser?.photoURL}`}
                     alt=""
-                    title={user?.email}
+                    title={currentUser?.email}
                   ></Avatar>
                 </div>
               </div>

@@ -5,7 +5,7 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Home from "./components/pages/Home/Home/Home.jsx";
-import Instructors from "./components/pages/Instructors/Instructors.jsx";
+
 import Classes from "./components/pages/Classes/Classes.jsx";
 import Login from "./components/pages/Login/Login.jsx";
 import Register from "./components/pages/Registration/Register.jsx";
@@ -38,10 +38,7 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home></Home>,
       },
-      {
-        path: "instructors",
-        element: <Instructors></Instructors>,
-      },
+
       {
         path: "classes",
         element: <Classes></Classes>,

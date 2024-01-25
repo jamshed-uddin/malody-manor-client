@@ -1,6 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
 import React, { useContext, useMemo } from "react";
-import { AuthContext } from "../../../Provider/AuthProvider";
 import TableComponent from "../TableComponent";
 import { Avatar } from "@mui/material";
 import { Helmet } from "react-helmet";
@@ -8,8 +6,13 @@ import LoadingComponent from "../LoadingComponent";
 import NoItemText from "../NoItemText";
 import useStudentData from "../../../../Hooks/useStudentData";
 import ErrorElement from "../../../shared/ErrorElement";
+import { Link } from "react-router-dom";
+import { ThemeContext } from "../../../Provider/ThemeProvider";
+import SeeDetailBtn from "../../../shared/SeeDetailBtn";
 
 const EnrolledClasses = () => {
+  const { theme } = useContext(ThemeContext);
+
   const {
     data: enrolledClasses,
     isLoading: enrolledClassesLoading,
@@ -20,19 +23,30 @@ const EnrolledClasses = () => {
   const columns = useMemo(
     () => [
       {
-        field: "image",
+        field: "photoURL",
         headerName: "Photo",
         width: "90",
-        renderCell: (params) => <Avatar src={params.row.image}></Avatar>,
+        renderCell: (params) => <Avatar src={params.row.photoURL}></Avatar>,
         sortable: false,
         editable: false,
       },
-      { field: "class_name", headerName: "Class Name", width: "150" },
-      { field: "instructor_name", headerName: "Instructor", width: "170" },
+      { field: "className", headerName: "Class Name", width: "150" },
+      { field: "instructorName", headerName: "Instructor", width: "170" },
+
       {
-        field: "instructor_email",
-        headerName: "Instructor Email",
-        width: "220",
+        field: "actions",
+        headerName: "Actions",
+        type: "actions",
+        width: "250",
+        renderCell: (params) => (
+          <p
+            className={`w-fit text-lg px-4 py-1 border-2 rounded-lg ${
+              theme === "black" ? "border-white" : "border-black"
+            }`}
+          >
+            <SeeDetailBtn classId={params.row._id}>Detail</SeeDetailBtn>
+          </p>
+        ),
       },
     ],
     []

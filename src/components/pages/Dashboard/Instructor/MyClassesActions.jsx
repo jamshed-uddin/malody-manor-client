@@ -5,6 +5,7 @@ import React, { useContext, useState } from "react";
 import { ThemeContext } from "../../../Provider/ThemeProvider";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import SeeDetailBtn from "../../../shared/SeeDetailBtn";
 
 const MyClassesActions = ({ params, refetch, notify }) => {
   const { theme } = useContext(ThemeContext);
@@ -52,7 +53,7 @@ const MyClassesActions = ({ params, refetch, notify }) => {
     }
   };
   return (
-    <div>
+    <div className="space-x-2">
       {params.row.status === "denied" && (
         <button className="border-2 border-black px-2 rounded-lg text-lg mr-3">
           Feedback
@@ -60,14 +61,17 @@ const MyClassesActions = ({ params, refetch, notify }) => {
       )}
       <Link
         to={`/dashboard/editClass/${params?.row._id}`}
-        className="border-2 border-black px-2 rounded-lg text-lg mr-3"
+        className="border-2 border-black px-2 rounded-lg text-lg"
       >
         Edit
       </Link>
+      <div className="inline border-2 border-black rounded-lg px-3 w-fit text-lg">
+        <SeeDetailBtn classId={params.row._id}>Detail</SeeDetailBtn>
+      </div>
 
       <button
         onClick={() => handleDeleteClass(params.row._id)}
-        className="border-2  px-2 rounded-lg text-lg bg-red-500 text-white border-red-500 "
+        className="  px-2 rounded-lg text-lg bg-red-500 text-white  "
       >
         Delete
       </button>

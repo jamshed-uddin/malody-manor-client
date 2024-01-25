@@ -18,7 +18,7 @@ const ClassesActions = ({ params, removeClassHandler }) => {
             singleClass?.availableSeats === 0 && "btn-disabled bg-transparent"
           }`}
         >
-          <Link to={`/dashboard/payment/${params.row?._id}`}>
+          <Link to={`/dashboard/payment/${params.row?.classId}`}>
             {singleClass?.availableSeats ? (
               "Checkout"
             ) : (

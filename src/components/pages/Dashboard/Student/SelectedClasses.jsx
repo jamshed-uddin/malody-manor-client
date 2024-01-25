@@ -41,19 +41,19 @@ const SelectedClasses = () => {
   const columns = useMemo(
     () => [
       {
-        field: "image",
+        field: "photoURL",
         headerName: "Photo",
         width: "90",
         renderCell: (params) => <Avatar src={params.row.image}></Avatar>,
         sortable: false,
         editable: false,
       },
-      { field: "class_name", headerName: "Class Name", width: "150" },
-      { field: "instructor_name", headerName: "Instructor", width: "170" },
+      { field: "className", headerName: "Class Name", width: "150" },
+      { field: "instructorName", headerName: "Instructor", width: "170" },
       {
-        field: "instructor_email",
-        headerName: "Instructor Email",
-        width: "220",
+        field: "availableSeats",
+        headerName: "Available seats",
+        width: "200",
       },
       {
         field: "price",

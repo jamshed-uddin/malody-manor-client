@@ -6,24 +6,19 @@ import { useQuery } from "@tanstack/react-query";
 import LoadingComponent from "../LoadingComponent";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import NoItemText from "../NoItemText";
+import useStudentData from "../../../../Hooks/useStudentData";
+import ErrorElement from "../../../shared/ErrorElement";
 
 const PaymentHistory = () => {
   const { currentUser } = useRole();
   const [axiosSecure] = useAxiosSecure();
 
   const {
+    data: payments,
     isLoading,
+    error: paymentHistoryError,
     refetch,
-    data: payments = [],
-  } = useQuery({
-    queryKey: ["paymentHistory", currentUser?.email],
-    queryFn: async () => {
-      const data = await axiosSecure(
-        `/getPaymentHistory/${currentUser?.email}`
-      );
-      return data.data;
-    },
-  });
+  } = useStudentData("/getPaymentHistory");
 
   console.log(payments);
 
@@ -45,6 +40,10 @@ const PaymentHistory = () => {
     []
   );
 
+  if (paymentHistoryError) {
+    return <ErrorElement error={paymentHistoryError} refetch={refetch} />;
+  }
+
   return (
     <div>
       <Helmet>
@@ -53,7 +52,7 @@ const PaymentHistory = () => {
 
       {isLoading ? (
         <LoadingComponent />
-      ) : payments.length === 0 ? (
+      ) : payments?.length === 0 ? (
         <NoItemText text={"No payment history"} />
       ) : (
         <div>

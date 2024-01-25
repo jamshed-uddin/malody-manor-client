@@ -1,10 +1,12 @@
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../components/Provider/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+
+import useAxiosSecure from "./useAxiosSecure";
 
 const useRole = () => {
   const { user } = useContext(AuthContext);
+  const [axiosSecure] = useAxiosSecure();
 
   const {
     data: currentUser,
@@ -14,7 +16,7 @@ const useRole = () => {
     ["currentUser"],
     async () => {
       try {
-        const result = await axios.get(
+        const result = await axiosSecure.get(
           `${import.meta.env.VITE_SERVER_URL}/singleUser/${user?.email}`
         );
 

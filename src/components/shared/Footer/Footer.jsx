@@ -10,7 +10,7 @@ const Footer = () => {
         className={` ${
           theme === "black" ? "bg-slate-900 text-white" : "bg-slate-100"
         } p
-        pt-4 rounded-ss-[50px] rounded-se-[50px] rounded-es-none rounded-ee-none`}
+        pt-4 rounded-ss-[30px] lg:rounded-ss-[50px] rounded-se-[30px] lg:rounded-se-[50px] rounded-es-none rounded-ee-none`}
       >
         <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
           <div className="text-center">

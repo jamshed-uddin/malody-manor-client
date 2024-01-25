@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
+import axios from "axios";
 
 const Login = () => {
   const { userLogin, loading, signInWithGoogle } = useContext(AuthContext);
@@ -42,17 +43,13 @@ const Login = () => {
             address: "",
             role: "student",
           };
-          fetch(`${import.meta.env.VITE_SERVER_URL}/users`, {
-            method: "POST",
-            headers: {
-              "content-type": "application/json",
-            },
-            body: JSON.stringify(newUser),
-          })
-            .then((res) => res.json())
+
+          axios
+            .post(`${import.meta.env.VITE_SERVER_URL}/users`, newUser)
             .then(() => {
               navigate(from, { replace: true });
-            });
+            })
+            .catch((error) => console.log(error));
         }
       })
       .catch((error) => console.log(error));
@@ -60,7 +57,7 @@ const Login = () => {
 
   return (
     <div className="h-screen flex justify-center items-center">
-      <div className=" p-6 shadow-lg rounded-xl">
+      <div className=" p-6 shadow-md rounded-xl">
         <h1 className="text-center text-2xl font-semibold my-3">Log in</h1>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <input
@@ -69,7 +66,9 @@ const Login = () => {
             placeholder="Email"
             className="border border-gray-400 p-2 w-full rounded-xl focus:outline-none"
           />
-          {errors.email && <p className="text-red-500">Email is required</p>}
+          {errors.email && (
+            <p className="text-red-500 text-sm">Email is required</p>
+          )}
 
           <input
             {...register("password", { required: true })}
@@ -87,7 +86,7 @@ const Login = () => {
             </label>
           </div>
           {errors.password && (
-            <p className="text-red-500">Password is required</p>
+            <p className="text-red-500 text-sm">Password is required</p>
           )}
 
           <p className="text-center">

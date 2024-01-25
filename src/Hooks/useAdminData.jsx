@@ -7,7 +7,7 @@ const useAdminData = (endPoint) => {
 
   const fetchData = async () => {
     try {
-      const result = await axiosSecure(`${endPoint}`);
+      const result = await axiosSecure.get(`${endPoint}`);
 
       return result.data;
     } catch (error) {

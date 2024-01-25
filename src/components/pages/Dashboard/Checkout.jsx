@@ -5,6 +5,8 @@ import clearPaidClass from "./clearPaidClass";
 import changeAvailability from "./changeAvailability";
 import { useNavigate } from "react-router-dom";
 import { ThemeContext } from "../../Provider/ThemeProvider";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 const Checkout = ({ singleSelectedClass, price, paymentCompleteToast }) => {
   const { theme } = useContext(ThemeContext);
@@ -15,19 +17,24 @@ const Checkout = ({ singleSelectedClass, price, paymentCompleteToast }) => {
   const [transectionId, setTransectionId] = useState("");
   const stripe = useStripe();
   const elements = useElements();
-  const [clientSecret, setClientSecret] = useState("");
 
-  useEffect(() => {
-    fetch(`${import.meta.env.VITE_SERVER_URL}/create-payment-intent`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ price: price }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setClientSecret(data.clientSecret);
-      });
-  }, [price]);
+  console.log(singleSelectedClass);
+
+  const { data: clientSecret } = useQuery(
+    ["paymentIntend", price],
+    async () => {
+      const result = await axios.post(
+        `${import.meta.env.VITE_SERVER_URL}/create-payment-intent`,
+        {
+          price,
+        }
+      );
+      return result.data.clientSecret;
+    },
+    {
+      enabled: !!price,
+    }
+  );
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -77,25 +84,19 @@ const Checkout = ({ singleSelectedClass, price, paymentCompleteToast }) => {
         transectionId: paymentIntent?.id,
         userEmail: currentUser?.email,
         userName: currentUser?.name,
-        classId: singleSelectedClass?.classId,
-        className: singleSelectedClass?.class_name,
+        classId: singleSelectedClass?._id,
+        className: singleSelectedClass?.className,
         paymentDate: new Date(),
         amount: parseFloat(paymentIntent?.amount / 100),
         status: paymentIntent?.status,
       };
 
-      fetch(`${import.meta.env.VITE_SERVER_URL}/paymentHistory`, {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(paymentInfo),
-      })
-        .then((res) => res.json())
+      await axios
+        .post(`${import.meta.env.VITE_SERVER_URL}/paymentHistory`, paymentInfo)
         .then((result) => {
-          if (result.insertedId) {
-            clearPaidClass(singleSelectedClass._id);
-            changeAvailability(singleSelectedClass?.classId);
+          if (result.data.insertedId) {
+            // clearPaidClass(singleSelectedClass._id);
+            // changeAvailability(singleSelectedClass?.classId);
             paymentCompleteToast();
             setTimeout(() => {
               navigate("/dashboard/enrolled-classes");

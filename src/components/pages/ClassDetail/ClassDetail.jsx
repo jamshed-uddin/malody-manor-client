@@ -1,5 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import React from "react";
 import { useParams } from "react-router-dom";
 import MyButton from "../../shared/MyButton";
@@ -7,10 +5,15 @@ import AddToSelected from "../../shared/AddToSelected";
 import { ToastContainer, toast } from "react-toastify";
 import useSingleClass from "../../../Hooks/useSingleClass";
 import ErrorElement from "../../shared/ErrorElement";
+import DetailSkeleton from "../../shared/DetailSkeleton";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFileLines } from "@fortawesome/free-regular-svg-icons";
+import useRole from "../../../Hooks/useRole";
 
 const ClassDetail = () => {
   const { classId } = useParams();
   const toastHandler = (msg) => toast(msg);
+  const { _, role } = useRole();
   const {
     data: classDetail,
     isLoading: classDetailLoading,
@@ -19,19 +22,21 @@ const ClassDetail = () => {
   } = useSingleClass(classId);
 
   if (classDetailError) {
-    <ErrorElement
-      error={classDetailError}
-      refetch={classDetailRefetch}
-    ></ErrorElement>;
+    return (
+      <ErrorElement
+        error={classDetailError}
+        refetch={classDetailRefetch}
+      ></ErrorElement>
+    );
   }
 
   if (classDetailLoading) {
-    <div className="mt-20">Loading...</div>;
+    return <DetailSkeleton />;
   }
 
   return (
-    <div className="my-container py-10">
-      <div className="flex flex-col lg:flex-row">
+    <div className="my-container pt-3 lg:pt-10 pb-10">
+      <div className="flex flex-col lg:flex-row gap-3">
         <div className="lg:w-[70%]">
           {/* class info */}
           <div>
@@ -50,18 +55,60 @@ const ClassDetail = () => {
           </div>
           {/* price and buying options */}
           <div className="mt-4">
-            <p className="text-xl font-semibold">
-              Price: ${classDetail?.price}
-            </p>
-            <div className="space-x-2">
-              <AddToSelected
-                singleClass={classDetail}
-                toastHandler={toastHandler}
+            <div className="flex space-x-4">
+              <p
+                className={`text-xl font-semibold ${
+                  classDetail.availableSeats === 0 && "text-red-600"
+                }`}
+                aria-label={
+                  classDetail.availableSeats === 0
+                    ? "No seat available"
+                    : "Available seat"
+                }
               >
-                <MyButton>Add to selected</MyButton>
-              </AddToSelected>
-
-              <MyButton>Enroll now</MyButton>
+                Available seats{" "}
+                <span className="text-2xl">{classDetail?.availableSeats}</span>
+              </p>
+              <p
+                className="text-xl font-semibold"
+                title="Enrolled students"
+                aria-label="Enrolled students"
+              >
+                Enrolled{" "}
+                <span className="text-2xl ">{classDetail?.enrolled}</span>
+              </p>
+            </div>
+            <p className="text-xl font-semibold">
+              Price: $<span className="text-2xl">{classDetail?.price}</span>
+            </p>
+            <div className="space-x-2 mt-2">
+              <div
+                className={`inline ${
+                  role === "admin" ||
+                  role === "instructor" ||
+                  classDetail.availableSeats === 0
+                    ? "btn-disabled bg-transparent"
+                    : ""
+                }`}
+              >
+                <AddToSelected
+                  singleClass={classDetail}
+                  toastHandler={toastHandler}
+                >
+                  <MyButton>Add to selected</MyButton>
+                </AddToSelected>
+              </div>
+              <div
+                className={`inline ${
+                  role === "admin" ||
+                  role === "instructor" ||
+                  classDetail.availableSeats === 0
+                    ? "btn-disabled bg-transparent"
+                    : ""
+                }`}
+              >
+                <MyButton>Enroll now</MyButton>
+              </div>
             </div>
           </div>
         </div>
@@ -73,7 +120,18 @@ const ClassDetail = () => {
           />
         </div>
       </div>
-      <div></div>
+      {/* lessons */}
+      <div className="mt-5">
+        <h3 className="text-2xl font-bold">Lessons</h3>
+        <div className="mt-1 space-y-2">
+          {classDetail?.lessons.map((lesson, index) => (
+            <p className="text-lg" key={index}>
+              <FontAwesomeIcon className="opacity-80" icon={faFileLines} />{" "}
+              {lesson}
+            </p>
+          ))}
+        </div>
+      </div>
 
       <ToastContainer autoClose={2500} />
     </div>

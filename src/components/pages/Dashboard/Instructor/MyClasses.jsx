@@ -42,7 +42,7 @@ const MyClasses = () => {
         field: "photoURL",
         headerName: "Photo",
         width: "60",
-        renderCell: (params) => <Avatar src={params.row.image}></Avatar>,
+        renderCell: (params) => <Avatar src={params.row.photoURL}></Avatar>,
         sortable: false,
         editable: false,
       },

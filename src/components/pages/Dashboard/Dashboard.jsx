@@ -20,7 +20,7 @@ const Dashboard = () => {
         <SideNav></SideNav>
       </div>
       <div
-        className={`w-[70%] h-full absolute lg:hidden bg-white z-20 top-0 ${
+        className={`w-[70%] h-full absolute lg:hidden bg-white z-50 top-0 ${
           navOpened ? "left-0" : "-left-96"
         }  transition-all duration-500`}
       >

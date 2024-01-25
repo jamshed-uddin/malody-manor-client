@@ -3,18 +3,20 @@ import { AuthContext } from "../Provider/AuthProvider";
 import { useLocation, useNavigate } from "react-router-dom";
 import useRole from "../../Hooks/useRole";
 import axios from "axios";
-import { set } from "react-hook-form";
+
 import { CircularProgress } from "@mui/material";
+import { ThemeContext } from "../Provider/ThemeProvider";
 
 const AddToSelected = ({ children, singleClass, toastHandler }) => {
+  const { theme } = useContext(ThemeContext);
   const { user } = useContext(AuthContext);
   const { currentUser, role } = useRole();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  console.dir(navigate);
 
-  const handleBookmark = async () => {
+  const handleBookmark = async (e) => {
+    e.preventDefault();
     if (!user) {
       return navigate("/login", { state: location });
     }
@@ -50,10 +52,24 @@ const AddToSelected = ({ children, singleClass, toastHandler }) => {
   };
 
   return (
-    <div className="inline relative" onClick={handleBookmark}>
+    <div
+      className={`inline relative   ${
+        role === "admin" ||
+        role === "instructor" ||
+        singleClass.availableSeats === 0
+          ? "btn-disabled bg-transparent"
+          : ""
+      }`}
+      onClick={handleBookmark}
+    >
       {children}
-      <span className="absolute left-1/2 top-1/2 -translate-y-1/2">
-        {loading && <CircularProgress size={30} sx={{ color: "black" }} />}
+      <span className="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2">
+        {loading && (
+          <CircularProgress
+            size={30}
+            sx={theme === "black" ? { color: "white" } : { color: "black" }}
+          />
+        )}
       </span>
     </div>
   );

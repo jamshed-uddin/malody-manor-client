@@ -1,19 +1,33 @@
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Checkout from "./Checkout";
 import { useParams } from "react-router-dom";
 
 import { ToastContainer, toast } from "react-toastify";
-import useSingleSelectedClass from "../../../Hooks/useSingleSelectedClass";
-import LoadingComponent from "./LoadingComponent";
 
-const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_PK);
+import LoadingComponent from "./LoadingComponent";
+import useSingleClass from "../../../Hooks/useSingleClass";
+import { ThemeContext } from "../../Provider/ThemeProvider";
+
+// const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_PK);
 
 const Payment = () => {
+  const { theme } = useContext(ThemeContext);
   const { selectedClassId } = useParams();
-  const [isLoading, singleSelectedClass] =
-    useSingleSelectedClass(selectedClassId);
+  const [stripe, setStripe] = useState(null);
+  const cardStyle = `rounded-xl p-3 shadow-md ${
+    theme === "black" ? "shadow-gray-500" : ""
+  }`;
+
+  useEffect(() => {
+    loadStripe(import.meta.env.VITE_PAYMENT_PK).then((stripeInstance) => {
+      setStripe(stripeInstance);
+    });
+  }, []);
+
+  const { data: singleSelectedClass, isLoading } =
+    useSingleClass(selectedClassId);
 
   const paymentCompleteToast = () =>
     toast("Payment completed.Redirecting to Enrolled classes...");
@@ -22,18 +36,16 @@ const Payment = () => {
     return <LoadingComponent />;
   }
   return (
-    <div>
-      <h1 className="text-2xl font-semibold lg:ml-11">Complete your payment</h1>
-      <div className="lg:flex lg:mt-14 mt-8 md:px-12">
-        <div className="flex-grow">
-          <h1 className="text-xl font-semibold mb-4">Class Detail</h1>
+    <div className="p-2 lg:p-8 ">
+      <h1 className="text-3xl font-semibold ">Complete your payment</h1>
+      <div className="lg:flex  mt-4  gap-3">
+        <div className={`flex-grow ${cardStyle}`}>
+          <h1 className="text-2xl font-semibold mb-4">Class Detail</h1>
 
-          <div className="space-y-2 mt-6">
+          <div className="space-y-1 mt-2">
+            <h1 className="text-xl">Class: {singleSelectedClass?.className}</h1>
             <h1 className="text-xl">
-              Class: {singleSelectedClass?.class_name}
-            </h1>
-            <h1 className="text-xl">
-              Instructor: {singleSelectedClass?.instructor_name}
+              Instructor: {singleSelectedClass?.instructorName}
             </h1>
             <h1 className="text-xl">
               Price: <span className="text-sm">$</span>
@@ -42,8 +54,9 @@ const Payment = () => {
           </div>
         </div>
 
-        <div className="flex-grow lg:mt-0 mt-8">
-          <Elements stripe={stripePromise}>
+        <div className={`flex-grow mt-8 lg:mt-0 ${cardStyle}`}>
+          <h1 className="text-2xl font-semibold mb-5">Card detail</h1>
+          <Elements stripe={stripe}>
             <Checkout
               singleSelectedClass={singleSelectedClass}
               price={singleSelectedClass?.price}
