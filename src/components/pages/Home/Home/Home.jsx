@@ -6,6 +6,7 @@ import Achievments from "../Achievments/Achievments";
 import WhyUs from "../WhyUs/WhyUs";
 import SubscribeToEmail from "../SubscribeToEmail";
 import { Helmet } from "react-helmet";
+import UpcomingEvent from "../UpcomingEvent/UpcomingEvent";
 
 const Home = () => {
   return (
@@ -17,10 +18,10 @@ const Home = () => {
       <div className="my-container">
         <Banner></Banner>
         <PopularClasses></PopularClasses>
-        <PopularInstructor></PopularInstructor>
-
         <Achievments></Achievments>
+        <PopularInstructor></PopularInstructor>
         <WhyUs></WhyUs>
+        <UpcomingEvent />
         <SubscribeToEmail></SubscribeToEmail>
       </div>
     </div>

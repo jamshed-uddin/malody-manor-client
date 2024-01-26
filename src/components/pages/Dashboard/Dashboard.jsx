@@ -5,6 +5,7 @@ import { Outlet } from "react-router-dom";
 import { ThemeContext } from "../../Provider/ThemeProvider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
+import ThemeToggler from "../../shared/ThemeToggler";
 
 const Dashboard = () => {
   const [navOpened, setNavOpened] = useState(false);
@@ -41,17 +42,7 @@ const Dashboard = () => {
               <FontAwesomeIcon icon={faBars} />
             </h1>
             <div className="text-end   w-full flex items-center justify-end ">
-              <div className="text-2xl w-7 cursor-pointer text-center transition-all duration-500">
-                {theme === "light" ? (
-                  <p onClick={() => toggleTheme()}>
-                    <FontAwesomeIcon icon={faMoon} />
-                  </p>
-                ) : (
-                  <p className="font-light" onClick={() => toggleTheme()}>
-                    <FontAwesomeIcon icon={faSun} />
-                  </p>
-                )}
-              </div>
+              <ThemeToggler />
             </div>
           </div>
           <div className="px-4 mt-14">

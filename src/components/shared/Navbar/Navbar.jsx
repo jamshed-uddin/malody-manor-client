@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Navbar.css";
 
 import { Link, useLocation } from "react-router-dom";
@@ -11,6 +11,7 @@ import { Avatar } from "@mui/material";
 import { faMoon, faSun } from "@fortawesome/free-regular-svg-icons";
 import { ThemeContext } from "../../Provider/ThemeProvider";
 import useRole from "../../../Hooks/useRole";
+import ThemeToggler from "../ThemeToggler";
 
 const Navbar = () => {
   const [isOpen, setOpen] = useState(false);
@@ -18,10 +19,41 @@ const Navbar = () => {
   const { currentUser } = useRole();
   const { theme, toggleTheme } = useContext(ThemeContext);
   const { pathname } = useLocation();
+  const [scrollingDown, setScrollingDown] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      return;
+    }
+
+    let prevScrollY = window.scrollY;
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY > prevScrollY) {
+        setScrollingDown(true);
+      } else {
+        setScrollingDown(false);
+      }
+
+      prevScrollY = currentScrollY;
+    };
+
+    if (!isOpen) {
+      window.addEventListener("scroll", handleScroll);
+    }
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [isOpen]);
 
   return (
     <nav
-      className={`py-3 fixed top-0 left-0 right-0 shadow ${
+      className={`transition-transform duration-500 ${
+        scrollingDown ? "-translate-y-24 " : "translate-x-0 "
+      } py-3 fixed top-0 left-0 right-0 shadow ${
         theme === "black" ? "bg-black" : "bg-white"
       }  z-30`}
     >
@@ -77,17 +109,7 @@ const Navbar = () => {
         <div>
           <div className="flex gap-5 items-center">
             {/* theme mode */}
-            <div className="text-2xl w-7 cursor-pointer text-center transition-all duration-500">
-              {theme === "light" ? (
-                <p onClick={() => toggleTheme()}>
-                  <FontAwesomeIcon icon={faMoon} />
-                </p>
-              ) : (
-                <p className="font-light" onClick={() => toggleTheme()}>
-                  <FontAwesomeIcon icon={faSun} />
-                </p>
-              )}
-            </div>
+            <ThemeToggler />
 
             <div className="lg:hidden text-3xl cursor-pointer w-7 ">
               <FontAwesomeIcon onClick={() => setOpen(true)} icon={faBars} />
