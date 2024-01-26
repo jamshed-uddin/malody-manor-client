@@ -27,6 +27,7 @@ import ThemeProvider from "./components/Provider/ThemeProvider.jsx";
 import ErrorPage from "./components/pages/ErrorPage.jsx";
 import ClassDetail from "./components/pages/ClassDetail/ClassDetail.jsx";
 import ScrollTop from "./ScrollTop.jsx";
+import EventSignup from "./components/pages/EventSignup/EventSignup.jsx";
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
       {
         path: "class/:classId",
         element: <ClassDetail></ClassDetail>,
+      },
+      {
+        path: "event-signup",
+        element: <EventSignup></EventSignup>,
       },
     ],
   },
