@@ -30,18 +30,14 @@ const Login = () => {
       });
   };
 
-  const googleSignInHandler = () => {
-    signInWithGoogle()
+  const googleSignInHandler = async () => {
+    await signInWithGoogle()
       .then((result) => {
-        console.log(result);
         if (result.user) {
           const newUser = {
             name: result.user.displayName,
             photo: result.user.photoURL,
             email: result.user.email,
-            gender: "",
-            phone: result.user.phoneNumber,
-            address: "",
             role: "student",
           };
 
@@ -50,10 +46,10 @@ const Login = () => {
             .then(() => {
               navigate(from, { replace: true });
             })
-            .catch((error) => console.log(error));
+            .catch(() => navigate(from, { replace: true }));
         }
       })
-      .catch((error) => console.log(error));
+      .catch(() => navigate(from, { replace: true }));
   };
 
   return (

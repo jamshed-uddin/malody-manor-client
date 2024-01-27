@@ -9,11 +9,19 @@ const UpcomingEvent = () => {
   const { theme } = useContext(ThemeContext);
 
   return (
-    <div className="lg:flex items-center gap-4 my-16 ">
-      <div className="w-[35%] h-[40vh] ">
-        <img className="w-full h-full object-cover" src={microPhone1} alt="" />
+    <div
+      className={`lg:flex items-center gap-4 my-16 ${
+        theme === "black" && "bg-slate-900"
+      } p-6 rounded-lg shadow-md`}
+    >
+      <div className="lg:w-[35%] h-[40vh] ">
+        <img
+          className="w-full h-full object-cover rounded-lg"
+          src={microPhone1}
+          alt=""
+        />
       </div>
-      <div className=" space-y-2">
+      <div className=" space-y-2 mt-4 lg:mt-0">
         <div>
           <h1 className="text-xl font-semibold uppercase tracking-tight">
             Upcoming event
@@ -27,8 +35,8 @@ const UpcomingEvent = () => {
           </p>
         </div>
         <div>
-          <p className="text-lg font-medium">
-            Next sunday - 6:30pm - At Malody Manor Theatre
+          <p className=" font-medium leading-5 mb-2">
+            Next sunday - 6:30pm <br /> At Malody Manor Theatre
           </p>
           <Link to={"/event-signup"}>
             <button

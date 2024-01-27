@@ -67,7 +67,7 @@ const EventSignup = () => {
             <h1 className="text-center text-xl font-semibold">SIGN UP</h1>
             <form
               onSubmit={handleEventSignup}
-              className="w-[40%]   mx-auto mt-3 mb-8"
+              className="lg:w-[40%]   mx-auto mt-3 mb-8"
             >
               <div className="lg:flex gap-3">
                 <div className="flex-grow">

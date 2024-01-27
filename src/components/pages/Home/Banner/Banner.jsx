@@ -9,8 +9,6 @@ import bannerImage3 from "../../../../assets/BannerCarouselImages/violin.jpg";
 const Banner = () => {
   const [imageIndexToPreview, setImageIndexToPreview] = useState(0);
 
-  console.log(imageIndexToPreview);
-
   useEffect(() => {
     const timeId = setTimeout(() => {
       setImageIndexToPreview((prev) => (prev === 2 ? 0 : prev + 1));
@@ -39,7 +37,7 @@ const Banner = () => {
                 alt=""
               />
             </div>
-            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-50">
+            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-10">
               <div className="flex items-center gap-2">
                 {arr.map((p, index) => (
                   <p
