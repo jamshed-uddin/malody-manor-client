@@ -4,12 +4,13 @@ import MyClassesActions from "./MyClassesActions";
 import { Avatar } from "@mui/material";
 import { ToastContainer, toast } from "react-toastify";
 import TableComponent from "../TableComponent";
-import { Helmet } from "react-helmet";
+
 import LoadingComponent from "../LoadingComponent";
 import NoItemText from "../NoItemText";
 import ErrorElement from "../../../shared/ErrorElement";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { Helmet } from "react-helmet-async";
 
 const MyClasses = () => {
   const { user } = useContext(AuthContext);
@@ -109,7 +110,7 @@ const MyClasses = () => {
           </div>
         </div>
       )}
-      <ToastContainer />
+      <ToastContainer hideProgressBar={true} />
     </div>
   );
 };

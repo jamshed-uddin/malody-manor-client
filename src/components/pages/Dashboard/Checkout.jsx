@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { ThemeContext } from "../../Provider/ThemeProvider";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { CircularProgress } from "@mui/material";
 
 const Checkout = ({ singleSelectedClass, price, paymentCompleteToast }) => {
   const { theme } = useContext(ThemeContext);
@@ -18,7 +19,7 @@ const Checkout = ({ singleSelectedClass, price, paymentCompleteToast }) => {
   const stripe = useStripe();
   const elements = useElements();
 
-  console.log(singleSelectedClass);
+  console.log(processing);
 
   const { data: clientSecret } = useQuery(
     ["paymentIntend", price],
@@ -125,15 +126,23 @@ const Checkout = ({ singleSelectedClass, price, paymentCompleteToast }) => {
             },
           }}
         />
-        <button
-          className={`border ${
-            theme === "black" ? "border-white" : "border-black"
-          } px-4 py-1 rounded-lg mt-3`}
-          type="submit"
-          disabled={!stripe || !clientSecret || processing}
-        >
-          Pay
-        </button>
+        <div className="flex  gap-2 items-center mt-4">
+          <button
+            className={`border ${
+              theme === "black" ? "border-white" : "border-black"
+            } px-4 py-1 rounded-lg  `}
+            type="submit"
+            disabled={!stripe || !clientSecret || processing}
+          >
+            Pay
+          </button>
+          {processing && (
+            <CircularProgress
+              size={25}
+              sx={theme === "black" ? { color: "white" } : { color: "black" }}
+            />
+          )}
+        </div>
       </form>
       {cardError && <p className="text-sm text-red-500 mt-3">{cardError}</p>}
       {transectionId && (

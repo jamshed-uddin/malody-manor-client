@@ -65,7 +65,7 @@ const Payment = () => {
           </Elements>
         </div>
       </div>
-      <ToastContainer autoClose={4000} />
+      <ToastContainer hideProgressBar={true} autoClose={4000} />
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useReducer, useState } from "react";
 
 import { CircularProgress } from "@mui/material";
-import { Helmet } from "react-helmet";
+
 import { ThemeContext } from "../../../Provider/ThemeProvider";
 import uplaodPhotoToCloud from "../../../shared/uploadPhotoToCloud";
 import deletePhotoFromCloud from "../../../shared/deletePhotoFromCloud";
@@ -11,6 +11,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import useRole from "../../../../Hooks/useRole";
 import { useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet-async";
 
 const initialState = {
   className: "",
@@ -34,10 +35,17 @@ const reducer = (state, action) => {
       };
 
     case "TEXT_INPUT":
+      if (action.name === "availableSeats" || action.name === "price") {
+        return {
+          ...state,
+          [action.name]: parseInt(action.value),
+        };
+      }
       return {
         ...state,
         [action.name]: action.value,
       };
+
     case "ADD_LESSONS":
       return {
         ...state,
@@ -72,9 +80,6 @@ const AddClass = () => {
   const [formState, dispatch] = useReducer(reducer, initialState);
   const { classId } = useParams();
 
-  console.log(previewImage);
-  console.log(formState);
-
   // using the add recipe form for editing recipe ..
   const { isLoading, data, error } = useQuery(
     ["classDetail"],
@@ -86,7 +91,6 @@ const AddClass = () => {
     },
     { enabled: !!classId } //query only enables when id is true or there is a id(id that comes in params)
   );
-  console.log(isLoading);
 
   useEffect(() => {
     if (data) {
@@ -260,6 +264,7 @@ const AddClass = () => {
             type="text"
             id="className"
             name="className"
+            placeholder="Class name"
             value={formState.className}
             className={inputStyle}
             required
@@ -280,6 +285,7 @@ const AddClass = () => {
           <textarea
             id="description"
             name="description"
+            placeholder="Description"
             value={formState.description}
             className={` border border-gray-400 focus:outline-none p-2 w-full rounded-xl ${
               theme === "black" && "bg-slate-900"
@@ -304,6 +310,7 @@ const AddClass = () => {
               id="price"
               name="price"
               min="0"
+              placeholder="Price"
               value={formState.price}
               className={inputStyle}
               required
@@ -328,6 +335,7 @@ const AddClass = () => {
               min="0"
               className={inputStyle}
               required
+              placeholder=" Available seats"
               value={formState.availableSeats}
               onChange={(e) => {
                 dispatch({

@@ -1,16 +1,16 @@
 import { Avatar } from "@mui/material";
-import React, { useContext, useEffect, useMemo, useState } from "react";
-import { AuthContext } from "../../../Provider/AuthProvider";
+import React, { useMemo } from "react";
+
 import ClassesActions from "./ClassesActions";
 import { ToastContainer, toast } from "react-toastify";
 import TableComponent from "../TableComponent";
-import { Helmet } from "react-helmet";
-import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+
 import LoadingComponent from "../LoadingComponent";
 import NoItemText from "../NoItemText";
 import useStudentData from "../../../../Hooks/useStudentData";
 import axios from "axios";
 import ErrorElement from "../../../shared/ErrorElement";
+import { Helmet } from "react-helmet-async";
 
 const SelectedClasses = () => {
   const notify = () => toast("Class romoved!");
@@ -102,7 +102,7 @@ const SelectedClasses = () => {
         </div>
       )}
 
-      <ToastContainer autoClose={2500} />
+      <ToastContainer hideProgressBar={true} autoClose={2500} />
     </div>
   );
 };

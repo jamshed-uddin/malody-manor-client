@@ -17,6 +17,10 @@ const AddToSelected = ({ children, singleClass, toastHandler }) => {
 
   const handleBookmark = async (e) => {
     e.preventDefault();
+    if (singleClass.availableSeats === 0) {
+      return;
+    }
+
     if (!user) {
       return navigate("/login", { state: { from: location } });
     }

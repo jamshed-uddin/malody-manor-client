@@ -7,13 +7,14 @@ import useAxiosSecure from "./useAxiosSecure";
 const useRole = () => {
   const { user } = useContext(AuthContext);
   const [axiosSecure] = useAxiosSecure();
+  console.log(user);
 
   const {
     data: currentUser,
     isLoading: currentUserLoading,
     error: currentUserError,
   } = useQuery(
-    ["currentUser"],
+    ["currentUser", user],
     async () => {
       try {
         const result = await axiosSecure.get(

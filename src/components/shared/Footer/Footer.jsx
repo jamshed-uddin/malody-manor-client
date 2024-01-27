@@ -1,5 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { ThemeContext } from "../../Provider/ThemeProvider";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const { theme } = useContext(ThemeContext);
@@ -17,14 +18,9 @@ const Footer = () => {
             <h3 className=" text-xl font-semibold uppercase">Melody Manor</h3>
             <ul className="mt-4 space-y-2">
               <li>
-                <a className=" cursor-pointe">Home</a>
+                <Link to={"/classes"}>Classes</Link>
               </li>
-              <li>
-                <a className=" cursor-pointe">Classes</a>
-              </li>
-              <li>
-                <a className=" cursor-pointe">Instructors</a>
-              </li>
+
               <li>
                 <a className=" cursor-pointe">Events</a>
               </li>
@@ -36,15 +32,9 @@ const Footer = () => {
           <div className="text-center">
             <h3 className=" text-xl font-semibold">Upcoming Events</h3>
             <ul className="mt-4 space-y-2">
-              <li>
-                <a className=" cursor-pointe">Concert on August 15th</a>
-              </li>
-              <li>
-                <a className=" cursor-pointe">Masterclass Series</a>
-              </li>
-              <li>
+              <Link to={"/event-signup"}>
                 <a className=" cursor-pointe">Open Mic Night</a>
-              </li>
+              </Link>
             </ul>
           </div>
           <div className="text-center">

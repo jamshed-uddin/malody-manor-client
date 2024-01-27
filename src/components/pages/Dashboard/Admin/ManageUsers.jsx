@@ -2,11 +2,12 @@ import React, { useMemo } from "react";
 import UserActions from "./UserActions";
 import { Avatar } from "@mui/material";
 import TableComponent from "../TableComponent";
-import { Helmet } from "react-helmet";
+
 import LoadingComponent from "../LoadingComponent";
 import NoItemText from "../NoItemText";
 import useAdminData from "../../../../Hooks/useAdminData";
 import ErrorElement from "../../../shared/ErrorElement";
+import { Helmet } from "react-helmet-async";
 
 const ManageUsers = () => {
   const {

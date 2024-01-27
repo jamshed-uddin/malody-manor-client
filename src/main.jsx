@@ -28,6 +28,7 @@ import ErrorPage from "./components/pages/ErrorPage.jsx";
 import ClassDetail from "./components/pages/ClassDetail/ClassDetail.jsx";
 import ScrollTop from "./ScrollTop.jsx";
 import EventSignup from "./components/pages/EventSignup/EventSignup.jsx";
+import { HelmetProvider } from "react-helmet-async";
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
@@ -63,10 +64,12 @@ const router = createBrowserRouter([
   {
     path: "login",
     element: <Login></Login>,
+    errorElement: <ErrorPage></ErrorPage>,
   },
   {
     path: "register",
     element: <Register></Register>,
+    errorElement: <ErrorPage></ErrorPage>,
   },
   {
     path: "dashboard",
@@ -75,6 +78,7 @@ const router = createBrowserRouter([
         <Dashboard></Dashboard>
       </PrivateRoute>
     ),
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "user-home",
@@ -149,12 +153,14 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <AuthProvider>
-      <ThemeProvider>
-        <QueryClientProvider client={queryClient}>
-          <RouterProvider router={router} />
-        </QueryClientProvider>
-      </ThemeProvider>
-    </AuthProvider>
+    <HelmetProvider>
+      <AuthProvider>
+        <ThemeProvider>
+          <QueryClientProvider client={queryClient}>
+            <RouterProvider router={router} />
+          </QueryClientProvider>
+        </ThemeProvider>
+      </AuthProvider>
+    </HelmetProvider>
   </React.StrictMode>
 );

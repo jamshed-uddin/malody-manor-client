@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 
 import microPhone1 from "../../../../assets/Microphone/microphone.jpg";
-import microPhone2 from "../../../../assets/Microphone/microphone2.jpg";
+
 import { Link } from "react-router-dom";
 import { ThemeContext } from "../../../Provider/ThemeProvider";
 

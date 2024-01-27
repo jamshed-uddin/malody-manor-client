@@ -18,7 +18,7 @@ const Banner = () => {
   }, [imageIndexToPreview]);
 
   return (
-    <div className="">
+    <div className="select-none">
       <div className=" font-bold w-full mt-20 mb-5 ">
         <h1 className="text-5xl lg:text-8xl  text-center font-semibold uppercase -tracking-[0.11rem] ">
           Unveiling <span className="lg:block">The Melodic</span>{" "}
@@ -43,8 +43,8 @@ const Banner = () => {
                   <p
                     className={`transition-all duration-700 ${
                       imageIndexToPreview === index
-                        ? "w-16 h-[5px] "
-                        : "w-4 h-[5px] "
+                        ? "w-16 h-[4px] "
+                        : "w-4 h-[4px] "
                     } bg-white rounded-lg`}
                   ></p>
                 ))}

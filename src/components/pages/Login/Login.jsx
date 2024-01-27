@@ -11,22 +11,23 @@ const Login = () => {
 
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
-  console.log(location);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    userLogin(data.email, data.password)
+  const onSubmit = async (data) => {
+    await userLogin(data.email, data.password)
       .then((result) => {
         if (result) {
           navigate(from, { replace: true });
         }
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((err) => {
+        console.log(err);
+        navigate("/");
       });
   };
 
@@ -46,10 +47,10 @@ const Login = () => {
             .then(() => {
               navigate(from, { replace: true });
             })
-            .catch(() => navigate(from, { replace: true }));
+            .catch(() => navigate("/"));
         }
       })
-      .catch(() => navigate(from, { replace: true }));
+      .catch(() => navigate("/"));
   };
 
   return (

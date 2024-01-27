@@ -9,6 +9,7 @@ import DetailSkeleton from "../../shared/DetailSkeleton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileLines } from "@fortawesome/free-regular-svg-icons";
 import useRole from "../../../Hooks/useRole";
+import { Helmet } from "react-helmet-async";
 
 const ClassDetail = () => {
   const { classId } = useParams();
@@ -36,6 +37,11 @@ const ClassDetail = () => {
 
   return (
     <div className="my-container pt-3 lg:pt-10 pb-10">
+      <Helmet>
+        <meta name="description" content={classDetail?.description} />
+        <meta property="og:image" content={classDetail?.photoURL} />
+        <title>{classDetail?.className} - Melody Manor</title>
+      </Helmet>
       <div className="flex flex-col lg:flex-row gap-3">
         <div className="lg:w-[70%]">
           {/* class info */}
@@ -135,7 +141,7 @@ const ClassDetail = () => {
         </div>
       </div>
 
-      <ToastContainer autoClose={2500} />
+      <ToastContainer hideProgressBar={true} autoClose={2500} />
     </div>
   );
 };

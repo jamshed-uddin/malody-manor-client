@@ -94,7 +94,7 @@ const ClassCard = ({ singleClass }) => {
             </div>
           </div>
         </div>
-        <ToastContainer autoClose={2500} />
+        <ToastContainer hideProgressBar={true} autoClose={2500} />
       </div>
     </Link>
   );

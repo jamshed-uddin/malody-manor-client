@@ -4,11 +4,12 @@ import { Avatar } from "@mui/material";
 
 import ManageClassActions from "./ManageClassActions";
 import TableComponent from "../TableComponent";
-import { Helmet } from "react-helmet";
+
 import LoadingComponent from "../LoadingComponent";
 import NoItemText from "../NoItemText";
 import useAdminData from "../../../../Hooks/useAdminData";
 import ErrorElement from "../../../shared/ErrorElement";
+import { Helmet } from "react-helmet-async";
 
 const ManageClasses = () => {
   const {

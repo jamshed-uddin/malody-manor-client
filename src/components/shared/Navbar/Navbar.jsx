@@ -51,7 +51,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`transition-transform duration-500 ${
+      className={`transition-transform duration-500 select-none ${
         scrollingDown ? "-translate-y-24 " : "translate-x-0 "
       } py-3 fixed top-0 left-0 right-0 shadow ${
         theme === "black" ? "bg-black" : "bg-white"
@@ -120,7 +120,7 @@ const Navbar = () => {
       {/* mobile navigation menu */}
 
       <div
-        className={`lg:hidden absolute top-0  ${
+        className={`lg:hidden absolute top-0 z-50  ${
           isOpen ? "right-0" : "-right-[1000px]"
         } h-screen w-full  ${
           theme === "black" ? "bg-black" : "bg-white"

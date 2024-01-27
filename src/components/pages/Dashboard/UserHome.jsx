@@ -1,14 +1,13 @@
 import React from "react";
 import useRole from "../../../Hooks/useRole";
 import { Avatar } from "@mui/material";
-import { Helmet } from "react-helmet";
+
 import LoadingComponent from "./LoadingComponent";
 import ErrorElement from "../../shared/ErrorElement";
+import { Helmet } from "react-helmet-async";
 
 const UserHome = () => {
   const { currentUser, currentUserLoading, currentUserError } = useRole();
-
-  console.log(currentUser);
 
   if (currentUserError) {
     return <ErrorElement error={currentUserError} />;

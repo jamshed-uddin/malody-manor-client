@@ -1,26 +1,20 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import useRole from "../../../../Hooks/useRole";
 import TableComponent from "../TableComponent";
-import { Helmet } from "react-helmet";
-import { useQuery } from "@tanstack/react-query";
 import LoadingComponent from "../LoadingComponent";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import NoItemText from "../NoItemText";
 import useStudentData from "../../../../Hooks/useStudentData";
 import ErrorElement from "../../../shared/ErrorElement";
+import { Helmet } from "react-helmet-async";
 
 const PaymentHistory = () => {
-  const { currentUser } = useRole();
-  const [axiosSecure] = useAxiosSecure();
-
   const {
     data: payments,
     isLoading,
     error: paymentHistoryError,
     refetch,
   } = useStudentData("/getPaymentHistory");
-
-  console.log(payments);
 
   const columns = useMemo(
     () => [
