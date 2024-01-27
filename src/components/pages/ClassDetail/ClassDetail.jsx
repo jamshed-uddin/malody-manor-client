@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import MyButton from "../../shared/MyButton";
 import AddToSelected from "../../shared/AddToSelected";
@@ -39,6 +39,8 @@ const ClassDetail = () => {
     <div className="my-container pt-3 lg:pt-10 pb-10">
       <Helmet>
         <meta name="description" content={classDetail?.description} />
+        <meta property="og:title" content={classDetail?.className} />
+        <meta property="og:description" content={classDetail?.description} />
         <meta property="og:image" content={classDetail?.photoURL} />
         <title>{classDetail?.className} - Melody Manor</title>
       </Helmet>
