@@ -140,7 +140,7 @@ const Register = () => {
             <button
               type="submit"
               className={`text-xl font-semibold  py-1 px-4 rounded-lg shadow ${
-                loading ? "opacity-90" : "opacity-100"
+                isLoading ? "opacity-90" : "opacity-100"
               }`}
             >
               Sign up
